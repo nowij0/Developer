@@ -1,5 +1,7 @@
 package com.developer.recommend;
 
+import com.developer.board.BoardVO;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,9 +13,9 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class RecommendVO {
-	private int rec_seq;
-	private int post_seq;
-	private String user_id;
+	private int recSeq;
+	private int postSeq;
+	private String userId;
 
 	private BoardVO boardVO;
 }

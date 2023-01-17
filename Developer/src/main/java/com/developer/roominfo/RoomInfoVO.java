@@ -1,5 +1,7 @@
 package com.developer.roominfo;
 
+import com.developer.studyroom.StudyroomVO;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

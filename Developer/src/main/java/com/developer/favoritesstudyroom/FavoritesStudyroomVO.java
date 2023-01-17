@@ -1,5 +1,7 @@
 package com.developer.favoritesstudyroom;
 
+import com.developer.studyroom.StudyroomVO;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,5 +19,5 @@ public class FavoritesStudyroomVO {
 	private int srSeq;
 	private String userId;
 	
-	private StudyroomVO studyroomVO;
+	private StudyroomVO studyroomVO; 
 }

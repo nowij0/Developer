@@ -1,4 +1,4 @@
-package com.developer.lesson_reivew;
+package com.developer.lessonreivew;
 
 public class LessonReivewDAOOracle implements LessonReivewDAO {
 

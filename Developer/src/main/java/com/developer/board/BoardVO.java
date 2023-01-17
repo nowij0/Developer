@@ -1,8 +1,6 @@
 package com.developer.board;
 
-import java.util.Date;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.developer.users.UsersVO;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,15 +13,16 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class BoardVO {
-	private int post_seq;
-	private String user_id;
+	private int postSeq;
+	private String userId;
 	private int category;
 	private String title;
 	private String content;
-	private String img_path;
-	private String c_date;
+	private String imgPath;
+	private String cDate;
 	private String recommend;
 	private int cnt;
 	
-	private UserVO userVO;
+	private UsersVO usersVO;
 }
+ 

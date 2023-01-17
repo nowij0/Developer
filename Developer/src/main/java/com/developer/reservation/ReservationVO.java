@@ -2,6 +2,8 @@ package com.developer.reservation;
 
 import java.util.Date;
 
+import com.developer.roominfo.RoomInfoVO;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,12 +14,12 @@ import lombok.ToString;
 @NoArgsConstructor @AllArgsConstructor
 @ToString
 public class ReservationVO {
-	private int res_seq;
-	private String user_id;
-	private int room_seq;
-	private String start_time;
-	private String end_time;
-	private Date using_date;
+	private int reSeq;
+	private String userId;
+	private int roomSeq;
+	private String startTime;
+	private String endTime;
+	private Date usingDate;
 	
 	private RoomInfoVO roomInfoVO;
 }

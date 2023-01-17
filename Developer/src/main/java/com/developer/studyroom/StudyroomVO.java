@@ -1,5 +1,7 @@
 package com.developer.studyroom;
 
+import com.developer.hostuser.HostUserVO;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,17 +13,16 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class StudyroomVO {
-	private int sr_seq;
+	private int srSeq;
 	private String name;
 	private String addr;
 	private String info;
-	private String open_time;
-	private String end_time;
-	private String img_path;
+	private String openTime;
+	private String endTime;
+	private String imgPath;
 	private int ov;
-	private String host_id;
+	private String hostId;
 	
-	
-	private Host_userVO host_userVO;
+	private HostUserVO hostUserVO;
 	
 }

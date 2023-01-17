@@ -2,7 +2,7 @@ package com.developer.boardrep;
 
 import java.util.Date;
 
-import com.developer.tutor.TutorVO;
+import com.developer.board.BoardVO;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

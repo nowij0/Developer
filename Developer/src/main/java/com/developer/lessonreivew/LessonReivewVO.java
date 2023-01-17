@@ -1,4 +1,4 @@
-package com.developer.lesson_reivew;
+package com.developer.lessonreivew;
 
 import java.util.Date;
 
@@ -12,12 +12,12 @@ import lombok.ToString;
 @NoArgsConstructor @AllArgsConstructor
 @ToString
 public class LessonReivewVO {
-	private int le_rev_seq;
-	private int apply_seq;
+	private int leRevSeq;
+	private int applySeq;
 	private Date cdate;
 	private String reivew;
 	private int star;
 	
-	private LessonVO lessonVO;
+//	private LessonVO lessonVO;
 	
 }

@@ -17,5 +17,5 @@ public class FavoritesLessonVO {
 	private String userId;
 	private int lessonSeq;
 	
-	private LessonVO lessonVO;
+//	private LessonVO lessonVO;
 }
