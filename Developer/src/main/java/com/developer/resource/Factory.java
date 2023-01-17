@@ -24,7 +24,7 @@ public class Factory {
 				sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
 
 				//구현할 Mapper 등록
-				Class[] mapper = {  }; //mapper 여러개를 담을 배열, 여기에 mapper 파일 다 등록 시킴
+				Class[] mapper = {com.developer.board.BoardDAO.class, com.developer.recommend.RecommendDAO.class, com.developer.studyroom.StudyroomDAO.class  }; //mapper 여러개를 담을 배열, 여기에 mapper 파일 다 등록 시킴
 				for (Class m : mapper) {
 					//sqlSessionFactory에 Mapper를 등록
 					sqlSessionFactory.getConfiguration().addMapper(m); //배열에 담긴 Mapper를 꺼내서 sqlSessionFactory로 구현체를 만든다.
