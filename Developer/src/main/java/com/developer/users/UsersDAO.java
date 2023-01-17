@@ -11,5 +11,8 @@ public interface UsersDAO {
 	
 	//미승인 튜터 목록 출력
 	public List<UsersVO> selectTutor() throws FindException;
+	
+	//회원 검색
+	public List<UsersVO> getUsers(String userId) throws FindException;
 
 }

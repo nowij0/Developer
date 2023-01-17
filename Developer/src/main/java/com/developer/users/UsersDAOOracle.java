@@ -23,12 +23,11 @@ public class UsersDAOOracle implements UsersDAO {
 		
 		return list;
 	}
-	
-	
+		
 	public static void main(String[] args) throws FindException {
 		UsersDAOOracle dao = new UsersDAOOracle();
 		System.out.println("?");
-		System.out.println(dao.selectAll());
+		System.out.println(dao.getUsers("kosta111"));
 		System.out.println("===");
 	}
 
@@ -38,5 +37,18 @@ public class UsersDAOOracle implements UsersDAO {
 		List<UsersVO> tList = session.selectList("com.developer.users.selectTutor");
 		return tList;
 	}
+  
+  @Override
+	public List<UsersVO> getUsers(String userId) throws FindException {
+		SqlSession session = sqlSessionFactory.openSession();
+		List<UsersVO> ulist= session.selectList("com.developer.users.getUsers", userId);
+		return ulist;
+	}
 
 }
+
+	
+
+
+
+
