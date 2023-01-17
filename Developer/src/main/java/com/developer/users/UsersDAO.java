@@ -14,4 +14,5 @@ public interface UsersDAO {
 	
 	//회원 검색
 	public List<UsersVO> getUsers(String userId) throws FindException;
+
 }

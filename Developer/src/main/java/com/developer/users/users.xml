@@ -4,6 +4,7 @@
 
 <mapper namespace="com.developer.users">
 
+
 <resultMap type="com.developer.users.UsersVO" id="tutorMap">
 	<result column="user_id" property="userId"/>
 	<result column="name" property="name"/>
@@ -15,8 +16,9 @@
 SELECT u.user_id, u.name, u.nickname, u.tel
 FROM users u, tutor t
 WHERE u.user_id = t.user_id
-AND apply_ok = 0
-</select> 
+AND apply_ok = 0;
+</select>
+
 
 <select id="selectAll" resultType="String">
 SELECT name

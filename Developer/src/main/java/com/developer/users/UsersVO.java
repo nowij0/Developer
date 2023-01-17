@@ -1,7 +1,5 @@
 package com.developer.users;
 
-import com.developer.tutor.TutorVO;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +19,5 @@ public class UsersVO{
 	private String email;
 	private String tel;
 	private String addr;
-	private TutorVO tutorVO;
 
 }
