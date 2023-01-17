@@ -22,6 +22,7 @@ public class Factory {
 				//	Builder :  객체 생성에 필요한 설정이 가능하고, 설정한 내용으로 객체를 생성해줌
 				//	build(): config.xml 의 내용을 설정에 활용하여 설정
 				sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+<<<<<<< HEAD
 
 				//구현할 Mapper 등록
 				Class[] mapper = {com.developer.board.BoardDAO.class, com.developer.recommend.RecommendDAO.class, com.developer.studyroom.StudyroomDAO.class  }; //mapper 여러개를 담을 배열, 여기에 mapper 파일 다 등록 시킴
@@ -29,6 +30,9 @@ public class Factory {
 					//sqlSessionFactory에 Mapper를 등록
 					sqlSessionFactory.getConfiguration().addMapper(m); //배열에 담긴 Mapper를 꺼내서 sqlSessionFactory로 구현체를 만든다.
 				}
+=======
+				
+>>>>>>> 97efce8f1b48e6c612f87d2d8e0a9e8027425f4b
 			}
 		} catch (FileNotFoundException fileNotFoundException) {
 			fileNotFoundException.printStackTrace();
