@@ -21,5 +21,8 @@ public class ReservationVO {
 	private String endTime;
 	private Date usingDate;
 	
-	private RoomInfoVO roomInfoVO;
+	private int price;
+	private String srName;
+	private String rifName;
+	
 }

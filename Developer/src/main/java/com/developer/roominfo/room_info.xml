@@ -1,3 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.developer.roominfo">
+
+<resultMap type="com.developer.users.RoomInfoVO" id="roominfoMap">
+	<result column="room_seq" property="roomSeq"/>
+	<result column="sr_seq" property="srSeq"/>
+	<result column="name" property="name"/>
+	<result column="info" property="info"/>
+	<result column="img_path" property="imgPath"/>
+	<result column="person" property="person"/>
+	<result column="price" property="price"/>
+
+</resultMap>
+
+<select id="selectAll" resultMap="roominfoMap">
+select * 
+from room_info 
+where sr_seq = #{sr_seq, jdbcType=NUMBER}
+</select>
+</mapper>

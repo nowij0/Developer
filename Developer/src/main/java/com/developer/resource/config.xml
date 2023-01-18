@@ -19,6 +19,7 @@
 	</environments>
 	<mappers>
  		<mapper resource="com/developer/users/users.xml"></mapper>
+ 		<mapper resource="com/developer/roominfo/room_info.xml"></mapper>
  </mappers>
 
 </configuration>

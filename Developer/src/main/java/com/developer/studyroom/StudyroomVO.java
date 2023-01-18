@@ -23,6 +23,8 @@ public class StudyroomVO {
 	private int ov;
 	private String hostId;
 	
-	private HostUserVO hostUserVO;
+	private int person;
+	private int price;
+	private String userId;
 	
 }
