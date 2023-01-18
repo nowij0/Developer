@@ -45,32 +45,6 @@ public interface UsersDAO {
 	 * @throws FindException
 	 */
 	public UsersVO selectUserPwd(String userId, String email) throws FindException;
-	
-	/**
-	 * [회원가입 > 회원] 회원가입
-	 * @author Jin
-	 * @param 회원가입 할 일반회원 객체 생성
-	 * @throws FindException
-	 */
-	public void insert(UsersVO vo) throws FindException;
-	
-	
-	/**
-	 * [회원가입 > 호스트] 호스트 회원가입
-	 * @author Jin
-	 * @param 호스트 회원가입 할 호스트객체 생성
-	 * @throws FindException
-	 */
-	public void insert(HostUserVO vo) throws FindException;
-	
-	
-	/**
-	 * [일반회원: 첫 화면] 회원 정보 수정 
-	 * @author Jin
-	 * @param 일반회원 객체의 정보를 수정
-	 * @throws FindException
-	 */
-	public void updateUsers(UsersVO vo) throws FindException;
 
 	
 	/**
@@ -82,25 +56,7 @@ public interface UsersDAO {
 	 */
 	public LessonVO getLesson(int lessonSeq) throws FindException;
 	
-	
-	/**
-	 * [일반회원 : 클래스 > 튜터 > 진행 예정 클래스 > 상세 정보] 수정하기
-	 * 셀렉문은 getLesson메서드 쓰면 됨.
-	 * @author Jin
-	 * @param LessonVO의 수정할 값 입력 
-	 * @throws FindException
-	 */
-	public void updateLesson(LessonVO vo) throws FindException;
-	
-	
-	/**
-	 * [일반회원 : 클래스 > 튜터 > 진행 예정 클래스 > 상세 정보] 삭제하기
-	 * 
-	 * @param 삭제할 lessonSeq값을 입력
-	 * @throws FindException
-	 */
-	public void deleteLesson(int lessonSeq) throws FindException;
-	
+
 	/**
 	 * [일반회원 : 클래스 > 튜터 > 진행 예정 클래스 > 상세 정보] 신청튜티 목록
 	 * 
@@ -111,33 +67,6 @@ public interface UsersDAO {
 	 */
 	public List<UsersVO> getLessonApplyUsers(int applyOk, int lessonSeq) throws FindException;
 	
-	
-	/**
-	 * [일반회원 : 클래스 > 튜터 > 진행 예정 클래스 > 상세 정보] 신청튜티 승인
-	 * 
-	 * @param 해당 튜티의 appliedLesson의 applyOk를 1로 변경
-	 * @throws FindException
-	 */
-	public void updateApplyLesson(AppliedLessonVO vo) throws FindException;
-	
-	
-	/**
-	 * [일반회원 : 클래스 > 튜터 > 진행 예정 클래스 > 상세 정보] 신청튜티 거절
-	 * 
-	 * @param 해당 튜티의 appliedLesson의 applyOk를 2로 변경
-	 * @throws FindException
-	 */
-	public void updateNotApplyLesson(AppliedLessonVO vo) throws FindException;
-	
-	
-	/**
-	 * [일반회원 : 클래스 > 튜터 > 진행 예정 클래스 > 상세 정보] 신청튜티 평가
-	 * 
-	 * @param 튜티에 해당하는 userId값
-	 * @return 해당 튜티의 UsersVO 값 출력(이름, 리뷰, 평점)
-	 * @throws FindException
-	 */
-	public UsersVO getTutee(String userId) throws FindException;
 	
 	/**
 	 * [일반회원 : 클래스 > 튜터 > 진행 예정 클래스 > 상세 정보] 신청완료 튜티 목록

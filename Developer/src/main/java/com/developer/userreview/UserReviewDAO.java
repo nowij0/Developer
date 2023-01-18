@@ -9,6 +9,6 @@ public interface UserReviewDAO {
 	 * @param 작성한 후기를 담을 vo객체
 	 * @throws FindException
 	 */
-	public void addUserReivew(UserReviewVO vo) throws FindException;
+	public void addUserReview(UserReviewVO vo) throws FindException;
 	
 }

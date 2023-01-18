@@ -14,8 +14,8 @@ public class UserReviewDAOOracle implements UserReviewDAO {
 	}
 
 	@Override
-	public void addUserReivew(UserReviewVO vo) throws FindException {
+	public void addUserReview(UserReviewVO vo) throws FindException {
 		// TODO Auto-generated method stub
 		
-	}	
+	}
 }

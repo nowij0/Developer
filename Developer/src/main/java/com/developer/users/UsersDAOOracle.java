@@ -65,23 +65,6 @@ public class UsersDAOOracle implements UsersDAO {
 		System.out.println("===");
 	}
 
-	@Override
-	public void insert(UsersVO vo) throws FindException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void insert(HostUserVO vo) throws FindException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void updateUsers(UsersVO vo) throws FindException {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public LessonVO getLesson(int lessonSeq) throws FindException {
@@ -89,17 +72,7 @@ public class UsersDAOOracle implements UsersDAO {
 		return null;
 	}
 
-	@Override
-	public void updateLesson(LessonVO vo) throws FindException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteLesson(int lessonSeq) throws FindException {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	@Override
 	public List<UsersVO> getLessonApplyUsers(int applyOk, int lessonSeq) throws FindException {
@@ -107,23 +80,7 @@ public class UsersDAOOracle implements UsersDAO {
 		return null;
 	}
 
-	@Override
-	public void updateApplyLesson(AppliedLessonVO vo) throws FindException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void updateNotApplyLesson(AppliedLessonVO vo) throws FindException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public UsersVO getTutee(String userId) throws FindException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	@Override
 	public List<UsersVO> getLessonApplyOkUsers(int applyOk, int lessonSeq) throws FindException {
