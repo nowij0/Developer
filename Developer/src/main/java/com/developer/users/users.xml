@@ -6,10 +6,10 @@
 
 
 <resultMap type="com.developer.users.UsersVO" id="tutorMap">
-	<result column="user_id" property="userId"/>
-	<result column="name" property="name"/>
-	<result column="nickname" property="nickname"/>
-	<result column="tel" property="tel"/>
+	<result column="u.user_id" property="userId"/>
+	<result column="u.name" property="name"/>
+	<result column="u.nickname" property="nickname"/>
+	<result column="u.tel" property="tel"/>
 </resultMap>
 
 <select id="selectTutor" resultMap="tutorMap">
@@ -31,4 +31,9 @@ SELECT *
 FROM users
 WHERE user_id=#{user_id, jdbcType=VARCHAR}
 </select>
+
+<insert id="joinUser">
+INSERT INTO users
+VALUES(#{user_id}, 2, #{pwd}, #{nickname}, #{name}, #{email}, #{tel}, #{addr} ))
+</insert>
 </mapper>
