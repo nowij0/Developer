@@ -1,5 +1,7 @@
 package com.developer.favoriteslesson;
 
+import com.developer.lesson.LessonVO;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,5 +19,5 @@ public class FavoritesLessonVO {
 	private String userId;
 	private int lessonSeq;
 	
-//	private LessonVO lessonVO;
+	private LessonVO lessonVO;
 }

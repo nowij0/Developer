@@ -10,5 +10,11 @@ public class AppliedLessonDAOOracle implements AppliedLessonDAO {
 	
 	public AppliedLessonDAOOracle() {
 		sqlSessionFactory = Factory.getSqlSessionFactory();
+	}
+
+	@Override
+	public int cntReview(int applySeq) {
+
+		return 0;
 	}	
 }

@@ -29,5 +29,19 @@ public class LessonVO {
 	private Date endDate;
 	private int payLesson;
 	private String location;
+	
 	private TutorVO tutorVO;
+	
+	//Users 테이블 
+	private String name;
+	
+	//Applied_Lesson 테이블 
+	private int applySeq;
+	private int applyOk;
+	
+	//Lesson_Review 테이블 
+	private String review;
+	private int star;
+	
+	private int filter;
 }
