@@ -1,5 +1,7 @@
 package com.developer.board;
 
+import java.util.List;
+
 import com.developer.boardrep.BoardRepVO;
 import com.developer.recommend.RecommendVO;
 
@@ -23,8 +25,10 @@ public class BoardVO {
 	private String cDate;
 	private String recommend;
 	private int cnt;
+	
 	private String nikcname;
-	private RecommendVO recommendVO;
-	private BoardRepVO boardRepVO;
+	private List<RecommendVO> recommendVO;
+	private List<BoardRepVO> boardRepVO;
+	
 }
  

@@ -22,7 +22,4 @@ public class BoardRepVO {
 	private Date cDate;
 	private int postSeq;
 	private String userId;
-	
-	private BoardVO boardVO;
-	
 }
