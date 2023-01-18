@@ -75,7 +75,7 @@ public interface UsersDAO {
 	
 	/**
 	 * [일반회원 : 클래스 > 튜터 > 진행 예정 클래스 > 상세 정보] 삭제하기
-	 * 
+	 * @author Jin
 	 * @param 삭제할 lessonSeq값을 입력
 	 * @throws FindException
 	 */
@@ -83,7 +83,7 @@ public interface UsersDAO {
 	
 	/**
 	 * [일반회원 : 클래스 > 튜터 > 진행 예정 클래스 > 상세 정보] 신청튜티 목록
-	 * 
+	 * @author Jin
 	 * @param applyOk가 0이고
 	 * @param 보여줄 lesson의 lessonSeq값
 	 * @return 특정 lesson에 신청한 미승인 상태인 튜티 리스트 출력 
@@ -94,7 +94,7 @@ public interface UsersDAO {
 	
 	/**
 	 * [일반회원 : 클래스 > 튜터 > 진행 예정 클래스 > 상세 정보] 신청튜티 승인
-	 * 
+	 * @author Jin
 	 * @param 해당 튜티의 appliedLesson의 applyOk를 1로 변경
 	 * @throws FindException
 	 */
@@ -103,7 +103,7 @@ public interface UsersDAO {
 	
 	/**
 	 * [일반회원 : 클래스 > 튜터 > 진행 예정 클래스 > 상세 정보] 신청튜티 거절
-	 * 
+	 * @author Jin
 	 * @param 해당 튜티의 appliedLesson의 applyOk를 2로 변경
 	 * @throws FindException
 	 */
@@ -112,7 +112,7 @@ public interface UsersDAO {
 	
 	/**
 	 * [일반회원 : 클래스 > 튜터 > 진행 예정 클래스 > 상세 정보] 신청튜티 평가
-	 * 
+	 * @author Jin
 	 * @param 튜티에 해당하는 userId값
 	 * @return 해당 튜티의 UsersVO 값 출력(이름, 리뷰, 평점)
 	 * @throws FindException
@@ -121,7 +121,7 @@ public interface UsersDAO {
 	
 	/**
 	 * [일반회원 : 클래스 > 튜터 > 진행 예정 클래스 > 상세 정보] 신청완료 튜티 목록
-	 * 
+	 * @author Jin
 	 * @param applyOk가 1인
 	 * @param lessonSeq에 해당하는 lesson
 	 * @return 해당 lesson의 applyOk가 1인 user리스트 출력
