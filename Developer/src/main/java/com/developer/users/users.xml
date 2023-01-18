@@ -5,30 +5,42 @@
 <mapper namespace="com.developer.users">
 
 
-<resultMap type="com.developer.users.UsersVO" id="tutorMap">
-	<result column="user_id" property="userId"/>
-	<result column="name" property="name"/>
-	<result column="nickname" property="nickname"/>
-	<result column="tel" property="tel"/>
-</resultMap>
+	<resultMap type="com.developer.users.UsersVO" id="tutorMap">
+		<result column="user_id" property="userId" />
+		<result column="name" property="name" />
+		<result column="nickname" property="nickname" />
+		<result column="tel" property="tel" />
+	</resultMap>
 
-<select id="selectTutor" resultMap="tutorMap">
-SELECT u.user_id, u.name, u.nickname, u.tel
-FROM users u, tutor t
-WHERE u.user_id = t.user_id
-AND apply_ok = 0;
-</select>
+	<select id="selectTutor" resultMap="tutorMap">
+		SELECT u.user_id, u.name, u.nickname, u.tel
+		FROM users u, tutor t
+		WHERE u.user_id = t.user_id
+		AND apply_ok = 0;
+	</select>
 
 
-<select id="selectAll" resultType="String">
-SELECT name
-FROM users 
-ORDER BY name
-</select>
+	<select id="selectAll" resultType="String">
+		SELECT name
+		FROM users
+		ORDER BY name
+	</select>
 
-<select id="getUsers" resultType="com.developer.users.UsersVO" >
-SELECT *
-FROM users
-WHERE user_id=#{user_id, jdbcType=VARCHAR}
-</select>
+	<select id="getUsers" resultType="com.developer.users.UsersVO">
+		SELECT *
+		FROM users
+		WHERE user_id=#{user_id}
+	</select>
+
+	<select id="selectUserId"
+		resultType="com.developer.users.UsersVO">
+		SELECT user_id
+		FROM users
+		WHERE email=#{email, jdbcType=VARCHAR}
+	</select>
+
+	<!-- <select id="selectUserPwd" parameterType="hashmap" resultMap="userPwdMap"> 
+		SELECT pwd FROM users WHERE user_id=#{user_id, jdbcType=VARCHAR} and email=#{email, 
+		jdbcType=VARCHAR} </select> -->
+
 </mapper>

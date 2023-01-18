@@ -1,6 +1,7 @@
 package com.developer.board;
 
-import com.developer.users.UsersVO;
+import com.developer.boardrep.BoardRepVO;
+import com.developer.recommend.RecommendVO;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,7 +23,8 @@ public class BoardVO {
 	private String cDate;
 	private String recommend;
 	private int cnt;
-	
-	private UsersVO usersVO;
+	private String nikcname;
+	private RecommendVO recommendVO;
+	private BoardRepVO boardRepVO;
 }
  
