@@ -14,10 +14,13 @@ import lombok.ToString;
 public class LessonReivewVO {
 	private int leRevSeq;
 	private int applySeq;
-	private Date cdate;
+	private Date cDate;
 	private String reivew;
 	private int star;
 	
-//	private LessonVO lessonVO;
+	private String lessonName;
+	
+	private int filter;
+	
 	
 }

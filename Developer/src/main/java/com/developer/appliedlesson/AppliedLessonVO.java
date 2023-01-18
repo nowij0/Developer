@@ -14,6 +14,6 @@ public class AppliedLessonVO {
 	private String userId;
 	private Date cdate;
 	private int applyOk;
-	private UsersVO usersVO;
-	private List<LessonVO> lessonVO;
+	
+	
 }
