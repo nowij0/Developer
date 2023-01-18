@@ -20,6 +20,11 @@ public class ReservationVO {
 	private String startTime;
 	private String endTime;
 	private Date usingDate;
+	private String hostId;
+	
 	
 	private RoomInfoVO roomInfoVO;
+	private String roomInfoName;
+	private String userName;
+	
 }
