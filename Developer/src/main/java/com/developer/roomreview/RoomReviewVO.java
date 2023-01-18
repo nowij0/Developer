@@ -2,6 +2,8 @@ package com.developer.roomreview;
 
 import java.util.Date;
 
+import com.developer.reservation.ReservationVO;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,5 +23,9 @@ public class RoomReviewVO {
 	private Date cDate;
 	private int resSeq;
 	
-	private RoomReviewVO roomReviewVO;
+	private String nickName;
+	private String srName;
+	private String riName;
+	private ReservationVO reservationVO;
+	
 }
