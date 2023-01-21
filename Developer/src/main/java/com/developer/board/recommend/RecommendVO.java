@@ -1,6 +1,5 @@
-package com.developer.recommend;
+package com.developer.board.recommend;
 
-import com.developer.board.BoardVO;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,6 +15,4 @@ public class RecommendVO {
 	private int recSeq;
 	private int postSeq;
 	private String userId;
-
-	private BoardVO boardVO;
 }

@@ -1,5 +1,9 @@
 package com.developer.studyroom;
 
+import java.util.List;
+
+import com.developer.exception.FindException;
+
 public interface StudyroomDAO {
 
 	/**
@@ -63,6 +67,7 @@ public interface StudyroomDAO {
 	 * @throws FindException
 	 */
 	public StudyroomVO getHostAndStudyroom(String hostId) throws FindException;
+
 }
 
 

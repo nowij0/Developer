@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.developer.lesson.LessonVO;
+import com.developer.lessonreview.LessonReviewVO;
 import com.developer.userreview.UserReviewVO;
 import com.developer.users.UsersVO;
 
@@ -24,7 +25,8 @@ public class AppliedLessonVO {
 	private Date cdate;
 	private int applyOk;
 	
-	private UsersVO usersVO;
+	private List<UsersVO> usersVO;
 	private LessonVO lessonVO;
 	private List<UserReviewVO> userReviewVO;
+	private LessonReviewVO lessonReviewVO;
 }

@@ -23,7 +23,6 @@ public interface ReservationDAO {
 	 * @throws FindException
 	 */
 	public int reservationDelete(int resSeq) throws FindException; 
-
 	
 	/** 
 	 * [마이페이지-호스트] 스터디카페 예약 내역을 전체 출력(목록)한다.

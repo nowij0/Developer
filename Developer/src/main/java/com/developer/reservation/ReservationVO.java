@@ -2,7 +2,9 @@ package com.developer.reservation;
 
 import java.util.Date;
 
+import com.developer.hostuser.HostUserVO;
 import com.developer.roominfo.RoomInfoVO;
+import com.developer.studyroom.StudyroomVO;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,14 +24,6 @@ public class ReservationVO {
 	private Date usingDate;
 	private String hostId;
 	
-	
-
-	private int price;
-	private String srName;
-	private String rifName;
-
-	private RoomInfoVO roomInfoVO;
-	private String roomInfoName;
-	private String userName;
-	
+	private StudyroomVO studyroomVO;
+	private HostUserVO hostUserVO;	
 }

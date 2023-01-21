@@ -80,7 +80,7 @@ order by l.lesson_seq desc
 	</association>
 </resultMap>
 
-<select id="selectDetail" resultMap="lessonDetail">
+<select id="selectLessonDetail" resultMap="lessonDetail">
 SELECT l.lesson_name, l.img_path, l.location, l.start_cdate, l.end_cdate,
         l.category, l.people, u.name
 FROM TUTOR t, LESSON l, USERS u
@@ -116,8 +116,6 @@ WHERE rownum BETWEEN 1 AND 4
 	</select>
 <!-- sr: selectAllByDate end -->
 
-</mapper>
-=======
 <resultMap type="LessonVO" id="selectLessonMap" autoMapping="true">
 	<id property="lessonSeq" column="lesson_seq"/>
 	<result property="userId" column="user_id"/>	

@@ -1,10 +1,7 @@
 package com.developer.appliedlesson;
-
 import java.util.List;
 
 import com.developer.exception.FindException;
-import com.developer.lesson.LessonVO;
-import com.developer.userreview.UserReviewVO;
 
 public interface AppliedLessonDAO {
 	
@@ -45,13 +42,6 @@ public interface AppliedLessonDAO {
 	 * @throws FindException
 	 */
 	public void updateNotApplyLesson(AppliedLessonVO vo) throws FindException;
-
-	
-	
-
-import com.developer.exception.FindException;
-
-public interface AppliedLessonDAO {
 
 	/**
 	 * [마이페이지: 튜티] 대시보드 

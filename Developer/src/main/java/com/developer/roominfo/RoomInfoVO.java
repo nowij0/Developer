@@ -1,7 +1,5 @@
 package com.developer.roominfo;
 
-import com.developer.studyroom.StudyroomVO;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,6 +20,4 @@ public class RoomInfoVO {
 	private String imgPath;
 	private int person;
 	private int price;
-	
-	private StudyroomVO studyroomVO;
 }

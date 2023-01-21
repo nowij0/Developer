@@ -1,6 +1,5 @@
 package com.developer.roominfo;
 
-
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
@@ -55,5 +54,6 @@ public class RoomInfoDAOOracle implements RoomInfoDAO {
 		session.close();
 		return vo;
 	}
+
 
 }

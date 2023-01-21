@@ -1,7 +1,5 @@
 package com.developer.userreview;
 
-import com.developer.appliedlesson.AppliedLessonVO;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,5 +14,5 @@ public class UserReviewVO {
 	private int applySeq;
 	private int star;
 	private String review;
-	private AppliedLessonVO appliedLessonVO;
+	
 }

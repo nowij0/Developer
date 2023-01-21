@@ -3,6 +3,25 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.developer.hostuser">
+	<!-- hostLogin -->
+	<select id="hostLogin" resultType="HostUserVO">
+		select * from host_user where host_id=#{hostId}
+	</select>
+	<!-- hostLogin -->
+	
+	
+	<!-- selectHostId -->
+	<select id="selectHostId" resultType="HostUserVO">
+		select host_Id from host_user where num=#{num}
+	</select>
+	<!-- selectHostId -->
+	
+	
+	<!-- selectHostPwd -->
+	<select id="selectHostPwd" resultType="HostUserVO">
+		select pwd from host_user where host_id=#{hostId} and num=#{num} and email=#{email}
+	</select>
+	<!-- selectHostPwd -->
 
 <!-- joinHostUser -->
 <insert id="joinHostUser">
@@ -33,4 +52,12 @@ SET pwd = #{pwd}, tel = #{tel}
 WHERE host_id = #{hostId}
 </update>
 <!-- sr: updateHostUser End -->
+
+
+<insert id="joinHostUser">
+INSERT INTO host_user
+VALUES(#{hostId}, 2, #{pwd}, #{num}, #{ready}, #{name}, #{tel}, #{email})
+</insert>
+
 </mapper>
+

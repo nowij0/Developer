@@ -43,9 +43,6 @@ public interface RoomInfoDAO {
 	 * @throws FindException
 	 */
 	public RoomInfoVO getRoom(int roomSeq) throws FindException; 
-	
-
-public interface RoomInfoDAO {
 
 	
 }

@@ -1,9 +1,8 @@
 package com.developer.lesson;
 
 import java.text.ParseException;
-import java.util.List;
-
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -21,9 +20,9 @@ public class LessonDAOOracle implements LessonDAO {
 
 	//장학
 	@Override
-	public LessonVO selectDetail(int lessonSeq) {
+	public LessonVO selectLessonDetail(int lessonSeq) {
 		SqlSession session = sqlSessionFactory.openSession();
-		LessonVO vo = (LessonVO) session.selectOne("com.developer.lesson.selectDetail", lessonSeq);
+		LessonVO vo = (LessonVO) session.selectOne("com.developer.lesson.selectLessonDetail", lessonSeq);
 		return vo;
 	}
 	
@@ -109,8 +108,6 @@ public class LessonDAOOracle implements LessonDAO {
 //		System.out.println(v);
 //		}
 	}
-
-
 	
 	//지원 : 카테고리 검색까지는 가능, 필터는 XXX
 	@Override
@@ -135,7 +132,7 @@ public class LessonDAOOracle implements LessonDAO {
 		return selectSearch;
 	}
 
-	//지원
+	//지원 
 	@Override
 	public LessonVO selectDetail(int lessonSeq) throws FindException {
 		SqlSession session = sqlSessionFactory.openSession();
