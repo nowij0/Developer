@@ -16,3 +16,183 @@ WHERE rownum BETWEEN 1 AND 4
 <!-- sr: selectAllByDate end -->
 
 </mapper>
+=======
+<resultMap type="LessonVO" id="selectLessonMap" autoMapping="true">
+	<id property="lessonSeq" column="lesson_seq"/>
+	<result property="userId" column="user_id"/>	
+	<result property="lessonName" column="lesson_name"/>	
+	<result property="category" column="category"/>	
+	<result property="content" column="content"/>	
+	<result property="people" column="people"/>	
+	<result property="imgPath" column="img_path"/>	
+	<result property="startCdate" column="start_cdate"/>	
+	<result property="endCdate" column="end_cdate"/>	
+	<result property="price" column="price"/>	
+	<result property="startDate" column="start_date"/>	
+	<result property="endDate" column="end_date"/>	
+	<result property="payLesson" column="pay_lesson"/>	
+	<result property="location" column="location"/>
+	
+	<association property="tutorVO" javaType="TutorVO" autoMapping="true">
+		<id property="info" column="info"/>
+		<result property="imgPath" column="img_path"/>
+		<result property="starAvg" column="star_avg"/>
+		
+		<association property="usersVO" javaType="UsersVO" autoMapping="true">
+			<id property="userId" column="user_id"/>
+			<result property="name" column="name"/>
+			<result property="nickname" column="nickname"/>
+		</association>
+	</association>
+</resultMap>
+<select id="selectLesson" parameterType="Map" resultMap="selectLessonMap" >
+SELECT 
+* FROM lesson l
+    INNER JOIN tutor t
+    ON l.user_id = t.user_id
+    INNER JOIN users u
+    ON t.user_id = u.user_id
+    WHERE l.pay_lesson != 2
+    AND l.end_cdate <![CDATA[>]]> SYSDATE
+	<if test="category != null">
+	AND l.category = #{category} 
+	</if>
+</select>
+
+<select id="selectSearch" parameterType="String" resultMap="selectLessonMap">
+SELECT *
+FROM lesson l
+    INNER JOIN tutor t
+    ON l.user_id = t.user_id
+    INNER JOIN users u
+    ON t.user_id = u.user_id
+WHERE pay_lesson != 2
+AND end_cdate <![CDATA[>]]> SYSDATE
+<if test="lessonName != null">
+	AND l.lesson_name LIKE '%' || #{search} || '%'
+</if>
+</select>
+
+
+<resultMap type="LessonVO" id="selectDetailMap" autoMapping="true">
+	<id property="lessonSeq" column="lesson_seq"/>
+	<result property="userId" column="user_id"/>	
+	<result property="lessonName" column="lesson_name"/>	
+	<result property="category" column="category"/>	
+	<result property="content" column="content"/>	
+	<result property="people" column="people"/>	
+	<result property="imgPath" column="img_path"/>	
+	<result property="startCdate" column="start_cdate"/>	
+	<result property="endCdate" column="end_cdate"/>	
+	<result property="price" column="price"/>	
+	<result property="startDate" column="start_date"/>	
+	<result property="endDate" column="end_date"/>	
+	<result property="payLesson" column="pay_lesson"/>	
+	<result property="location" column="location"/>
+	
+	<association property="tutorVO" javaType="TutorVO" autoMapping="true">
+		<id property="info" column="info"/>
+		<result property="imgPath" column="img_path"/>
+		<result property="starAvg" column="star_avg"/>
+		
+		<association property="usersVO" javaType="UsersVO" autoMapping="true">
+			<id property="userId" column="user_id"/>
+			<result property="name" column="name"/>
+			<result property="nickname" column="nickname"/>
+		</association>
+	</association>
+	
+	<collection property="favoritesLessonVO" ofType="FavoritesLessonVO" autoMapping="true">
+		<id property="favLesSeq" column="fav_les_seq" />
+		<result property="userId" column="user_id"/>
+		<result property="lessonSeq" column="lesson_seq"/>
+	</collection>
+</resultMap>
+<select id="selectDetail" resultMap="selectDetailMap">
+SELECT 
+*
+FROM lesson l
+    INNER JOIN applied_lesson al
+    ON l.lesson_seq = al.lesson_seq
+    INNER JOIN tutor t
+    ON l.user_id = t.user_id
+    INNER JOIN users u 
+    ON t.user_id = u.user_id
+    FULL JOIN favorites_lesson fl
+    ON fl.user_id = u.user_id
+    WHERE l.lesson_seq = #{lessonSeq}
+</select>
+
+<resultMap type="LessonVO" id="selectAllReviewMap">
+	<id property="lessonSeq" column="lesson_seq"/>
+	
+	<collection property="appliedLessonVO" ofType="AppliedLessonVO" autoMapping="true">
+		<id property="applySeq" column="apply_seq"/>
+		
+		<association property="usersVO" javaType="UsersVO" autoMapping="true">
+			<id property="userId" column="user_id"/>
+			<result property="nickname" column="nickname"/>
+		</association>
+		<collection property="userReviewVO" ofType="UserReviewVO" autoMapping="true">
+			<id property="applySeq" column="apply_seq"/>
+			<result property="star" column="star"/>
+			<result property="review" column="review"/>
+		</collection>
+	</collection>
+</resultMap>
+<select id="selectAllReview" resultMap="selectAllReviewMap">
+SELECT * 
+FROM applied_lesson al
+    INNER JOIN lesson l
+    ON al.lesson_seq = l.lesson_seq
+    INNER JOIN lesson_review lr
+    ON al.apply_seq = lr.apply_seq
+    INNER JOIN users u
+    ON al.user_id = u.user_id
+    WHERE l.lesson_seq = #{lessonSeq}
+</select>
+
+
+<insert id="addLesson">
+INSERT INTO lesson 
+VALUES (lesson_seq.nextVal, #{userId}, #{lessonName},  #{category}, 
+#{content}, #{people}, #{imgPath},
+#{startCdate},  #{endCdate}, #{price}, #{startDate}, #{endDate},  
+#{payLesson}, #{location})
+</insert>
+
+
+<resultMap type="LessonVO" id="selectTutorMap">
+	<id property="lessonSeq" column="lesson_seq"/>
+	<result property="lessonName" column="lesson_name"/>	
+	<result property="category" column="category"/>	
+	<result property="imgPath" column="img_path"/>	
+	<result property="price" column="price"/>	
+	<result property="payLesson" column="pay_lesson"/>	
+	<result property="location" column="location"/>
+	
+	<association property="tutorVO" javaType="TutorVO" autoMapping="true">
+		<id property="userId" column="user_id"/>
+		<result property="info" column="info"/>
+		<result property="imgPath" column="img_path"/>
+		
+		<association property="usersVO" javaType="UsersVO" autoMapping="true">
+			<result property="name" column="name"/>
+		</association>
+	</association>	
+</resultMap>
+<select id="selectTutor" resultMap="selectTutorMap">
+SELECT 
+* FROM lesson l
+    INNER JOIN tutor t
+    ON l.user_id = t.user_id
+    INNER JOIN users u 
+    ON t.user_id = u.user_id
+    WHERE l.user_id = #{userId}
+    AND pay_lesson != 2
+</select>
+
+</mapper>
+
+
+
