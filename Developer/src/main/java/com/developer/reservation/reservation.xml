@@ -2,6 +2,80 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.developer.users">
+<mapper namespace="com.developer.reservation">
+
+<!-- sr:reservationDelete start -->
+<delete id="reservationDelete" parameterType="Integer">
+DELETE FROM reservation
+WHERE res_seq = #{resSeq}
+</delete>
+<!-- sr:reservationDelete end -->
+
+<!-- sr:selectAllStudycafeReservation start -->
+<resultMap type="ReservationVO" id="ReservationMap" autoMapping = "true">
+	<id column="res_seq" property="resSeq" />
+	<result column="using_date" property="usingDate" />
+	<result column="start_time" property="startTime" />
+	<result column="end_time" property="endTime" />
+	<result column="host_id" property="hostId" />
+	
+	<association property="studyroomVO" javaType="StudyroomVO" autoMapping = "true">
+ 		<collection property="roomInfoVO" ofType="RoomInfoVO" autoMapping = "true">
+ 			<id column="room_seq" property="roomSeq"/>
+ 			<result column="riName" property="name" />
+ 		</collection>
+	</association>
+	
+	<association property="usersVO" javaType="UsersVO" autoMapping = "true">
+		<id column="user_id" property="userId" />
+		<result column="uName" property="name" />
+	</association>
+</resultMap>
+
+<select id="selectAllStudycafeReservation" parameterType="String" resultMap="ReservationMap">
+SELECT r.res_seq, ri.name as riName, r.user_id, u.name As uName, r.using_date, r.start_time, r.end_time, r.host_id
+FROM reservation r  JOIN users u ON r.user_id = u.user_id
+JOIN room_info ri ON   ri.room_seq = r.room_seq 
+JOIN studyroom sr ON   sr.sr_seq = ri.sr_seq
+WHERE sr.host_id = #{hostId}
+UNION
+SELECT r.res_seq, ri.name, '', '', r.using_date, r.start_time, r.end_time, r.host_id
+FROM reservation r 
+JOIN room_info ri ON ri.room_seq = r.room_seq 
+WHERE host_id = #{hostId}
+</select>
+<!-- sr:selectAllStudycafeReservation End -->
+
+
+<!-- sr:selectReservation Start -->
+<resultMap type="ReservationVO" id="ReservationSelectMap" autoMapping = "true">
+	<id column="res_seq" property="resSeq" />
+	<result column="using_date" property="usingDate" />
+	<result column="start_time" property="startTime" />
+	<result column="end_time" property="endTime" />
+	<result column="host_id" property="hostId" />
+	
+	<association property="studyroomVO" javaType="StudyroomVO" autoMapping = "true">
+ 		<collection property="roomInfoVO" ofType="RoomInfoVO"  autoMapping = "true">
+ 			<id column="room_seq" property="roomSeq"/>
+ 			<result column="rifName" property="name" />
+ 			</collection>
+ 			</association>
+	<association property="usersVO" javaType="UsersVO" autoMapping = "true">
+		<id column="user_id" property="userId" />
+		<result column="uName" property="name" />
+		<result column="tel" property="tel" />
+	
+	</association>
+		</resultMap>
+		
+<select id="selectReservation" parameterType="Integer" resultMap="ReservationSelectMap">
+SELECT r.res_seq, u.name AS uName, u.tel, rif.name AS rifName, r.using_date, r.start_time, r.end_time, r.host_id
+FROM room_info rif, reservation r, users u
+WHERE rif.room_seq = r.room_seq
+AND r.user_id = u.user_id
+AND r.res_seq = #{res_seq}
+</select>
+<!-- sr:selectReservation End -->
 
 </mapper>

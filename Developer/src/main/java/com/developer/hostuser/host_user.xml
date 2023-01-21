@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<<<<<<< HEAD
 <mapper namespace="com.developer.hostuser">
 	<!-- hostLogin -->
 	<select id="hostLogin" resultType="HostUserVO">
@@ -23,3 +24,31 @@
 	<!-- selectHostPwd -->
 	
 </mapper>
+=======
+
+<mapper namespace="com.developer.hostuser">
+
+<!-- sr: deleteHostUser Start -->
+<delete id="deleteHostUser">
+	DELETE FROM host_user
+	WHERE host_id = #{host_id}
+</delete>
+<!-- sr: deleteHostUser End -->
+
+
+<!-- sr: getHostUser Start -->
+<select id= "getHostUser" resultType="HostUserVO">
+SELECT * FROM host_user
+WHERE host_id = #{hostId}
+</select>
+<!-- sr: getHostUser End -->
+
+<!-- sr: updateHostUser Start -->
+<update id="updateHostUser" parameterType="HostUserVO">
+UPDATE host_user
+SET pwd = #{pwd}, tel = #{tel}
+WHERE host_id = #{hostId}
+</update>
+<!-- sr: updateHostUser End -->
+</mapper>
+>>>>>>> 24016e656d39b0bdcea57683fe473175c58dd951

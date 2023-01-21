@@ -1,5 +1,6 @@
 package com.developer.board;
 
+<<<<<<< HEAD
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -13,11 +14,24 @@ import com.developer.exception.FindException;
 import com.developer.resource.Factory;
 
 public class BoardDAOOracle implements BoardDAO {
+=======
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+
+import com.developer.exception.FindException;
+import com.developer.resource.Factory;
+
+public class BoardDAOOracle implements BoardDAO {
+
+>>>>>>> 24016e656d39b0bdcea57683fe473175c58dd951
 	private SqlSessionFactory sqlSessionFactory;
 
 	public BoardDAOOracle() {
 		sqlSessionFactory = Factory.getSqlSessionFactory();
 	}
+<<<<<<< HEAD
 	
 	//근형
 	@Override
@@ -128,4 +142,17 @@ public class BoardDAOOracle implements BoardDAO {
 		session.close();
 		return vo;
 	}
+=======
+
+	// sr
+	@Override
+	public List<BoardVO> boardSelectAllByDate() throws FindException {
+		SqlSession session = sqlSessionFactory.openSession();
+		List<BoardVO> list = session.selectList("com.developer.board.boardSelectAllByDate");
+		session.close();
+		return list;
+
+	}
+
+>>>>>>> 24016e656d39b0bdcea57683fe473175c58dd951
 }

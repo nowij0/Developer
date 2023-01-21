@@ -4,9 +4,18 @@ import java.util.Date;
 import java.util.List;
 
 import com.developer.lesson.LessonVO;
+import com.developer.userreview.UserReviewVO;
 import com.developer.users.UsersVO;
 
- 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter @Setter
+@NoArgsConstructor @AllArgsConstructor
+@ToString
 public class AppliedLessonVO {
 	
 	private int applySeq;
@@ -15,5 +24,7 @@ public class AppliedLessonVO {
 	private Date cdate;
 	private int applyOk;
 	
-	
+	private UsersVO usersVO;
+	private LessonVO lessonVO;
+	private List<UserReviewVO> userReviewVO;
 }
