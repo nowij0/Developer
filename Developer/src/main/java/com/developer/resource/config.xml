@@ -45,7 +45,7 @@
  		<mapper resource="com/developer/lesson/lesson.xml"></mapper>
  		<mapper resource="com/developer/reservation/reservation.xml"></mapper>
  		<mapper resource="com/developer/roominfo/room_info.xml"></mapper>
- 		<mapper resource="com/developer/studytroom/studyroom.xml"></mapper>
+ 		<mapper resource="com/developer/studyroom/studyroom.xml"></mapper>
  		<mapper resource="com/developer/tutor/tutor.xml"></mapper>
  		<mapper resource="com/developer/userreview/user_review.xml"></mapper> 
  		<mapper resource="com/developer/roomreview/room_review.xml"></mapper> 
