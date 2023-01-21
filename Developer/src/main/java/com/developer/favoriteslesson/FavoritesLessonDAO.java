@@ -1,21 +1,24 @@
 package com.developer.favoriteslesson;
 
+import com.developer.exception.FindException;
+
 public interface FavoritesLessonDAO {
 	
 	/**
-	 * [클래스] 해당 수업 즐겨찾기 추가 
+	 * [클래스: 상세정보] 즐겨찾기 추가 
 	 * @author moonone
-	 * @param userId 로그인한 회원의 아이디 
-	 * @param lessonSeq 수업번호 
+	 * @param favoritesLessonVO 회원아이디, 수업번호
+	 * @throws FindException
 	 */
-	public void addFav(String userId, int lessonSeq);
+	public void addFavLesson(FavoritesLessonVO favoritesLessonVO) throws FindException;
 	
 	/**
-	 * [클래스] 해당 수업 즐겨찾기 삭제
+	 * [클래스: 상세정보] 즐겨찾기 삭제
 	 * @author moonone 
-	 * @param userId 로그인한 회원의 아이디 
-	 * @param lessonSeq 수업번호 
+	 * @param userId 회원아이디 
+	 * @param lessonseq 수업번호 
+	 * @throws FindException
 	 */
-	public void delFav(String userId, int lessonSeq);
+	public void delFavLesson(String userId, int lessonSeq) throws FindException;
 
 }

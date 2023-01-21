@@ -1,33 +1,78 @@
 package com.developer.hostuser;
 
+import java.util.List;
+
 import com.developer.exception.FindException;
 
 public interface HostUserDAO {
-
+	
 	/**
-	 * [마이페이지-호스트] 호스트 회원의 정보 1 set를 출력한다 (+스터디카페 정보 1set도 같이 출력)
-	 * @author sr
-	 * @param hostId(호스트 아이디)
-	 * @return HostUserVO
+	 * [관리자 페이지] 호스트회원 전체목록 출력 
+	 * @author choigeunhyeong
+	 * @return 호스트회원 테이블 전체값
 	 * @throws FindException
 	 */
-	public HostUserVO select(String hostId) throws FindException;
+	public List<HostUserVO> selectAll() throws FindException;
 	
+	/**
+	 * [호스트회원 > 로그인] 호스트로그인을 위한 호스트회원 검색
+	 * @author choigeunhyeong
+	 * @return 호스트회원 테이블 아이디값에 해당하는 정보
+	 * @throws FindException
+	 */
+	public HostUserVO hostLogin(String hostId) throws FindException;
+	
+	/**
+	 * [호스트회원 > 아이디찾기 페이지] 호스트회원 사업자번호로 아이디 검색
+	 * @author choigeunhyeong
+	 * @param num 사업자 번호
+	 * @return 사업자번호값이 일치하는 호스트회원의 아이디
+	 * @throws FindException
+	 */
+	public HostUserVO selectHostId(String num) throws FindException;
+	
+	/**
+	 * [호스트회원 > 비밀번호 찾기 페이지] 호스트회원아이디, 사업자번호, 이메일이 일치하는 값의 비밀번호 검색
+	 * @author choigeunhyeong
+	 * @param hostId 호스트회원 아이디
+	 * @param num 사업자번호
+	 * @param email 이메일
+	 * @return
+	 * @throws FindException
+	 */
+	public HostUserVO selectHostPwd(String hostId, String num, String email) throws FindException;
+
 	/**
 	 * [마이페이지-호스트] 호스트 회원 정보를 수정한다
 	 * @author sr
 	 * @param HostUserVO
 	 * @throws FindException
 	 */
-	public void update(HostUserVO hostUserVO) throws FindException;
+	public int updateHostUser(HostUserVO hostUserVO) throws FindException;
 	
 	/**
 	 * [마이페이지-호스트] 호스트 회원을 삭제한다(탈퇴)
 	 * @author sr
-	 * @param HostId(호스트 아이디)
+	 * @param hostId(호스트 아이디)
 	 * @throws FindException
 	 */
-	public void delete(String hostId) throws FindException;
+	public int deleteHostUser(String hostId) throws FindException;
 	
+	/**
+	 * [마이페이지-호스트] 호스트 회원 정보를 출력한다.
+	 * @author sr
+	 * @param hostId (호스트아이디)
+	 * @return HostUserVO
+	 * @throws FindException
+	 */
+	public HostUserVO getHostUser(String hostId) throws FindException;
+	
+	   /**
+	    * [회원가입 > 호스트] 호스트 회원가입
+	    * @author Jin
+	    * @param 호스트 회원가입 할 호스트객체 생성
+	    * @throws FindException
+	    */
+	   public int joinHostUser(HostUserVO vo) throws FindException;
 	
 }

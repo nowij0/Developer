@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.developer.lessonReview">
+	
+	<!-- selectLessonReview -->
+	<resultMap id="selectLessonReviewMap" type="AppliedLessonVO" autoMapping="true">
+		<id column="apply_seq" property="applySeq" />
+		
+		<association property="lessonReviewVO" javaType="LessonReviewVO"
+			autoMapping="true">
+			<id column="le_rev_seq" property="leRevSeq" />
+			<result column="REVIEW" property="review" />
+			<result column="STAR" property="star"></result>
+		</association>
+		
+		<collection property="usersVO" ofType="UsersVO" autoMapping="true">
+			<id column="user_id" property="userId" />
+			<result column="name" property="name" />
+		</collection>
+
+	</resultMap>
+	
+	<select id="selectLessonReview" resultMap="selectLessonReviewMap">
+    
+    SELECT *
+    FROM applied_lesson al
+    INNER JOIN lesson_review lr
+    ON al.apply_seq = lr.apply_seq
+    INNER JOIN users u
+    ON al.user_id = u.user_id
+    WHERE al.lesson_seq = #{lessonSeq}
+	</select>
+	<!-- selectLessonReview -->
+
+<!-- ====== cntReview() ====== -->
+<select id="cntReview" resultType="int">
+SELECT COUNT(*)
+FROM lesson_review lr
+    INNER JOIN applied_lesson al
+    ON lr.apply_seq = al.apply_seq
+    INNER JOIN lesson l
+    ON al.lesson_seq = l.lesson_seq
+WHERE l.user_id = #{userId}
+</select>
+<!-- ====== cntReview() ====== -->
+
+<!-- ===== addReview() ===== -->
+<insert id="addReview">
+INSERT INTO LESSON_REVIEW VALUES
+(le_rev_seq.nextVal, #{applySeq}, #{cDate}, #{review}, #{star})
+</insert>
+<!-- ===== addReview() ===== -->
+
+<!-- ===== noWriteReview() ===== -->
+<resultMap type="AppliedLessonVO" id="noWriteReviewMap">
+	<result property="userId" column="user_id"/>
+	
+	<association property="lessonVO" javaType="LessonVO" autoMapping="true">
+		<result property="lessonName" column="lesson_name"/>
+	</association>
+</resultMap>
+<select id="noWriteReview" resultMap="noWriteReviewMap">
+SELECT a.apply_seq, l.lesson_name
+from applied_lesson a, lesson l, users u
+WHERE a.user_id = #{userId}
+and l.lesson_seq = a.lesson_seq
+MINUS
+SELECT a.apply_seq, l.lesson_name
+FROM lesson_review r, applied_lesson a, lesson l
+where a.user_id = #{userId}
+and a.apply_seq = r.apply_seq
+</select>
+<!-- ===== noWriteReview() ===== -->
+
+
+<!-- ===== myReviewList() ===== -->
+<resultMap type="AppliedLessonVO" id="myReviewListMap">
+	<result property="userId" column="user_id"/>
+	
+	<association property="lessonVO" javaType="LessonVO" autoMapping="true">
+		<result property="lessonName" column="lesson_name"/>
+	</association>
+	<collection property="userReviewVO" ofType="UserReviewVO" autoMapping="true">
+		<id property="applySeq" column="apply_seq"/>
+		<result property="star" column="star"/>
+		<result property="review" column="review"/>
+	</collection>
+</resultMap>
+<select id = "myReviewList" resultMap="myReviewListMap">
+SELECT l.lesson_name, r.review
+from LESSON l, USERS u, LESSON_REVIEW r, APPLIED_LESSON a
+	WHERE a.user_id = u.user_id
+	AND l.lesson_seq = a.lesson_seq
+	AND r.apply_seq = a.apply_seq
+	AND u.user_id = #{user_id}
+	order by l.lesson_seq desc
+</select>
+<!-- ===== myReviewList() ===== -->
+</mapper>

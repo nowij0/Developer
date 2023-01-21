@@ -11,5 +11,36 @@
 select * 
 from room_info 
 where sr_seq = #{srSeq}
+<!-- sr: insertRoom Start-->
+<insert id="insertRoom" parameterType = "RoomInfoVO">
+INSERT into room_info values
+(room_seq.nextval,#{srSeq},#{name},#{info},
+#{imgPath},#{person},#{price})
+</insert>
+<!-- sr: insertRoom End-->
+
+
+<!-- sr: getRoom Start-->
+<select id="getRoom" parameterType="Integer" resultType="RoomInfoVO">
+SELECT *
+FROM room_info
+WHERE room_seq = #{roomSeq}
 </select>
+<!-- sr: getRoom End-->
+
+<!-- sr: updateRoom Start-->
+<update id="updateRoom" parameterType = "RoomInfoVO">
+update room_info 
+set name=#{name}, info=#{info},img_path=#{imgPath},person=#{person},price=#{price}
+where room_seq=#{roomSeq}
+</update>
+<!-- sr: updateRoom End-->
+
+
+<!-- sr: deleteRoom Start-->
+<delete id="deleteRoom" parameterType="Integer">
+delete room_info where room_seq=#{roomSeq}
+</delete>
+<!-- sr: deleteRoom End-->
+
 </mapper>

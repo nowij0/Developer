@@ -1,87 +1,156 @@
 package com.developer.lesson;
 
-import java.util.Date;
-import java.util.List;
-
 import java.util.List;
 
 import com.developer.exception.FindException;
 
 public interface LessonDAO {
-	
 
 	/**
-	 * [클래스 메인화면] 카테고리별 클래스 목록 출력 
+	 * [클래스: 메인화면] 현재 진행 중인 수업 목록 (필터로 정렬)
+	 * 
 	 * @author moonone
-	 * @param payLesson 유료클래스여부 (0무료 1유료 2결제대기)
-	 * @param endCdate 수업종료일  
-	 * @param filter 필터 선택값 
-	 * @param starAvg [튜터정보]의 평균별점 
-	 * @return 검색한 클래스에 대한 정보 
+	 * 
+	 * @return List<LessonVO>
+	 * @throws FindException
 	 */
-	public List<LessonVO> selectLesson(int payLesson, Date endCdate, int filter, int starAvg);
-	
+	public List<LessonVO> selectLesson(int category, int filter) throws FindException;
+
 	/**
-	 * [클래스 메인화면] 클래스이름, 카테고리, 튜터명으로 검색 목록 출력 
+	 * [클래스: 메인화면] 수업 이름, 카테고리명, 강사명 검색
+	 * 
 	 * @author moonone
-	 * @param lessonName 클래스명 
-	 * @param category 카테고리 
-	 * @param name [회원]의 튜터이름 
-	 * @return 검색한 클래스에 대한 정보 
+	 * @param search 검색어
+	 * @return 해당하는 클래스 정보
+	 * @throws FindException
 	 */
-	public List<LessonVO> selectSearch(String lessonName, int category, String name);
-		
+	public List<LessonVO> selectSearch(String search) throws FindException;
+
 	/**
-	 * [클래스] 선택한 클래스에 대한 상세정보 
+	 * [클래스: 상세정보] 선택한 클래스에 대한 상세정보
+	 * 
 	 * @author moonone
-	 * @param lessonSeq 클래스번호 
+	 * @param lessonSeq 클래스번호
+	 * @return 해당하는 클래스 정보 + 평균별점
+	 * @throws FindException 
+	 */
+	public LessonVO selectDetail(int lessonSeq) throws FindException;
+
+	/**
+	 * [일반회원 : 클래스 > 튜터] 진행예정 클래스 정보 출력
+	 * 
+	 * @author Jin
+	 * @param 튜터에 해당하는 userId
+	 * @return UserId로 검색된 Lesson 리스트 출력
+	 * @throws FindException
+	 */
+	public List<LessonVO> getLessonByUser1(String userId) throws FindException;
+
+	/**
+	 * [일반회원 : 클래스 > 튜터] 진행중클래스 정보 출력
+	 * 
+	 * @author Jin
+	 * @param 튜터에 해당하는 userId
+	 * @return UserId로 검색된 Lesson 리스트 출력
+	 * @throws FindException
+	 */
+	public List<LessonVO> getLessonByUser2(String userId) throws FindException;
+
+	/**
+	 * [일반회원 : 클래스 > 튜터] 진행완료 클래스 정보 출력
+	 * 
+	 * @author Jin
+	 * @param 튜터에 해당하는 userId
+	 * @return UserId로 검색된 Lesson 리스트 출력
+	 * @throws FindException
+	 */
+	public List<LessonVO> getLessonByUser3(String userId) throws FindException;
+
+	/**
+	 * [일반회원 : 클래스 > 튜터 > 진행 예정 클래스 > 상세 정보] 수정하기 셀렉문은 getLessonByUser메서드 사용.
+	 * 
+	 * @author Jin
+	 * @param LessonVO의 수정할 값 입력
+	 * @throws FindException
+	 */
+	public void updateLesson(LessonVO vo) throws FindException;
+
+	/**
+	 * [일반회원 : 클래스 > 튜터 > 진행 예정 클래스 > 상세 정보] 삭제하기
+	 * 
+	 * @author Jin
+	 * @param 삭제할 lessonSeq값을 입력
+	 * @throws FindException
+	 */
+	public void deleteLesson(int lessonSeq) throws FindException;
+
+	/**
+	 * [일반회원 : 클래스 > 튜터 > 진행 예정 클래스 > 상세 정보] 선택한 클래스에 대한 상세정보
+	 * 
+	 * @author Jin
+	 * @param lessonSeq 클래스번호
 	 * @return 해당하는 클래스 정보
 	 */
-	public LessonVO selectDetail(int lessonSeq);
-	
+	public LessonVO selectLessonDetail(int lessonSeq);
+
 	/**
-	 * [클래스] 클래스 등록 
-	 * @param lessonSeq 클래스번호 
-	 * @param userId 튜터아이디 
-	 * @param lessonName 클래스명 
-	 * @param category 카테고리 
-	 * @param content 상세내용 
-	 * @param people 클래스정원 
-	 * @param imgPath 이미지
-	 * @param startCDate 수업시작일 
-	 * @param endCDate 수업종료일 
-	 * @param price 가격 
-	 * @param startDate 신청시작일 
-	 * @param endDate 신청종료일 
-	 * @param payLesson 유료클래스 여부 
-	 * @param location 수업지역 
-	 */
-	public void addLesson(LessonVO lessonVO);
-	
-	/**
-	 * [마이페이지] 튜티 : 대시보드 
+	 * [클래스: 상세정보] 선택한 클래스를 개설한 튜터의 후기 목록 (필터로 정렬)
+	 * 
 	 * @author moonone
-	 * @param userId 회원아이디 
+	 * @param lessonSeq 해당수업번호
+	 * @return 수업에 해당하는 후기내역들
+	 * @throws FindException
+	 */
+	public List<LessonVO> selectAllReview(int lessonSeq) throws FindException;
+
+	/**
+	 * [클래스] 클래스 등록
+	 * 
+	 * @author moonone
+	 * @param lessonSeq  클래스번호
+	 * @param userId     튜터아이디
+	 * @param lessonName 클래스명
+	 * @param category   카테고리
+	 * @param content    상세내용
+	 * @param people     클래스정원
+	 * @param imgPath    이미지
+	 * @param startCDate 수업시작일
+	 * @param endCDate   수업종료일
+	 * @param price      가격
+	 * @param startDate  신청시작일
+	 * @param endDate    신청종료일
+	 * @param payLesson  유료클래스 여부
+	 * @param location   수업지역
+	 * @throws FindException
+	 */
+	public void addLesson(LessonVO lessonVO) throws FindException;
+
+	/**
+	 * [클래스: 상세정보] 튜터가 생성한 클래스목록 + 튜터 정보
+	 * 
+	 * @author moonone
+	 * @param userId 튜터아이디
+	 * @return 튜터가 생성한 수업 목록 + 튜터 정보
+	 * @throws FindException
+	 */
+	public List<LessonVO> selectTutor(String userId) throws FindException;
+
+	/**
+	 * [마이페이지] 튜티 : 대시보드
+	 * 
+	 * @author moonone
+	 * @param userId 회원아이디
 	 * @return 수업이름, 승인여부
 	 */
-	public List<LessonVO> selectDashBoard(String userId);
-	
-	/**
-	 * [마이페이지] 튜티 : 나의 후기 목록 확인  
-	 * @author moonone
-	 * @param userId 회원아이디 
-	 * @return 수업명, 후기, 별점 
-	 */
-	public List<LessonVO> selectReview(String userId);
+	public List<LessonVO> selectDashBoard(String userId) throws FindException;
 
-	
 	/**
 	 * [메인] 날짜가 임박한순으로 수업 전체 목록을 출력한다.
+	 * 
 	 * @author sr
 	 * @return List<LessonVO>
 	 * @throws FindException
 	 */
-	public List<LessonVO> selectAllByDate() throws FindException; 
-
+	public List<LessonVO> selectAllByDate() throws FindException;
 
 }

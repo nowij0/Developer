@@ -1,6 +1,9 @@
 package com.developer.studyroom;
 
+import java.util.List;
+
 import com.developer.hostuser.HostUserVO;
+import com.developer.roominfo.RoomInfoVO;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,11 +23,10 @@ public class StudyroomVO {
 	private String openTime;
 	private String endTime;
 	private String imgPath;
-	private int ov;
+	private int oc;
 	private String hostId;
 	
-	private int person;
-	private int price;
-	private String userId;
+	private List<RoomInfoVO> roomInfoVO;
+	private HostUserVO hostUserVO;
 	
 }

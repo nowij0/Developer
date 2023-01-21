@@ -19,10 +19,8 @@ import lombok.ToString;
 public class BoardRepVO {
 	private int postRepSeq;
 	private String content;
-	private Date cDate;
+	private Date date;
 	private int postSeq;
 	private String userId;
-	
-	private BoardVO boardVO;
 	
 }
