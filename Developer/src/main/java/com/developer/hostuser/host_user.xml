@@ -46,11 +46,11 @@ WHERE host_id = #{hostId}
 </update>
 <!-- sr: updateHostUser End -->
 
-
+<!-- joinHostUser -->
 <insert id="joinHostUser">
 INSERT INTO host_user
-VALUES(#{hostId}, 2, #{pwd}, #{num}, #{ready}, #{name}, #{tel}, #{email})
+VALUES(#{hostId}, #{pwd}, #{num}, 0, #{name}, #{tel}, #{email})
 </insert>
-
+<!-- joinHostUser -->
 </mapper>
 
