@@ -18,7 +18,6 @@ public class LessonDAOOracle implements LessonDAO {
 	public LessonDAOOracle() {
 		sqlSessionFactory = Factory.getSqlSessionFactory();
 	}	
-	}
 	
 	//지원 : 카테고리 검색까지는 가능, 필터는 XXX
 	@Override

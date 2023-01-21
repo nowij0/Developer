@@ -1,5 +1,9 @@
 package com.developer.studyroom;
 
+import java.util.List;
+
+import com.developer.exception.FindException;
+
 public interface StudyroomDAO {
 
 	/**

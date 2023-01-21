@@ -15,8 +15,6 @@ WHERE rownum BETWEEN 1 AND 4
 	</select>
 <!-- sr: selectAllByDate end -->
 
-</mapper>
-=======
 <resultMap type="LessonVO" id="selectLessonMap" autoMapping="true">
 	<id property="lessonSeq" column="lesson_seq"/>
 	<result property="userId" column="user_id"/>	
