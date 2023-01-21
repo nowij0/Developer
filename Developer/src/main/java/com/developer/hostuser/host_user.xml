@@ -4,6 +4,13 @@
 
 <mapper namespace="com.developer.hostuser">
 
+<!-- joinHostUser -->
+<insert id="joinHostUser">
+INSERT INTO host_user
+VALUES(#{hostId}, #{pwd}, #{num}, 0, #{name}, #{tel}, #{email})
+</insert>
+<!-- joinHostUser -->
+
 <!-- sr: deleteHostUser Start -->
 <delete id="deleteHostUser">
 	DELETE FROM host_user

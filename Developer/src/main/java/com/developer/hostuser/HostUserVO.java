@@ -1,6 +1,6 @@
 package com.developer.hostuser;
 
-import com.developer.studyroom.StudyroomVO;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,6 +23,5 @@ public class HostUserVO {
 	private String tel;
 	private String email;
 	
-	private StudyroomVO studyroomVO;
 	
 }

@@ -29,4 +29,13 @@ public interface HostUserDAO {
 	 */
 	public HostUserVO getHostUser(String hostId) throws FindException;
 	
+	
+	/**
+	 * [회원가입 > 호스트] 호스트 회원가입
+	 * @author Jin
+	 * @param 호스트 회원가입 할 호스트객체 생성
+	 * @throws FindException
+	 */
+	public int joinHostUser(HostUserVO vo) throws FindException;
+	
 }
