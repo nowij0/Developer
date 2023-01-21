@@ -69,4 +69,13 @@ and apply_seq = #{applySeq}
 
 
 
+=======
+<mapper namespace="com.developer.appliedLesson">
+
+<!-- ===== tuteeDashboard ===== -->
+<resultMap type="AppliedLessonVO" id="tuteeDashboardMap"></resultMap>
+<select id="tuteeDashboard" resultMap="tuteeDashboardMap">
+
+</select>
+<!-- ===== tuteeDashboard ===== -->
 </mapper>

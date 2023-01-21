@@ -20,7 +20,7 @@ public class StudyroomVO {
 	private String openTime;
 	private String endTime;
 	private String imgPath;
-	private int ov;
+	private int oc;
 	private String hostId;
 	
 	private int person;

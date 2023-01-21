@@ -1,8 +1,12 @@
 package com.developer.lesson;
 
 import java.util.Date;
+import java.util.List;
 
+import com.developer.appliedlesson.AppliedLessonVO;
+import com.developer.favoriteslesson.FavoritesLessonVO;
 import com.developer.tutor.TutorVO;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,6 +17,7 @@ import lombok.ToString;
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor
 @ToString
+@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 public class LessonVO {
 
 	private int lessonSeq;
@@ -31,17 +36,6 @@ public class LessonVO {
 	private String location;
 	
 	private TutorVO tutorVO;
-	
-	//Users 테이블 
-	private String name;
-	
-	//Applied_Lesson 테이블 
-	private int applySeq;
-	private int applyOk;
-	
-	//Lesson_Review 테이블 
-	private String review;
-	private int star;
-	
-	private int filter;
+	private List<AppliedLessonVO> appliedLessonVO;
+	private List<FavoritesLessonVO> favoritesLessonVO;
 }

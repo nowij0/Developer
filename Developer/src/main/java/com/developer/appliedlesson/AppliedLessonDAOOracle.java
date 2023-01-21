@@ -75,4 +75,15 @@ public class AppliedLessonDAOOracle implements AppliedLessonDAO {
 //			System.out.println(v);
 //		}
 	}
+	//지원 [미완]
+	@Override
+	public List<AppliedLessonVO> tuteeDashboard(String userId) throws FindException {
+		SqlSession session = sqlSessionFactory.openSession();
+		List<AppliedLessonVO> tuteeDashboard = session.selectList("com.developer.appliedLesson.tuteeDashboard", userId);
+		session.commit();
+		session.close();
+		return tuteeDashboard;
+	}
+	
+
 }

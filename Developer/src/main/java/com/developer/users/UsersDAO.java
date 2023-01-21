@@ -1,12 +1,5 @@
 package com.developer.users;
 
-import java.util.List;
-
-import com.developer.appliedlesson.AppliedLessonVO;
-import com.developer.exception.FindException;
-import com.developer.hostuser.HostUserVO;
-import com.developer.lesson.LessonVO;
-
 public interface UsersDAO {
 	
 	//회원목록출력 
