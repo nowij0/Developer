@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.developer.lessonReview">
+	
+	<!-- selectLessonReview -->
+	<resultMap id="selectLessonReviewMap" type="AppliedLessonVO" autoMapping="true">
+		<id column="apply_seq" property="applySeq" />
+		
+		<association property="lessonReviewVO" javaType="LessonReviewVO"
+			autoMapping="true">
+			<id column="le_rev_seq" property="leRevSeq" />
+			<result column="REVIEW" property="review" />
+			<result column="STAR" property="star"></result>
+		</association>
+		
+		<collection property="usersVO" ofType="UsersVO" autoMapping="true">
+			<id column="user_id" property="userId" />
+			<result column="name" property="name" />
+		</collection>
+
+	</resultMap>
+	
+	<select id="selectLessonReview" resultMap="selectLessonReviewMap">
+    
+    SELECT *
+    FROM applied_lesson al
+    INNER JOIN lesson_review lr
+    ON al.apply_seq = lr.apply_seq
+    INNER JOIN users u
+    ON al.user_id = u.user_id
+    WHERE al.lesson_seq = #{lessonSeq}
+	</select>
+	<!-- selectLessonReview -->
+	
+</mapper>

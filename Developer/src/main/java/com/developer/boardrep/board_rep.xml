@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.developer.boardRep">
+	<!-- selectAllRep-->
+	<insert id="selectAllRep" parameterType="hashMap">
+		insert into board_rep
+		values(post_rep_seq.nextval, #{content}, SYSDATE, #{post_seq}, #{userId})
+	</insert>
+	<!-- selectAllRep-->
+	
+	<!-- editRep -->
+	<update id="editRep" parameterType="hashmap">
+	update board_rep set content=#{content}, cdate = SYSDATE where post_rep_seq =#{postRepSeq}
+	</update>
+	<!-- editRep -->
+	
+	<!-- delRep-->
+	<delete id="delRep" parameterType="int">
+		delete from board_rep where post_rep_seq = #{postRepSeq}
+	</delete>
+	<!-- delRep-->
+	
+	
+</mapper>

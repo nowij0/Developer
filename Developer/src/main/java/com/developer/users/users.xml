@@ -4,36 +4,37 @@
 
 <mapper namespace="com.developer.users">
 
-
-<resultMap type="com.developer.users.UsersVO" id="tutorMap">
-	<result column="u.user_id" property="userId"/>
-	<result column="u.name" property="name"/>
-	<result column="u.nickname" property="nickname"/>
-	<result column="u.tel" property="tel"/>
-</resultMap>
-
-<select id="selectTutor" resultMap="tutorMap">
-SELECT u.user_id, u.name, u.nickname, u.tel
-FROM users u, tutor t
-WHERE u.user_id = t.user_id
-AND apply_ok = 0;
-</select>
-
-
-<select id="selectAll" resultType="String">
-SELECT name
-FROM users 
-ORDER BY name
-</select>
-
-<select id="getUsers" resultType="com.developer.users.UsersVO" >
-SELECT *
-FROM users
-WHERE user_id=#{user_id, jdbcType=VARCHAR}
-</select>
-
-<insert id="joinUser">
-INSERT INTO users
-VALUES(#{user_id}, 2, #{pwd}, #{nickname}, #{name}, #{email}, #{tel}, #{addr} ))
-</insert>
+	<!-- selectAll -->
+	<select id="selectAll" resultType="String">
+		SELECT name
+		FROM users
+		ORDER BY name
+	</select>
+	<!-- selectAll -->
+	
+	
+	<!-- userLogin -->
+	<select id="userLogin" resultType="UsersVO">
+		SELECT *
+		FROM users
+		WHERE user_id=#{userId}
+	</select>
+	<!-- userLogin -->
+	
+	
+	<!-- selectUserId -->
+	<select id="selectUserId" resultType="UsersVO">
+		SELECT user_id
+		FROM users
+		WHERE email=#{email}
+	</select>
+	<!-- selectUserId -->
+	
+	<!-- selectUserPwd -->
+	<select id="selectUserPwd" resultType="UsersVO">
+		SELECT pwd
+		FROM users
+		WHERE user_id=#{userId} and email=#{email}
+	</select>
+	<!-- selectUserPwd -->
 </mapper>
