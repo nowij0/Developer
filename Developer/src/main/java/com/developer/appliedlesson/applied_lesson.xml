@@ -2,5 +2,71 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="">
+<mapper namespace="com.developer.appliedlesson">
+
+<!-- getLessonApplyUsers0 -->
+<resultMap type="AppliedLessonVO" id="lessonApplyUsers0" autoMapping="true">
+	<id column="apply_seq" property="applySeq"/>
+		<association property="lessonVO" javaType="LessonVO" autoMapping="true">
+		<id column="lesson_seq" property="lessonSeq"></id>
+		</association>
+		<collection property="usersVO" ofType="UsersVO" autoMapping="true">
+		<id column="user_id" property="userId"/>
+		<result column="name" property="name"/>
+		</collection>
+</resultMap>
+
+<select id="getLessonApplyUsers0" resultMap="lessonApplyUsers0">
+SELECT u.name
+FROM USERS u, APPLIED_LESSON a, LESSON l
+WHERE a.user_id = u.user_id
+and a.apply_ok = 0
+and l.lesson_seq = a.lesson_seq
+and l.lesson_seq = #{lessonSeq}
+order by u.name desc
+</select>
+<!-- getLessonApplyUsers0 -->
+
+<!-- getLessonApplyUsers1 -->
+<resultMap type="AppliedLessonVO" id="lessonApplyUsers1" autoMapping="true">
+	<id column="apply_seq" property="applySeq"/>
+		<association property="lessonVO" javaType="LessonVO" autoMapping="true">
+		<id column="lesson_seq" property="lessonSeq"></id>
+		</association>
+		<collection property="usersVO" ofType="UsersVO" autoMapping="true">
+		<id column="user_id" property="userId"/>
+		</collection>
+</resultMap>
+
+<select id="getLessonApplyUsers1" resultMap="lessonApplyUsers1">
+SELECT u.name
+FROM USERS u, APPLIED_LESSON a, LESSON l
+WHERE a.user_id = u.user_id
+and a.apply_ok = 1
+and l.lesson_seq = a.lesson_seq
+and l.lesson_seq = #{lessonSeq}
+order by u.name desc
+</select>
+<!-- getLessonApplyUsers1 -->
+
+
+<!-- updateApplyLesson -->
+<update id="updateApplyLesson" parameterType="AppliedLessonVO">
+update applied_lesson set apply_ok=1
+where user_id = #{userId}
+and apply_seq = #{applySeq}
+</update>
+<!-- updateApplyLesson -->
+
+
+<!-- updateNotApplyLesson -->
+<update id="updateNotApplyLesson" parameterType="AppliedLessonVO">
+update applied_lesson set apply_ok=2
+where user_id = #{userId}
+and apply_seq = #{applySeq}
+</update>
+<!-- updateNotApplyLesson -->
+
+
+
 </mapper>

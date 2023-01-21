@@ -2,5 +2,107 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="">
+<mapper namespace="com.developer.lesson">
+
+
+<sql id="getLessonByUserSql">
+SELECT l.lesson_name
+from LESSON l, TUTOR t, USERS u
+where l.user_id = t.user_id
+and t.user_id = u.user_id
+and u.user_id = #{userId}
+</sql>
+
+<!-- getLessonByUser1 -->
+<resultMap type="LessonVO" id="lessonList1" autoMapping="true">
+	<id column="lesson_seq" property="lessonSeq"/>
+	<association property="tutorVO" javaType="TutorVO" autoMapping="true">
+		<association property="usersVO" javaType="UsersVO" autoMapping="true">
+			<id column="user_id" property="userId"/>
+			<result column="name" property="name"/>
+		</association>
+	</association>
+</resultMap>
+
+<select id="getLessonByUser1" resultMap="lessonList1">
+	<include refid="getLessonByUserSql"></include>
+
+and TO_CHAR(SYSDATE,'yyyymmdd')<![CDATA[<]]>l.start_cdate
+order by l.lesson_seq desc
+</select>
+<!-- getLessonByUser1 -->
+
+<!-- getLessonByUser2 -->
+<resultMap type="LessonVO" id="lessonList2" autoMapping="true">
+	<id column="lesson_seq" property="lessonSeq"/>
+	<association property="tutorVO" javaType="TutorVO" autoMapping="true">
+		<association property="usersVO" javaType="UsersVO" autoMapping="true">
+			<id column="user_id" property="userId"/>
+			<result column="name" property="name"/>
+		</association>
+	</association>
+</resultMap>
+
+<select id="getLessonByUser2" resultMap="lessonList2">
+	<include refid="getLessonByUserSql"></include>
+and l.start_cdate<![CDATA[<]]><![CDATA[=]]>TO_CHAR(SYSDATE,'yyyymmdd')
+and TO_CHAR(SYSDATE,'yyyymmdd')<![CDATA[<]]><![CDATA[=]]>l.end_cdate
+order by l.lesson_seq desc
+</select>
+<!-- getLessonByUser2 -->
+
+<!-- getLessonByUser3 -->
+<resultMap type="LessonVO" id="lessonList3" autoMapping="true">
+	<id column="lesson_seq" property="lessonSeq"/>
+	<association property="tutorVO" javaType="TutorVO" autoMapping="true">
+		<association property="usersVO" javaType="UsersVO" autoMapping="true">
+			<id column="user_id" property="userId"/>
+			<result column="name" property="name"/>
+		</association>
+	</association>
+</resultMap>
+
+<select id="getLessonByUser3" resultMap="lessonList3">
+	<include refid="getLessonByUserSql"></include>
+and TO_CHAR(SYSDATE,'yyyymmdd')<![CDATA[>]]>l.end_cdate
+order by l.lesson_seq desc
+</select>
+<!-- getLessonByUser3 -->
+
+<!-- selectDetail -->
+<resultMap type="LessonVO" id="lessonDetail" autoMapping="true">
+	<id column="lesson_seq" property="lessonSeq"/>
+	<association property="tutorVO" javaType="TutorVO" autoMapping="true">
+		<association property="usersVO" javaType="UsersVO" autoMapping="true">
+			<id column="user_id" property="userId"></id>
+			<result column="name" property="name"/>
+		</association>
+	</association>
+</resultMap>
+
+<select id="selectDetail" resultMap="lessonDetail">
+SELECT l.lesson_name, l.img_path, l.location, l.start_cdate, l.end_cdate,
+        l.category, l.people, u.name
+FROM TUTOR t, LESSON l, USERS u
+WHERE u.user_id = t.user_id
+and t.user_id = l.user_id
+and l.lesson_seq = #{lessonSeq}
+</select>
+<!-- selectDetail -->
+
+<!-- updateLesson -->
+<update id="updateLesson" parameterType="LessonVO">
+UPDATE LESSON 
+set location=#{location}, category=#{category}, people=#{people}, content=#{content}, price=#{price}
+,start_cdate=#{startCdate}, end_cdate=#{endCdate}
+where lesson_seq=#{lessonSeq}
+</update>
+<!-- updateLesson -->
+
+<!-- deleteLesson -->
+<delete id="deleteLesson">
+DELETE from lesson where lesson_seq=#{lessonSeq}
+</delete>
+<!-- deleteLesson -->
+
 </mapper>
