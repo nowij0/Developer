@@ -4,6 +4,19 @@
 
 <mapper namespace="com.developer.lesson">
 
+<!-- sr: selectAllByDate start -->
+<select id="selectAllByDate" resultType="LessonVO">
+SELECT *
+FROM (SELECT * FROM lesson 
+      WHERE pay_lesson != 2
+      AND <![CDATA[end_date >= sysdate ]]>
+      ORDER BY end_date ASC)
+WHERE rownum BETWEEN 1 AND 4
+	</select>
+<!-- sr: selectAllByDate end -->
+
+</mapper>
+=======
 <resultMap type="LessonVO" id="selectLessonMap" autoMapping="true">
 	<id property="lessonSeq" column="lesson_seq"/>
 	<result property="userId" column="user_id"/>	

@@ -3,20 +3,36 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.developer.roominfo">
 
-<resultMap type="com.developer.users.RoomInfoVO" id="roominfoMap">
-	<result column="room_seq" property="roomSeq"/>
-	<result column="sr_seq" property="srSeq"/>
-	<result column="name" property="name"/>
-	<result column="info" property="info"/>
-	<result column="img_path" property="imgPath"/>
-	<result column="person" property="person"/>
-	<result column="price" property="price"/>
+<!-- sr: insertRoom Start-->
+<insert id="insertRoom" parameterType = "RoomInfoVO">
+INSERT into room_info values
+(room_seq.nextval,#{srSeq},#{name},#{info},
+#{imgPath},#{person},#{price})
+</insert>
+<!-- sr: insertRoom End-->
 
-</resultMap>
 
-<select id="selectAll" resultMap="roominfoMap">
-select * 
-from room_info 
-where sr_seq = #{sr_seq, jdbcType=NUMBER}
+<!-- sr: getRoom Start-->
+<select id="getRoom" parameterType="Integer" resultType="RoomInfoVO">
+SELECT *
+FROM room_info
+WHERE room_seq = #{roomSeq}
 </select>
+<!-- sr: getRoom End-->
+
+<!-- sr: updateRoom Start-->
+<update id="updateRoom" parameterType = "RoomInfoVO">
+update room_info 
+set name=#{name}, info=#{info},img_path=#{imgPath},person=#{person},price=#{price}
+where room_seq=#{roomSeq}
+</update>
+<!-- sr: updateRoom End-->
+
+
+<!-- sr: deleteRoom Start-->
+<delete id="deleteRoom" parameterType="Integer">
+delete room_info where room_seq=#{roomSeq}
+</delete>
+<!-- sr: deleteRoom End-->
+
 </mapper>

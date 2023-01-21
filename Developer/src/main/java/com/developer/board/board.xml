@@ -1,3 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.developer.board">
+
+<!-- sr: boardSelectAllByDate Start -->
+	<select id="boardSelectAllByDate" resultType="BoardVO">
+	SELECT * 
+	FROM (SELECT b.post_seq, u.nickname "usersVO.nickname", b.category, b.title, b.content, b.img_path, b.c_date, b.recommend, b.cnt
+    	  FROM users u INNER JOIN board b ON u.user_id = b.user_id
+     	  ORDER BY c_date DESC)
+	WHERE rownum BETWEEN 1 AND 5
+	</select>
+<!-- sr: boardSelectAllByDate End -->
+
+</mapper>
