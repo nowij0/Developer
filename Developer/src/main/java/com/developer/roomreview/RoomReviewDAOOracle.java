@@ -15,12 +15,4 @@ public class RoomReviewDAOOracle implements RoomReviewDAO {
 		sqlSessionFactory = Factory.getSqlSessionFactory();
 	}
 	
-	@Override
-	public List<RoomReviewVO> selectAll(int srSeq) throws FindException{
-		SqlSession session = sqlSessionFactory.openSession();
-		List<RoomReviewVO> list = session.selectList("com.developer.roomreview.selectAll");
-		
-		return list;
-	}
-	
 }

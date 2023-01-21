@@ -14,7 +14,7 @@ import lombok.ToString;
 @NoArgsConstructor @AllArgsConstructor
 @ToString
 public class ReservationVO {
-	private int reSeq;
+	private int resSeq;
 	private String userId;
 	private int roomSeq;
 	private String startTime;
