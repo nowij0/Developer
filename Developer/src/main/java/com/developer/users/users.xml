@@ -4,36 +4,58 @@
 
 <mapper namespace="com.developer.users">
 
+<!-- selectTutor -->
+<resultMap type="com.developer.users.UsersVO" id="tutorMap" autoMapping="true">
+	<id column="user_id" property="userId"/>
 
-<resultMap type="com.developer.users.UsersVO" id="tutorMap">
-	<result column="u.user_id" property="userId"/>
-	<result column="u.name" property="name"/>
-	<result column="u.nickname" property="nickname"/>
-	<result column="u.tel" property="tel"/>
+	<association property="tutorVO" javaType="com.developer.tutor.TutorVO" autoMapping="true">
+
+	</association>
 </resultMap>
 
 <select id="selectTutor" resultMap="tutorMap">
 SELECT u.user_id, u.name, u.nickname, u.tel
 FROM users u, tutor t
 WHERE u.user_id = t.user_id
-AND apply_ok = 0;
+AND role = 0
 </select>
+<!-- selectTutor -->
 
-
+<!-- selectAll -->
 <select id="selectAll" resultType="String">
 SELECT name
 FROM users 
 ORDER BY name
 </select>
+<!-- selectAll -->
 
-<select id="getUsers" resultType="com.developer.users.UsersVO" >
+<!-- getUsers -->
+<select id="getUsers" resultType="UsersVO" >
 SELECT *
 FROM users
-WHERE user_id=#{user_id, jdbcType=VARCHAR}
+WHERE user_id=#{userId, jdbcType=VARCHAR}
 </select>
+<!-- getUsers -->
 
+<!-- joinUser -->
 <insert id="joinUser">
 INSERT INTO users
-VALUES(#{user_id}, 2, #{pwd}, #{nickname}, #{name}, #{email}, #{tel}, #{addr} ))
+VALUES(#{userId}, 2, #{pwd}, #{nickname}, #{name}, #{email}, #{tel}, #{addr})
 </insert>
+<!-- joinUser -->
+
+<!-- updateUsers -->
+<update id="updateUsers">
+UPDATE USERS
+SET pwd=#{pwd}, nickname=#{nickname}, name=#{name},
+email=#{email}, tel=#{tel}, 
+addr=#{addr}  WHERE user_id=#{userId}
+</update>
+<!-- updateUsers -->
+
+<!-- deleteUser -->
+<delete id="deleteUser">
+Delete from USERS WHERE user_id=#{userId}
+</delete>
+<!-- deleteUser -->
 </mapper>

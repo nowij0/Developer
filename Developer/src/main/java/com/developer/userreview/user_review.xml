@@ -2,5 +2,34 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="">
+<mapper namespace="com.developer.userreview">
+
+<!-- getTuteeReview -->
+<resultMap type="UserReviewVO" id="getTuteeMap" autoMapping="true">
+	<id column="apply_seq" property="applySeq"/>
+		<association property="appliedLessonVO" javaType="AppliedLessonVO" autoMapping="true">
+			<collection property="usersVO" ofType="UsersVO" autoMapping="true">
+			<id column="user_id" property="userId"/>
+			<result column="name" property="name"/>
+			</collection>
+		</association>
+</resultMap>
+
+<select id="getTuteeReview" resultMap="getTuteeMap">
+SELECT u.name, r.review, r.star, r.apply_seq
+FROM APPLIED_LESSON a, USER_REVIEW r, USERS u, lesson l
+WHERE u.user_id = a.user_id
+and l.lesson_seq = a.lesson_seq
+and r.apply_seq = a.apply_seq
+and u.user_id=#{userId}
+</select>
+<!-- getTuteeReview -->
+
+<!-- addTuteeReview -->
+<insert id="addTuteeReview">
+INSERT INTO USER_REVIEW VALUES
+(#{applySeq},#{star},#{review})
+</insert>
+<!-- addTuteeReview -->
+
 </mapper>
