@@ -8,41 +8,81 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import com.developer.exception.FindException;
 import com.developer.resource.Factory;
 
-
 public class StudyroomDAOOracle implements StudyroomDAO {
 	private SqlSessionFactory sqlSessionFactory;
+
 	public StudyroomDAOOracle() {
 		sqlSessionFactory = Factory.getSqlSessionFactory();
 	}
-	
+
+	//sr
 	@Override
-	public List<StudyroomVO> selectBySerch1(String search1) throws FindException{
+	public int reservationOpen(String hostId) throws FindException {
 		SqlSession session = sqlSessionFactory.openSession();
-		List<StudyroomVO> list = session.selectList("com.developer.studyroom.selectBySerch1");
-		
+
+		int a = session.update("com.developer.studyroom.reservationOpen", hostId);
+		session.commit();
+		session.close();
+		return a;
+
+	}
+	
+	//sr
+	@Override
+	public int reservationClose(String hostId) throws FindException {
+		SqlSession session = sqlSessionFactory.openSession();
+		int a = session.update("com.developer.studyroom.reservationClose", hostId);
+		session.commit();
+		session.close();
+		return a;
+	}
+
+	//sr
+	@Override
+	public StudyroomVO getStudycafe(String hostId) throws FindException {
+		SqlSession session = sqlSessionFactory.openSession();
+		StudyroomVO vo = (StudyroomVO) session.selectOne("com.developer.studyroom.getStudycafe", hostId);
+		session.close();
+		return vo;
+	}
+
+
+	//sr
+	@Override
+	public void insertStudycafe(StudyroomVO studyroomVO) throws FindException {
+		SqlSession session = sqlSessionFactory.openSession();
+		session.insert("com.developer.studyroom.insertStudycafe", studyroomVO);
+		session.commit();
+		session.close();
+
+	}
+
+
+	//sr
+	@Override
+	public List<StudyroomVO> selectAllRoom(String hostId) throws FindException {
+		SqlSession session = sqlSessionFactory.openSession();
+		List<StudyroomVO> list = session.selectList("com.developer.studyroom.selectAllRoom", hostId);
+		session.close();
 		return list;
 	}
-	@Override
-	public List<StudyroomVO> selectByPerson(int person) throws FindException{
-		SqlSession session = sqlSessionFactory.openSession();
-		List<StudyroomVO> plist = session.selectList("com.developer.studyroom.selectByPerson");
-		
-		return plist;
-	}
 	
+
+	//sr
 	@Override
-	public List<StudyroomVO> selectByAddrAndPerson(String addr, int person) throws FindException{
+	public StudyroomVO getHostAndStudyroom(String hostId) throws FindException {
 		SqlSession session = sqlSessionFactory.openSession();
-		List<StudyroomVO> aplist = session.selectList("com.developer.studyroom.selectByAddrAndPerson");
-		
-		return aplist;
+		StudyroomVO vo = (StudyroomVO) session.selectOne("com.developer.studyroom.getHostAndStudyroom", hostId);
+		return vo;
 	}
+
+	//sr
 	@Override
-	public List<StudyroomVO> selectAll(int srSeq) throws FindException{
+	public int updateStudycafe(StudyroomVO studyroomVO) throws FindException {
 		SqlSession session = sqlSessionFactory.openSession();
-		List<StudyroomVO> listall = session.selectList("com.developer.studyroom.selectAll");
-		
-		return listall;
+		int a = session.update("com.developer.studyroom.updateStudycafe", studyroomVO);
+		session.commit();
+		session.close();
+		return a;
 	}
-	
 }

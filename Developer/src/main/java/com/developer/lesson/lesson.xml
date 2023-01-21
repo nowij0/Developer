@@ -2,5 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="">
+<mapper namespace="com.developer.lesson">
+
+<!-- sr: selectAllByDate start -->
+<select id="selectAllByDate" resultType="LessonVO">
+SELECT *
+FROM (SELECT * FROM lesson 
+      WHERE pay_lesson != 2
+      AND <![CDATA[end_date >= sysdate ]]>
+      ORDER BY end_date ASC)
+WHERE rownum BETWEEN 1 AND 4
+	</select>
+<!-- sr: selectAllByDate end -->
+
 </mapper>
