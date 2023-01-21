@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 package com.developer.appliedlesson;
 
 import java.util.List;
@@ -54,3 +56,4 @@ public interface AppliedLessonDAO {
 	public List<AppliedLessonVO> tuteeDashboard (String userId) throws FindException;
 }
 
+>>>>>>> 24016e656d39b0bdcea57683fe473175c58dd951

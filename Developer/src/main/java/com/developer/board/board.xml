@@ -3,6 +3,183 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.developer.board">
+<<<<<<< HEAD
+	<!--selectAllBoard -->
+	<resultMap id="boardList" type="BoardVO" autoMapping="true">
+		<id column="post_seq" property="postSeq" />
+		<result column="category" property="category" />
+		<result column="title" property="title" />
+		<result column="content" property="content" />
+		<result column="img_path" property="imgPath" />
+		<result column="c_date" property="cDate" />
+		<result column="recommend" property="recommend" />
+		<result column="cnt" property="cnt" />
+
+		<association property="usersVO" javaType="UsersVO"
+			autoMapping="true">
+			<id column="user_id" property="userId" />
+			<result column="nickname" property="nickname" />
+		</association>
+	</resultMap>
+
+	<select id="selectAllBoard" resultMap="boardList">
+
+		select users.nickname, board.category, board.title, board.content,
+		board.img_path, board.c_date, board.recommend, board.cnt
+		from users
+		inner join board
+		on users.user_id = board.user_id
+
+		<if test="boardType ==1">
+			order by c_date desc
+		</if>
+		<if test="boardType == 2">
+			order by cnt desc
+		</if>
+		<if test="boardType == 3">
+			order by recommend desc
+		</if>
+		
+	</select>
+<!--selectAllBoard -->
+
+	<!-- boardAllCnt -->
+	<!-- 글 하나에 대한 조회수, 좋아요수, 댓글들 -->
+	<!-- 일단 이대로 뿌리고 프론트에서 댓글들은 카운트해주기 -->
+	<resultMap id="boardAllCnt" type="BoardVO" autoMapping="true">
+		<id column="post_seq" property="postSeq" />
+		<result column="cnt" property="cnt" />
+		<result column="recommend" property="recommend" />
+
+		<collection property="boardRepVO" ofType="BoardRepVO"
+			autoMapping="true">
+			<result column="post_rep_seq" property="postRepSeq"></result>
+		</collection>
+	</resultMap>
+
+	<select id="selectAllCnt" resultMap="boardAllCnt">
+		select b.cnt, b.recommend,
+		r.post_rep_seq from board b
+		full outer join board_rep r
+		on b.post_seq =
+		r.post_seq
+		where b.post_seq=#{postSeq}
+	</select>
+	<!-- boardAllCnt -->
+	
+	<!-- boardSearch -->
+	<!-- 제목으로 검색 -->
+	<select id="boardSearch" resultType="String">
+		select title from board
+		where title like '%${title}%'
+	</select>
+	<!-- boardSearch -->
+	
+	<!-- selectByPostSeqMap -->
+	<!-- 글하나 상세정보 + 댓글까지 -->
+	<resultMap id="selectByPostSeqMap" type="BoardVO" autoMapping="true">
+		<id column="post_seq" property="postSeq" />
+		<result column="category" property="category" />
+		<result column="title" property="title" />
+		<result column="bContent" property="content" />
+		<result column="img_path" property="imgPath" />
+		<result column="c_date" property="cDate" />
+		<result column="recommend" property="recommend" />
+		<result column="cnt" property="cnt"></result>
+
+		<association property="usersVO" javaType="UsersVO"
+			autoMapping="true">
+			<id column="user_id" property="userId" />
+			<result column="nickname" property="nickname" />
+		</association>
+
+		<collection property="boardRepVO" ofType="BoardRepVO"
+			autoMapping="true">
+			<id column="post_rep_seq" property="postRepSeq"></id>
+			<result column="rContent" property="content"></result>
+			<result column="cdate" property="date"></result>
+		</collection>
+	</resultMap>
+
+	<select id="selectByPostSeq" resultMap="selectByPostSeqMap">
+		select u.user_id,
+		u.nickname, b.category, b.title, b.content AS bContent , b.img_path,
+		b.c_date,
+		b.recommend, b.cnt, r.content AS rContent, r.cdate
+		from users
+		u
+		full join board b
+		on u.user_id = b.user_id
+		full join board_rep r
+		on
+		b.post_seq = r.post_seq
+		where b.post_seq=#{postSeq}
+	</select>
+	<!-- selectByPostSeqMap -->
+
+	<!-- addBoard -->
+	<!-- 게시글 작성 -->
+	<insert id="addBoard" parameterType="hashmap">
+		INSERT INTO BOARD
+		VALUES(post_seq.nextVal, #{userId}, #{category}, #{title},
+		#{content},
+		#{imgPath}, SYSDATE, 0 ,0)
+	</insert>
+	<!-- addBoard -->
+	
+	<!-- editBoard -->
+	<!-- 게시글 수정 -->
+	<update id="editBoard" parameterType="hashmap">
+		update board set
+		category=#{category}, title=#{title}, content=#{content},
+		img_path=#{imgPath} where post_seq = #{postSeq}
+	</update>
+	<!-- editBoard -->
+	
+	<!-- delBoard -->
+	<!-- 게시글 삭제 -->
+	<delete id="delBoard" parameterType="int">
+		delete from board where
+		post_seq = #{postSeq}
+	</delete>
+	<!-- delBoard -->
+	
+	<!-- updateCnt -->
+	<!-- 조회수 증가 -->
+	<update id="updateCnt" parameterType="int">
+		update board set cnt =
+		cnt+1 where post_seq=#{postSeq}
+	</update>
+	<!-- updateCnt -->
+	
+	
+	<!-- boardDetail -->
+	<resultMap id="boardDetailMap" type="BoardVO" autoMapping="true">
+		<id column="post_seq" property="postSeq" />
+		<result column="post_seq" property="postSeq" />
+		<result column="category" property="category" />
+		<result column="title" property="title" />
+		<result column="bContent" property="content" />
+		<result column="img_path" property="imgPath" />
+		<result column="c_date" property="cDate" />
+		<result column="recommend" property="recommend" />
+		<result column="cnt" property="cnt"></result>
+
+		<association property="usersVO" javaType="UsersVO"
+			autoMapping="true">
+			<id column="user_id" property="userId" />
+			<result column="nickname" property="nickname" />
+		</association>
+	</resultMap>
+	<select id="boardDetail" resultMap="boardDetailMap">
+		select users.nickname, board.post_seq, board.category, board.title, board.content,
+		board.img_path, board.c_date, board.recommend, board.cnt
+		from users inner join board on users.user_id = board.user_id
+		where post_seq=#{postSeq}
+	</select>
+	<!-- boardDetail -->
+	
+=======
 
 <!-- sr: boardSelectAllByDate Start -->
 	<select id="boardSelectAllByDate" resultType="BoardVO">
@@ -14,4 +191,5 @@
 	</select>
 <!-- sr: boardSelectAllByDate End -->
 
+>>>>>>> 24016e656d39b0bdcea57683fe473175c58dd951
 </mapper>

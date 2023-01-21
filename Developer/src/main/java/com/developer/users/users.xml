@@ -4,6 +4,41 @@
 
 <mapper namespace="com.developer.users">
 
+<<<<<<< HEAD
+	<!-- selectAll -->
+	<select id="selectAll" resultType="String">
+		SELECT name
+		FROM users
+		ORDER BY name
+	</select>
+	<!-- selectAll -->
+	
+	
+	<!-- userLogin -->
+	<select id="userLogin" resultType="UsersVO">
+		SELECT *
+		FROM users
+		WHERE user_id=#{userId}
+	</select>
+	<!-- userLogin -->
+	
+	
+	<!-- selectUserId -->
+	<select id="selectUserId" resultType="UsersVO">
+		SELECT user_id
+		FROM users
+		WHERE email=#{email}
+	</select>
+	<!-- selectUserId -->
+	
+	<!-- selectUserPwd -->
+	<select id="selectUserPwd" resultType="UsersVO">
+		SELECT pwd
+		FROM users
+		WHERE user_id=#{userId} and email=#{email}
+	</select>
+	<!-- selectUserPwd -->
+=======
 <!-- selectTutor -->
 <resultMap type="com.developer.users.UsersVO" id="tutorMap" autoMapping="true">
 	<id column="user_id" property="userId"/>
@@ -58,4 +93,5 @@ addr=#{addr}  WHERE user_id=#{userId}
 Delete from USERS WHERE user_id=#{userId}
 </delete>
 <!-- deleteUser -->
+>>>>>>> 24016e656d39b0bdcea57683fe473175c58dd951
 </mapper>

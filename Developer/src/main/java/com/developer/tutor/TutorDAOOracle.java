@@ -10,6 +10,9 @@ import com.developer.resource.Factory;
 import com.developer.users.UsersVO;
 
 public class TutorDAOOracle implements TutorDAO {
+<<<<<<< HEAD
+	
+=======
 
 	private SqlSessionFactory sqlSessionFactory;
 	
@@ -39,4 +42,5 @@ public class TutorDAOOracle implements TutorDAO {
 	}
 
 
+>>>>>>> 24016e656d39b0bdcea57683fe473175c58dd951
 }

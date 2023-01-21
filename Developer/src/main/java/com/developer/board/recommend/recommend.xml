@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.developer.boardRecommend">
+	
+	<!-- addRecommend -->
+	<!-- 추천수 증가 -->
+	<insert id="addRecommend" parameterType="RecommendVO">
+		insert into recommend values(rec_seq.nextval,#{postSeq},#{userId})
+	</insert>
+	<!-- addRecommend -->
+	
+	<!-- delRecommend -->
+	<!-- 추천수 감소 -->
+	<delete id="delRecommend" parameterType="int">
+		delete recommend where rec_seq=#{recSeq}
+	</delete>
+	<!-- delRecommend -->
+</mapper>

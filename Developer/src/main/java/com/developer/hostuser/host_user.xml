@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<<<<<<< HEAD
+<mapper namespace="com.developer.hostuser">
+	<!-- hostLogin -->
+	<select id="hostLogin" resultType="HostUserVO">
+		select * from host_user where host_id=#{hostId}
+	</select>
+	<!-- hostLogin -->
+	
+	
+	<!-- selectHostId -->
+	<select id="selectHostId" resultType="HostUserVO">
+		select host_Id from host_user where num=#{num}
+	</select>
+	<!-- selectHostId -->
+	
+	
+	<!-- selectHostPwd -->
+	<select id="selectHostPwd" resultType="HostUserVO">
+		select pwd from host_user where host_id=#{hostId} and num=#{num} and email=#{email}
+	</select>
+	<!-- selectHostPwd -->
+	
+</mapper>
+=======
 
 <mapper namespace="com.developer.hostuser">
 
@@ -27,3 +51,4 @@ WHERE host_id = #{hostId}
 </update>
 <!-- sr: updateHostUser End -->
 </mapper>
+>>>>>>> 24016e656d39b0bdcea57683fe473175c58dd951

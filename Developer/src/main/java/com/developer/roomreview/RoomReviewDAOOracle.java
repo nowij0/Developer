@@ -1,18 +1,14 @@
 package com.developer.roomreview;
 
-import java.util.List;
-
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-
-import com.developer.exception.FindException;
-import com.developer.resource.Factory;
-
 
 public class RoomReviewDAOOracle implements RoomReviewDAO {
+<<<<<<< HEAD
+
+=======
 	private SqlSessionFactory sqlSessionFactory;
 	public RoomReviewDAOOracle() {
 		sqlSessionFactory = Factory.getSqlSessionFactory();
 	}
+>>>>>>> 24016e656d39b0bdcea57683fe473175c58dd951
 	
 }

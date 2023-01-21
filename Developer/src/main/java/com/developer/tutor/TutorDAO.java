@@ -3,6 +3,9 @@ package com.developer.tutor;
 import com.developer.exception.FindException;
 
 public interface TutorDAO {
+<<<<<<< HEAD
+
+=======
 	
 	/**
 	 * [튜터등록] 
@@ -13,5 +16,6 @@ public interface TutorDAO {
 	 */
 	public void addTutor(TutorVO tutorVO) throws FindException;
 	
+>>>>>>> 24016e656d39b0bdcea57683fe473175c58dd951
 	
 }

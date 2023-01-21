@@ -1,5 +1,10 @@
 package com.developer.reservation;
 
+<<<<<<< HEAD
+
+public interface ReservationDAO {
+	
+=======
 import java.util.List;
 import com.developer.exception.FindException;
 
@@ -24,6 +29,7 @@ public interface ReservationDAO {
 	 */
 	public int reservationDelete(int resSeq) throws FindException; 
 
+>>>>>>> 24016e656d39b0bdcea57683fe473175c58dd951
 	
 	/** 
 	 * [마이페이지-호스트] 스터디카페 예약 내역을 전체 출력(목록)한다.
