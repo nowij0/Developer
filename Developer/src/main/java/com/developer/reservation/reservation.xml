@@ -74,7 +74,7 @@ SELECT r.res_seq, u.name AS uName, u.tel, rif.name AS rifName, r.using_date, r.s
 FROM room_info rif, reservation r, users u
 WHERE rif.room_seq = r.room_seq
 AND r.user_id = u.user_id
-AND r.res_seq = #{res_seq}
+AND r.res_seq = #{resSeq}
 </select>
 <!-- sr:selectReservation End -->
 

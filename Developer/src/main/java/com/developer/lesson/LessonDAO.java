@@ -1,9 +1,5 @@
 package com.developer.lesson;
 
-<<<<<<< HEAD
-public interface LessonDAO {
-	
-=======
 import java.util.List;
 
 import com.developer.exception.FindException;
@@ -157,5 +153,4 @@ public interface LessonDAO {
 	 */
 	public List<LessonVO> selectAllByDate() throws FindException;
 
->>>>>>> 24016e656d39b0bdcea57683fe473175c58dd951
 }

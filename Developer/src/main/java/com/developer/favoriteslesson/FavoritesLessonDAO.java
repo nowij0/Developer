@@ -3,8 +3,6 @@ package com.developer.favoriteslesson;
 import com.developer.exception.FindException;
 
 public interface FavoritesLessonDAO {
-<<<<<<< HEAD
-=======
 	
 	/**
 	 * [클래스: 상세정보] 즐겨찾기 추가 
@@ -22,6 +20,5 @@ public interface FavoritesLessonDAO {
 	 * @throws FindException
 	 */
 	public void delFavLesson(String userId, int lessonSeq) throws FindException;
->>>>>>> 24016e656d39b0bdcea57683fe473175c58dd951
 
 }

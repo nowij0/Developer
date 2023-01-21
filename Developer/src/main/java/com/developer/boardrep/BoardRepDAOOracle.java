@@ -15,9 +15,7 @@ public class BoardRepDAOOracle implements BoardRepDAO {
 
 	public BoardRepDAOOracle() {
 		sqlSessionFactory = Factory.getSqlSessionFactory();
-	}
-	
-	
+	}	
 	//근형
 	@Override
 	public void addRep(BoardRepVO br) throws FindException {

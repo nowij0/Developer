@@ -1,9 +1,5 @@
 package com.developer.lesson;
 
-<<<<<<< HEAD
-
-public class LessonDAOOracle implements LessonDAO {
-=======
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
@@ -181,7 +177,6 @@ public class LessonDAOOracle implements LessonDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
->>>>>>> 24016e656d39b0bdcea57683fe473175c58dd951
 	
 	//sr
 	@Override

@@ -1,10 +1,5 @@
 package com.developer.studyroom;
 
-<<<<<<< HEAD
-
-public class StudyroomDAOOracle implements StudyroomDAO {
-
-=======
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -90,5 +85,5 @@ public class StudyroomDAOOracle implements StudyroomDAO {
 		session.close();
 		return a;
 	}
->>>>>>> 24016e656d39b0bdcea57683fe473175c58dd951
+
 }

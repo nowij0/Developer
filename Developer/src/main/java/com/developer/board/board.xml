@@ -3,7 +3,6 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.developer.board">
-<<<<<<< HEAD
 	<!--selectAllBoard -->
 	<resultMap id="boardList" type="BoardVO" autoMapping="true">
 		<id column="post_seq" property="postSeq" />
@@ -178,8 +177,7 @@
 		where post_seq=#{postSeq}
 	</select>
 	<!-- boardDetail -->
-	
-=======
+
 
 <!-- sr: boardSelectAllByDate Start -->
 	<select id="boardSelectAllByDate" resultType="BoardVO">
@@ -191,5 +189,4 @@
 	</select>
 <!-- sr: boardSelectAllByDate End -->
 
->>>>>>> 24016e656d39b0bdcea57683fe473175c58dd951
 </mapper>

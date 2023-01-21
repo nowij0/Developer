@@ -1,7 +1,5 @@
 package com.developer.boardrep;
 
-import java.util.List;
-
 import com.developer.exception.FindException;
 
 public interface BoardRepDAO {

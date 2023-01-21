@@ -1,9 +1,5 @@
 package com.developer.userreview;
 
-<<<<<<< HEAD
-public class UserReviewDAOOracle implements UserReviewDAO {
-
-=======
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -51,5 +47,5 @@ public class UserReviewDAOOracle implements UserReviewDAO {
 
 		
 	}
->>>>>>> 24016e656d39b0bdcea57683fe473175c58dd951
+
 }

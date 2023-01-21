@@ -5,7 +5,6 @@ import java.util.List;
 import com.developer.appliedlesson.AppliedLessonVO;
 import com.developer.exception.FindException;
 
-<<<<<<< HEAD
 public interface LessonReviewDAO {	
 	/**
 	    * [일반회원 : 클래스 > 튜터 > 진행 완료된 클래스 > 상세 정보] 클래스 후기 목록
@@ -14,10 +13,6 @@ public interface LessonReviewDAO {
 	    * @return lessonSeq에 해당하는 LessonReview list
 	    */
 	public List<AppliedLessonVO> selectLessonReview(int lessonSeq) throws FindException;
-	
-	
-=======
-public interface LessonReviewDAO {
 	
 	
 	/**
@@ -56,6 +51,5 @@ public interface LessonReviewDAO {
 	 * @throws FindException
 	 */
 	public List<AppliedLessonVO> myReviewList(String userId) throws FindException;
->>>>>>> 24016e656d39b0bdcea57683fe473175c58dd951
 
 }

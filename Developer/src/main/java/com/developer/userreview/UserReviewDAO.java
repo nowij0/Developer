@@ -5,10 +5,6 @@ import java.util.List;
 import com.developer.exception.FindException;
 
 public interface UserReviewDAO {
-<<<<<<< HEAD
-	
-=======
-
 	
 	/**
 	 * [일반회원 : 클래스 > 튜터 > 진행 예정 클래스 > 상세 정보] 신청튜티 평가
@@ -27,5 +23,5 @@ public interface UserReviewDAO {
 	 * @throws FindException
 	 */
 	public int addTuteeReview(UserReviewVO vo) throws FindException;
->>>>>>> 24016e656d39b0bdcea57683fe473175c58dd951
+
 }

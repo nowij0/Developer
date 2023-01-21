@@ -1,10 +1,11 @@
 package com.developer.studyroom;
 
+import java.util.List;
+
+import com.developer.exception.FindException;
 
 public interface StudyroomDAO {
 
-<<<<<<< HEAD
-=======
 	/**
 	 * [마이페이지-호스트] 스터디카페 예약을 오픈한다.
 	 * @author sr
@@ -66,7 +67,7 @@ public interface StudyroomDAO {
 	 * @throws FindException
 	 */
 	public StudyroomVO getHostAndStudyroom(String hostId) throws FindException;
->>>>>>> 24016e656d39b0bdcea57683fe473175c58dd951
+
 }
 
 

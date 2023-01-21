@@ -6,9 +6,8 @@ import java.util.List;
 import com.developer.exception.FindException;
 
 public interface BoardDAO {
-	
+
 	/**
-<<<<<<< HEAD
 	 * [커뮤니티 > 메인페이지] 게시판 테이블 글 전체목록 출력
 	 * @author choigeunhyeong
 	 * @param boardType(1번: 작성일최신순, 2번:조회수 높은순 3번: 추천높은순)
@@ -109,12 +108,12 @@ public interface BoardDAO {
 	 */
 	public void updateCnt(int postSeq) throws FindException;
 	
-=======
+	/**
 	 * [메인] 작성순으로 커뮤니티 글 5개만 출력한다.
 	 * @author sr
 	 * @return List<BoardVO>
 	 * @throws FindException
 	 */
 	public List<BoardVO> boardSelectAllByDate() throws FindException;
->>>>>>> 24016e656d39b0bdcea57683fe473175c58dd951
+
 }

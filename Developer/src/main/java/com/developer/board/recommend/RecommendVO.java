@@ -1,8 +1,5 @@
-package com.developer.boardrep;
+package com.developer.board.recommend;
 
-import java.util.Date;
-
-import com.developer.board.BoardVO;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,17 +7,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Setter
-@Getter
+@Setter @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-
-public class BoardRepVO {
-	private int postRepSeq;
-	private String content;
-	private Date date;
+public class RecommendVO {
+	private int recSeq;
 	private int postSeq;
 	private String userId;
-	
 }

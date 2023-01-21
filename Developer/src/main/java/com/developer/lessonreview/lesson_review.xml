@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<<<<<<< HEAD
 <mapper namespace="com.developer.lessonReview">
 	
 	<!-- selectLessonReview -->
@@ -34,9 +33,6 @@
     WHERE al.lesson_seq = #{lessonSeq}
 	</select>
 	<!-- selectLessonReview -->
-	
-=======
-<mapper namespace="com.developer.lessonreview">
 
 <!-- ====== cntReview() ====== -->
 <select id="cntReview" resultType="int">
@@ -102,6 +98,4 @@ from LESSON l, USERS u, LESSON_REVIEW r, APPLIED_LESSON a
 	order by l.lesson_seq desc
 </select>
 <!-- ===== myReviewList() ===== -->
-
->>>>>>> 24016e656d39b0bdcea57683fe473175c58dd951
 </mapper>

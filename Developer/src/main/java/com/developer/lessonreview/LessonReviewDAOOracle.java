@@ -10,19 +10,13 @@ import com.developer.exception.FindException;
 import com.developer.resource.Factory;
 
 public class LessonReviewDAOOracle implements LessonReviewDAO {
-<<<<<<< HEAD
-	private SqlSessionFactory sqlSessionFactory;
 
-=======
-	
 	private SqlSessionFactory sqlSessionFactory;
 	
->>>>>>> 24016e656d39b0bdcea57683fe473175c58dd951
 	public LessonReviewDAOOracle() {
 		sqlSessionFactory = Factory.getSqlSessionFactory();
 	}
 	
-<<<<<<< HEAD
 	//근형
 	@Override
 	public List<AppliedLessonVO> selectLessonReview(int lessonSeq) throws FindException {
@@ -31,13 +25,6 @@ public class LessonReviewDAOOracle implements LessonReviewDAO {
 		List<AppliedLessonVO> list = session.selectList("com.developer.lessonReview.selectLessonReview", lessonSeq);
 		session.close();
 		return list;
-	}
-
-=======
-	public static void main(String[] args) throws FindException {
-		LessonReviewDAOOracle dao = new LessonReviewDAOOracle();
-		List<AppliedLessonVO>list = dao.noWriteReview("devman");
-		System.out.println(list);
 	}
 
 	//지원
@@ -80,6 +67,4 @@ public class LessonReviewDAOOracle implements LessonReviewDAO {
 		return myReviewList;
 	}
 
-
->>>>>>> 24016e656d39b0bdcea57683fe473175c58dd951
 }

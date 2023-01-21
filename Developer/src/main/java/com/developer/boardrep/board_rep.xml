@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-<<<<<<< HEAD
+
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.developer.boardRep">
@@ -25,6 +25,3 @@
 	
 	
 </mapper>
-=======
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
->>>>>>> 24016e656d39b0bdcea57683fe473175c58dd951

@@ -8,38 +8,22 @@
    </settings>
    
    <typeAliases>
+		<typeAlias type="com.developer.board.BoardVO" alias="BoardVO"/>
+		<typeAlias type="com.developer.boardrep.BoardRepVO" alias="BoardRepVO"/>
+		<typeAlias type="com.developer.users.UsersVO" alias="UsersVO"/>
+		<typeAlias type="com.developer.hostuser.HostUserVO" alias="HostUserVO"/>
+		<typeAlias type="com.developer.board.recommend.RecommendVO" alias="RecommendVO"/>
+		<typeAlias type="com.developer.lessonreview.LessonReviewVO" alias="LessonReviewVO"/>
 		<typeAlias type="com.developer.appliedlesson.AppliedLessonVO" alias="AppliedLessonVO"/>
-<!-- 		<typeAlias type="com.developer.board.BoardVO" alias="BoardVO"/> -->
-<!-- 		<typeAlias type="com.developer.boardrep.BoardRepVO" alias="BoardRepVO"/> -->
-<!-- 		<typeAlias type="com.developer.favoriteslesson.FavoritesLessonVO" alias="FavoritesLessonVO"/> -->
-<!-- 		<typeAlias type="com.developer.favoritesstudyroom.FavoritesStudyroomVO" alias="FavoritesStudyroomVO"/> -->
-<!-- 		<typeAlias type="com.developer.hostuser.HostUserVO" alias="HostUserVO"/> -->
 		<typeAlias type="com.developer.lesson.LessonVO" alias="LessonVO"/>
-<!-- 		<typeAlias type="com.developer.lessonreview.LessonReviewVO" alias="LessonReviewVO"/> -->
-<!-- 		<typeAlias type="com.developer.recommend.RecommendVO" alias="RecommendVO"/> -->
-<!-- 		<typeAlias type="com.developer.reservation.ReservationVO" alias="ReservationVO"/> -->
-<!-- 		<typeAlias type="com.developer.roominfo.RoomInfoVO" alias="RoomInfoVO"/> -->
-<!-- 		<typeAlias type="com.developer.roomreview.RoomReviewVO" alias="RoomReviewVO"/> -->
-<!-- 		<typeAlias type="com.developer.studyroom.StudyroomVO" alias="StudyRoomVO"/> -->
+		<typeAlias type="com.developer.favoriteslesson.FavoritesLessonVO" alias="FavoritesLessonVO"/>
+		<typeAlias type="com.developer.favoritesstudyroom.FavoritesStudyroomVO" alias="FavoritesStudyroomVO"/>
+		<typeAlias type="com.developer.reservation.ReservationVO" alias="ReservationVO"/>
+		<typeAlias type="com.developer.roominfo.RoomInfoVO" alias="RoomInfoVO"/>
+		<typeAlias type="com.developer.roomreview.RoomReviewVO" alias="RoomReviewVO"/>
+		<typeAlias type="com.developer.studyroom.StudyroomVO" alias="StudyRoomVO"/>
 		<typeAlias type="com.developer.tutor.TutorVO" alias="TutorVO"/>
 		<typeAlias type="com.developer.userreview.UserReviewVO" alias="UserReviewVO"/>
-		<typeAlias type="com.developer.users.UsersVO" alias="UsersVO"/>
- 		<typeAlias type="com.developer.appliedlesson.AppliedLessonVO" alias="AppliedLessonVO"/>
-		<!-- <typeAlias type="com.developer.board.BoardVO" alias="BoardVO"/> -->
-		<!-- <typeAlias type="com.developer.boardrep.BoardRepVO" alias="BoardRepVO"/> -->
-		<typeAlias type="com.developer.favoriteslesson.FavoritesLessonVO" alias="FavoritesLessonVO"/>
-		<!-- <typeAlias type="com.developer.favoritesstudyroom.FavoritesStudyroomVO" alias="FavoritesStudyroomVO"/> -->
-		<!-- <typeAlias type="com.developer.hostuser.HostUserVO" alias="HostUserVO"/> -->
-		<typeAlias type="com.developer.lesson.LessonVO" alias="LessonVO"/>
-		<typeAlias type="com.developer.lessonreview.LessonReviewVO" alias="LessonReviewVO"/>
-		<!-- <typeAlias type="com.developer.recommend.RecommendVO" alias="RecommendVO"/> -->
-		<!-- <typeAlias type="com.developer.reservation.ReservationVO" alias="ReservationVO"/> -->
-		<!-- <typeAlias type="com.developer.roominfo.RoomInfoVO" alias="RoomInfoVO"/> -->
-		<!-- <typeAlias type="com.developer.roomreview.RoomReviewVO" alias="RoomReviewVO"/> -->
-		<!-- <typeAlias type="com.developer.studyroom.StudyroomVO" alias="StudyRoomVO"/> -->
-		<typeAlias type="com.developer.tutor.TutorVO" alias="TutorVO"/>
- 		<typeAlias type="com.developer.userreview.UserReviewVO" alias="UserReviewVO"/>
-		<typeAlias type="com.developer.users.UsersVO" alias="UsersVO"/> 
 	</typeAliases>
 	
 	<environments default="mybatis_test">
@@ -47,27 +31,30 @@
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED"><!-- connection pool의 일종 -->
 				<property name="driver" value="oracle.jdbc.driver.OracleDriver" />
+				<property name="url" value="jdbc:oracle:thin:@localhost:1521/xe" />
+				<property name="username" value="dev" />
+				<property name="password" value="dev" />
 			</dataSource>
 		</environment>
 	</environments>
 	
 	<mappers>
-		<mapper resource="com/developer/appliedlesson/applied_lesson.xml"></mapper> 
- 		<!-- <mapper resource="com/developer/board/board.xml"></mapper> -->
- 		<!-- <mapper resource="com/developer/boardrep/board_rep.xml"></mapper> -->
+ 	 	<mapper resource="com/developer/appliedlesson/applied_lesson.xml"></mapper>
  		<mapper resource="com/developer/favoriteslesson/favorites_lesson.xml"></mapper>
- 		<!-- <mapper resource="com/developer/favoritesstudyroom/favorites_studyroom.xml"></mapper> -->
- 		<!-- <mapper resource="com/developer/hostuser/host_user.xml"></mapper> --> 
+ 		<mapper resource="com/developer/favoritesstudyroom/favorites_studyroom.xml"></mapper>
  		<mapper resource="com/developer/lesson/lesson.xml"></mapper>
+ 		<mapper resource="com/developer/reservation/reservation.xml"></mapper>
+ 		<mapper resource="com/developer/roominfo/room_info.xml"></mapper>
+ 		<mapper resource="com/developer/studytroom/studyroom.xml"></mapper>
+ 		<mapper resource="com/developer/tutor/tutor.xml"></mapper>
+ 		<mapper resource="com/developer/userreview/user_review.xml"></mapper> 
+ 		<mapper resource="com/developer/roomreview/room_review.xml"></mapper> 
  		<mapper resource="com/developer/lessonreview/lesson_review.xml"></mapper>
- 		<!-- <mapper resource="com/developer/recommend/recommend.xml"></mapper> -->
- 		<!-- <mapper resource="com/developer/reservation/reservation.xml"></mapper> -->
- 		<!-- <mapper resource="com/developer/roominfo/room_info.xml"></mapper> -->
- 		<!-- <mapper resource="com/developer/roomreview/room_review.xml"></mapper> -->
- 		<!-- <mapper resource="com/developer/studyroom/studyroom.xml"></mapper> -->
- 		<!-- <mapper resource="com/developer/tutor/tutor.xml"></mapper> -->
-		<!--<mapper resource="com/developer/userreview/user_review.xml"></mapper> -->
- 		<!-- <mapper resource="com/developer/users/users.xml"></mapper> -->
+ 		<mapper resource="com/developer/board/recommend/recommend.xml"></mapper>
+ 		<mapper resource="com/developer/boardrep/board_rep.xml"></mapper>
+ 		<mapper resource="com/developer/board/board.xml"></mapper>
+ 		<mapper resource="com/developer/hostuser/host_user.xml"></mapper>
+ 		<mapper resource="com/developer/users/users.xml"></mapper>
  	</mappers>
 
 </configuration>

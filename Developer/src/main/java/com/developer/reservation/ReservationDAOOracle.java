@@ -1,10 +1,5 @@
 package com.developer.reservation;
 
-<<<<<<< HEAD
-
-public class ReservationDAOOracle implements ReservationDAO {
-	
-=======
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -50,6 +45,6 @@ private SqlSessionFactory sqlSessionFactory;
 		session.close();
 		return list;
 	}
->>>>>>> 24016e656d39b0bdcea57683fe473175c58dd951
+
 
 }

@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 package com.developer.appliedlesson;
 
 import java.util.HashMap;
@@ -89,4 +87,4 @@ public class AppliedLessonDAOOracle implements AppliedLessonDAO {
 	
 
 }
->>>>>>> 24016e656d39b0bdcea57683fe473175c58dd951
+

@@ -1,9 +1,5 @@
 package com.developer.roominfo;
 
-<<<<<<< HEAD
-public interface RoomInfoDAO {
-
-=======
 import java.util.List;
 
 import com.developer.exception.FindException;
@@ -49,5 +45,4 @@ public interface RoomInfoDAO {
 	public RoomInfoVO getRoom(int roomSeq) throws FindException; 
 
 	
->>>>>>> 24016e656d39b0bdcea57683fe473175c58dd951
 }

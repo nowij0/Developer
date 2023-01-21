@@ -5,7 +5,6 @@ import java.util.List;
 import com.developer.exception.FindException;
 
 public interface HostUserDAO {
-<<<<<<< HEAD
 	
 	/**
 	 * [관리자 페이지] 호스트회원 전체목록 출력 
@@ -42,7 +41,6 @@ public interface HostUserDAO {
 	 * @throws FindException
 	 */
 	public HostUserVO selectHostPwd(String hostId, String num, String email) throws FindException;
-=======
 
 	/**
 	 * [마이페이지-호스트] 호스트 회원 정보를 수정한다
@@ -59,7 +57,6 @@ public interface HostUserDAO {
 	 * @throws FindException
 	 */
 	public int deleteHostUser(String hostId) throws FindException;
->>>>>>> 24016e656d39b0bdcea57683fe473175c58dd951
 	
 	/**
 	 * [마이페이지-호스트] 호스트 회원 정보를 출력한다.
@@ -69,5 +66,13 @@ public interface HostUserDAO {
 	 * @throws FindException
 	 */
 	public HostUserVO getHostUser(String hostId) throws FindException;
+	
+	   /**
+	    * [회원가입 > 호스트] 호스트 회원가입
+	    * @author Jin
+	    * @param 호스트 회원가입 할 호스트객체 생성
+	    * @throws FindException
+	    */
+	   public int joinHostUser(HostUserVO vo) throws FindException;
 	
 }
