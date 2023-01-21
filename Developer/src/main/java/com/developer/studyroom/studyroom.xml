@@ -1,3 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.developer.studyroom">
+
+
+	<select id="selectAllDetail" resultType="StudyroomVO">
+		SELECT *
+		FROM STUDYROOM
+		WHERE sr_seq = #{srSeq}
+	</select>
+
+	<resultMap type="StudyroomVO" id="studyroomMap" autoMapping="true">
+		<result column="name" property="name" />
+		<result column="addr" property="addr" />
+		<result column="img_path" property="imgPath" />
+			
+		<association property="favoritesStudyroomVO" javaType="FavoritesStudyroomVO" autoMapping="true">
+			<result  column="user_id" property="userId" />
+			<result  column="fav_cnt" property="cnt" />
+
+		</association>
+		<collection property="roomInfoVO" ofType="RoomInfoVO" autoMapping="true">
+			<result column="person" property="person" />
+			<result column="price" property="price" />
+		</collection>
+	</resultMap>
+
+	<select id="selectByAddrAndPerson" resultMap="studyroomMap">
+		SELECT S.NAME, S.ADDR, S.IMG_PATH, MAX(R.PERSON) AS PERSON,
+		MIN(R.PRICE) AS PRICE, COUNT(distinct(F.USER_ID)) AS FAV_CNT
+		FROM STUDYROOM S
+		full outer join
+		ROOM_INFO R
+		ON s.sr_seq = r.sr_seq
+		full outer join
+		FAVORITES_STUDYROOM F
+		ON F.SR_SEQ = S.SR_SEQ
+		
+		where R.person <![CDATA[>=]]>#{person}
+
+		And s.addr LIKE '%${addr}%' 
+		GROUP BY S.NAME , S.ADDR , S.IMG_PATH
+		ORDER BY
+		<if test="orderBy == 1">
+			PRICE ASC
+		</if>
+		<if test="orderBy == 2">
+			FAV_CNT DESC
+		</if>
+	</select>
+
+   <select id="selectByPerson" resultMap="studyroomMap">
+   	SELECT S.NAME, S.ADDR, S.IMG_PATH, MAX(R.PERSON) AS PERSON,
+		MIN(R.PRICE) AS PRICE, COUNT(distinct(F.USER_ID)) AS FAV_CNT
+		FROM STUDYROOM S
+		full outer join
+		ROOM_INFO R
+		ON s.sr_seq = r.sr_seq
+		full outer join
+		FAVORITES_STUDYROOM F
+		ON F.SR_SEQ = S.SR_SEQ
+		where R.person <![CDATA[>=]]>#{person}
+		GROUP BY S.NAME , S.ADDR , S.IMG_PATH
+		ORDER BY
+		<if test="orderBy == 1">
+			PRICE ASC
+		</if>
+		<if test="orderBy == 2">
+			FAV_CNT DESC
+		</if>
+   </select>
+   
+   <select id="selectBySearchString" resultMap="studyroomMap">
+   	SELECT S.NAME, S.ADDR, S.IMG_PATH, MAX(R.PERSON) AS PERSON,
+		MIN(R.PRICE) AS PRICE, COUNT(distinct(F.USER_ID)) AS FAV_CNT
+		FROM STUDYROOM S
+		full outer join
+		ROOM_INFO R
+		ON s.sr_seq = r.sr_seq
+		full outer join
+		FAVORITES_STUDYROOM F
+		ON F.SR_SEQ = S.SR_SEQ
+		
+   <if test="searchBy == 1">
+   where s.addr LIKE '%${ADDR}%' 
+   </if>
+   <if test="searchBy == 2">
+   where S.NAME LIKE '%${name}%'
+   </if>
+   GROUP BY S.NAME , S.ADDR , S.IMG_PATH
+	ORDER BY
+		<if test="orderBy == 1">
+			PRICE ASC
+		</if>
+		<if test="orderBy == 2">
+			FAV_CNT DESC
+		</if>
+	
+   </select>
+
+</mapper>

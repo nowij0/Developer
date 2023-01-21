@@ -6,56 +6,47 @@ import com.developer.exception.FindException;
 
 public interface StudyroomDAO {
 	/**
-	 * <스터디카페 검색페이지>
-	 * @author ds
-	 * 스터디카페명, 주소로 스터디카페리스트를 검색한다
-	 * 스터디카페 테이블 외 필요한 것 
-	 * roominfo의 person, price 
-	 * fav-studyroom테이블의userId 
-	 * @param search1 스터디카페명, 주소명 
-	 * @return 검색에 맞은 스터디카페목록
+	 * [스터디카페 검색페이지] 주소(1), 스터디카페명(2)로 스터디카페리스트를 검색한다
+	 * @author ds 
+	 * @param searchSrNameAddr (주소명 or 스터디카페명 ) 
+	 * order by 두개있음
+	 * @return List<StudyroomVO> 검색에 맞은 스터디카페목록
 	 * @throws 스터디카페목록 검색시 FindException예외발생한다
 	 */
-	public List<StudyroomVO> selectBySerch1(String search1) throws FindException;
+	public List<StudyroomVO> selectBySearchString(String srNameAddrName, int searchBy, int orderBy) throws FindException;
 	
 	/**
-	 * <스터디카페 검색페이지>
+	 * [스터디카페 검색페이지] 인원수로 스터디카페리스트를 검색한다 order by 두개있음
 	 * @author ds
-	 * 사람수로 스터디카페리스트를 검색한다
-	 * 스터디카페 테이블 외 필요한 것 
-	 * roominfo의 person, price 
-	 * fav-studyroom테이블의 userId 
-	 * order by 두개있음
 	 * @param perosn 인원수 
-	 * @return 검색에 맞은 스터디카페목록
+	 * @return List<StudyroomVO> 검색에 맞은 스터디카페목록
 	 * @throws 스터디카페목록 검색시 FindException예외발생한다
 	 */
 	
-	public List<StudyroomVO> selectByPerson(int person) throws FindException;
+	public List<StudyroomVO> selectByPerson(int person, int orderBy) throws FindException;
 	
 	/**
-	* <스터디카페 검색페이지>
+	* [스터디카페 검색페이지] 주소와 인원수로 스터디카페리스트를 검색한다
 	 * @author ds
-	 * 주소와 인원수로 스터디카페리스트를 검색한다
 	 * order by 두개있음
-	 * @param addr 스터디카페 주소, person 인원 수 
-	 * @return 검색에 맞은 스터디카페목록
+	 * @param addr 스터디카페 주소 
+	 * @param person 인원 수 
+	 * @return List<StudyroomVO> 검색에 맞은 스터디카페목록
 	 * @throws 전체정보 출력시  FindException예외발생한다
 	 */
 	
-	public List<StudyroomVO> selectByAddrAndPerson(String addr, int person) throws FindException;
+	public List<StudyroomVO> selectByAddrAndPerson(String addr, int person, int orderBy) throws FindException;
 	
 	
 	/**
-	 * <스터디카페의 모든정보를 출력하는 상세페이지>
+	 * [스터디카페의 모든정보를 출력하는 상세페이지]스터디룸 시퀀스를 받아 특정 스터디카페의 전체정보를 출력한다
 	 * @author ds
-	 * 스터디룸 시퀀스를 받아 스터디카페의 전체정보를 출력한다
 	 * @param srSeq 스터디카페 시퀀스(장소번호) 
-	 * @return 특정스터디카페 전체정보
+	 * @return StudyroomVO 특정스터디카페 전체정보
 	 * @throws 전체정보 출력시  FindException예외발생한다
 	 */
 	
-	public List<StudyroomVO> selectAll(int srSeq) throws FindException;
+	public StudyroomVO selectAllDetail(int srSeq) throws FindException;
 
 	/**
 	 * [마이페이지-호스트] 스터디카페 예약을 오픈한다.

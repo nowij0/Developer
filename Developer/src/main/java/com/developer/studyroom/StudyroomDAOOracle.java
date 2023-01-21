@@ -1,6 +1,8 @@
 package com.developer.studyroom;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -14,35 +16,59 @@ public class StudyroomDAOOracle implements StudyroomDAO {
 	public StudyroomDAOOracle() {
 		sqlSessionFactory = Factory.getSqlSessionFactory();
 	}
+	public static void main(String[] args) throws FindException { //
+		StudyroomDAOOracle dao = new StudyroomDAOOracle(); 
+		 List<StudyroomVO> list = dao.selectBySearchString("장학", 2, 2);
+		 System.out.println("-------");
+		 System.out.println(list);
+		 System.out.println("-------");
+		}
 	
 	@Override
-	public List<StudyroomVO> selectBySerch1(String search1) throws FindException{
+	public List<StudyroomVO> selectBySearchString(String srNameAddrName, int searchBy, int orderBy) throws FindException{
 		SqlSession session = sqlSessionFactory.openSession();
-		List<StudyroomVO> list = session.selectList("com.developer.studyroom.selectBySerch1");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("srNameAddrName", srNameAddrName);
+		map.put("searchBy", searchBy);
+		map.put("orderBy", orderBy);
+		
+		List<StudyroomVO> list = session.selectList("com.developer.studyroom.selectBySearchString",map);
 		
 		return list;
 	}
-	@Override
-	public List<StudyroomVO> selectByPerson(int person) throws FindException{
+	@Override //성공
+	public List<StudyroomVO> selectByPerson(int person, int orderBy) throws FindException{
 		SqlSession session = sqlSessionFactory.openSession();
-		List<StudyroomVO> plist = session.selectList("com.developer.studyroom.selectByPerson");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("person", person);
+		map.put("orderBy", orderBy);
 		
-		return plist;
+		List<StudyroomVO> list = session.selectList("com.developer.studyroom.selectByPerson",map);
+		return list;
 	}
 	
-	@Override
-	public List<StudyroomVO> selectByAddrAndPerson(String addr, int person) throws FindException{
+	@Override //성공
+	public List<StudyroomVO> selectByAddrAndPerson(String addr, int person, int orderBy) throws FindException{
 		SqlSession session = sqlSessionFactory.openSession();
-		List<StudyroomVO> aplist = session.selectList("com.developer.studyroom.selectByAddrAndPerson");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("addr",addr);
+		map.put("person", person);
+		map.put("orderBy", orderBy);
+		List<StudyroomVO> list = session.selectList("com.developer.studyroom.selectByAddrAndPerson", map);
 		
-		return aplist;
-	}
-	@Override
-	public List<StudyroomVO> selectAll(int srSeq) throws FindException{
-		SqlSession session = sqlSessionFactory.openSession();
-		List<StudyroomVO> listall = session.selectList("com.developer.studyroom.selectAll");
-		
-		return listall;
+		return list;
 	}
 	
+	
+	//성공
+	@Override
+	public StudyroomVO selectAllDetail(int srSeq) throws FindException{
+		SqlSession session = sqlSessionFactory.openSession();
+		StudyroomVO vo=(StudyroomVO)session.selectOne("com.developer.studyroom.selectAllDetail",srSeq);
+		
+		return vo;
+	}
+	
+
+
 }
