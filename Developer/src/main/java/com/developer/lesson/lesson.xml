@@ -80,7 +80,7 @@ order by l.lesson_seq desc
 	</association>
 </resultMap>
 
-<select id="selectDetail" resultMap="lessonDetail">
+<select id="selectLessonDetail" resultMap="lessonDetail">
 SELECT l.lesson_name, l.img_path, l.location, l.start_cdate, l.end_cdate,
         l.category, l.people, u.name
 FROM TUTOR t, LESSON l, USERS u

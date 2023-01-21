@@ -68,10 +68,6 @@ and apply_seq = #{applySeq}
 <!-- updateNotApplyLesson -->
 
 
-
-=======
-<mapper namespace="com.developer.appliedLesson">
-
 <!-- ===== tuteeDashboard ===== -->
 <resultMap type="AppliedLessonVO" id="tuteeDashboardMap"></resultMap>
 <select id="tuteeDashboard" resultMap="tuteeDashboardMap">

@@ -52,22 +52,6 @@
 	</environments>
 	
 	<mappers>
- 		<mapper resource="com/developer/appliedlesson/applied_lesson.xml"></mapper>
-<!--  		<mapper resource="com/developer/board/board.xml"></mapper> -->
-<!--  		<mapper resource="com/developer/boardrep/board_rep.xml"></mapper> -->
-<!--  		<mapper resource="com/developer/favoriteslesson/favorites_lesson.xml"></mapper> -->
-<!--  		<mapper resource="com/developer/favoritesstudyroom/favorites_studyroom.xml"></mapper> -->
-<!--  		<mapper resource="com/developer/hostuser/host_user.xml"></mapper> -->
- 		<mapper resource="com/developer/lesson/lesson.xml"></mapper>
-<!--  		<mapper resource="com/developer/lessonreview/lesson_review.xml"></mapper> -->
-<!--  		<mapper resource="com/developer/recommend/recommend.xml"></mapper> -->
-<!--  		<mapper resource="com/developer/reservation/reservation.xml"></mapper> -->
-<!--  		<mapper resource="com/developer/roominfo/room_info.xml"></mapper> -->
-<!--  		<mapper resource="com/developer/studytroom/studyroom.xml"></mapper> -->
- 		<mapper resource="com/developer/tutor/tutor.xml"></mapper>
- 		<mapper resource="com/developer/userreview/user_review.xml"></mapper>
- 		<mapper resource="com/developer/users/users.xml"></mapper>
-=======
 		<mapper resource="com/developer/appliedlesson/applied_lesson.xml"></mapper> 
  		<!-- <mapper resource="com/developer/board/board.xml"></mapper> -->
  		<!-- <mapper resource="com/developer/boardrep/board_rep.xml"></mapper> -->
