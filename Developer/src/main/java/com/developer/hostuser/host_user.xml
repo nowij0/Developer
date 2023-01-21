@@ -26,7 +26,7 @@
 <!-- sr: deleteHostUser Start -->
 <delete id="deleteHostUser">
 	DELETE FROM host_user
-	WHERE host_id = #{host_id}
+	WHERE host_id = #{hostId}
 </delete>
 <!-- sr: deleteHostUser End -->
 

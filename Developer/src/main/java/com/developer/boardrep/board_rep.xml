@@ -7,7 +7,7 @@
 	<!-- selectAllRep-->
 	<insert id="selectAllRep" parameterType="hashMap">
 		insert into board_rep
-		values(post_rep_seq.nextval, #{content}, SYSDATE, #{post_seq}, #{userId})
+		values(post_rep_seq.nextval, #{content}, SYSDATE, #{postSeq}, #{userId})
 	</insert>
 	<!-- selectAllRep-->
 	
