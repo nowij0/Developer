@@ -1,6 +1,6 @@
 package com.developer.favoriteslesson;
 
-import com.developer.lesson.LessonVO;
+import com.developer.lesson.vo.LessonVO;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

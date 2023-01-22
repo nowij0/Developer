@@ -45,7 +45,6 @@ DELETE FROM reservation
 WHERE res_seq = #{resSeq}
 </delete>
 
-</mapper>
 <!-- sr:reservationDelete start -->
 <delete id="reservationDelete" parameterType="Integer">
 DELETE FROM reservation
@@ -119,4 +118,6 @@ AND r.user_id = u.user_id
 AND r.res_seq = #{resSeq}
 </select>
 <!-- sr:selectReservation End -->
+
+</mapper>
 

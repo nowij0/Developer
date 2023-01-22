@@ -1,8 +1,9 @@
-package com.developer.lesson;
+package com.developer.lesson.dao;
 
 import java.util.List;
 
 import com.developer.exception.FindException;
+import com.developer.lesson.vo.LessonVO;
 
 public interface LessonDAO {
 

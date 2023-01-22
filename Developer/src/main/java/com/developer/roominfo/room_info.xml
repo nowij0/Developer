@@ -11,6 +11,8 @@
 select * 
 from room_info 
 where sr_seq = #{srSeq}
+</select>
+
 <!-- sr: insertRoom Start-->
 <insert id="insertRoom" parameterType = "RoomInfoVO">
 INSERT into room_info values

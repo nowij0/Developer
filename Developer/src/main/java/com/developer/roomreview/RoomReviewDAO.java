@@ -1,5 +1,9 @@
 package com.developer.roomreview;
 
+import java.util.List;
+
+import com.developer.exception.FindException;
+
 public interface RoomReviewDAO {
 	/**
 	 * [스터디카페 상세페이지 하단 후기리스트 페이지] 스터디룸 시퀀스를 받아 특정 스터디룸 후기에 대한 리스트를 출력한다

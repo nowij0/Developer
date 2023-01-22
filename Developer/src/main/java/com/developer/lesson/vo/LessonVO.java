@@ -1,4 +1,4 @@
-package com.developer.lesson;
+package com.developer.lesson.vo;
 
 import java.util.Date;
 import java.util.List;

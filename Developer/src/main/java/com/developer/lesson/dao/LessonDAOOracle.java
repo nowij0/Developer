@@ -1,4 +1,4 @@
-package com.developer.lesson;
+package com.developer.lesson.dao;
 
 import java.text.ParseException;
 import java.util.HashMap;
@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.developer.exception.FindException;
+import com.developer.lesson.vo.LessonVO;
 import com.developer.resource.Factory;
 
 public class LessonDAOOracle implements LessonDAO {

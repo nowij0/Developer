@@ -1,5 +1,7 @@
 package com.developer.roominfo;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 

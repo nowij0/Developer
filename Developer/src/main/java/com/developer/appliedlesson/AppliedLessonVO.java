@@ -3,7 +3,7 @@ package com.developer.appliedlesson;
 import java.util.Date;
 import java.util.List;
 
-import com.developer.lesson.LessonVO;
+import com.developer.lesson.vo.LessonVO;
 import com.developer.lessonreview.LessonReviewVO;
 import com.developer.userreview.UserReviewVO;
 import com.developer.users.UsersVO;
