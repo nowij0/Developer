@@ -5,13 +5,24 @@
 <mapper namespace="com.developer.studyroom">
 
 
-	<select id="selectAllDetail" resultType="StudyroomVO">
+	
+	<resultMap type="StudyroomVO" id="studyroomMap2" autoMapping="true">
+  	<result column="name" property="name" />
+  	<result column="info" property="info" />
+  	<result column="addr" property="addr" />
+  	<result column="open_time" property="openTime" />
+  	<result column="end_time" property="endTime" />
+  	<result column="img_path" property="imgPath" />
+  	
+  	
+    </resultMap>
+	<select id="selectAllDetail" resultMap="studyroomMap2">
 		SELECT *
 		FROM STUDYROOM
 		WHERE sr_seq = #{srSeq}
 	</select>
 
-	<resultMap type="StudyroomVO" id="studyroomMap" autoMapping="true">
+	<resultMap type="StudyroomVO" id="studyroomMap1" autoMapping="true">
 		<result column="name" property="name" />
 		<result column="addr" property="addr" />
 		<result column="img_path" property="imgPath" />
@@ -27,7 +38,7 @@
 		</collection>
 	</resultMap>
 
-	<select id="selectByAddrAndPerson" resultMap="studyroomMap">
+	<select id="selectByAddrAndPerson" resultMap="studyroomMap1">
 		SELECT S.NAME, S.ADDR, S.IMG_PATH, MAX(R.PERSON) AS PERSON,
 		MIN(R.PRICE) AS PRICE, COUNT(distinct(F.USER_ID)) AS FAV_CNT
 		FROM STUDYROOM S
@@ -50,8 +61,23 @@
 			FAV_CNT DESC
 		</if>
 	</select>
+	<resultMap type="StudyroomVO" id="studyroomMap4" autoMapping="true">
+		<result column="name" property="name" />
+		<result column="addr" property="addr" />
+		<result column="img_path" property="imgPath" />
+			
+		<association property="favoritesStudyroomVO" javaType="FavoritesStudyroomVO" autoMapping="true">
+			<result  column="user_id" property="userId" />
+			<result  column="fav_cnt" property="cnt" />
 
-   <select id="selectByPerson" resultMap="studyroomMap">
+		</association>
+		<collection property="roomInfoVO" ofType="RoomInfoVO" autoMapping="true">
+			<result column="person" property="person" />
+			<result column="price" property="price" />
+		</collection>
+	</resultMap>
+
+   <select id="selectByPerson" resultMap="studyroomMap4">
    	SELECT S.NAME, S.ADDR, S.IMG_PATH, MAX(R.PERSON) AS PERSON,
 		MIN(R.PRICE) AS PRICE, COUNT(distinct(F.USER_ID)) AS FAV_CNT
 		FROM STUDYROOM S
@@ -71,8 +97,22 @@
 			FAV_CNT DESC
 		</if>
    </select>
-   
-   <select id="selectBySearchString" resultMap="studyroomMap">
+   	<resultMap type="StudyroomVO" id="studyroomMap3" autoMapping="true">
+		<result column="name" property="name" />
+		<result column="addr" property="addr" />
+		<result column="img_path" property="imgPath" />
+			
+		<association property="favoritesStudyroomVO" javaType="FavoritesStudyroomVO" autoMapping="true">
+			<result  column="user_id" property="userId" />
+			<result  column="fav_cnt" property="cnt" />
+
+		</association>
+		<collection property="roomInfoVO" ofType="RoomInfoVO" autoMapping="true">
+			<result column="person" property="person" />
+			<result column="price" property="price" />
+		</collection>
+	</resultMap>
+   <select id="selectBySearchString" resultMap="studyroomMap3">
    	SELECT S.NAME, S.ADDR, S.IMG_PATH, MAX(R.PERSON) AS PERSON,
 		MIN(R.PRICE) AS PRICE, COUNT(distinct(F.USER_ID)) AS FAV_CNT
 		FROM STUDYROOM S
@@ -82,23 +122,70 @@
 		full outer join
 		FAVORITES_STUDYROOM F
 		ON F.SR_SEQ = S.SR_SEQ
-		
-   <if test="searchBy == 1">
-   where s.addr LIKE '%${ADDR}%' 
-   </if>
-   <if test="searchBy == 2">
-   where S.NAME LIKE '%${name}%'
-   </if>
+		where
+		<choose>
+   <when test="searchBy==1">
+  S.ADDR LIKE '%${addr}%' 
+   </when>
+   <when test="searchBy==2">
+   S.NAME LIKE '%${name}%'
+   </when>
+   <otherwise>
+   
+   </otherwise>
+	
+   </choose>
    GROUP BY S.NAME , S.ADDR , S.IMG_PATH
 	ORDER BY
-		<if test="orderBy == 1">
+	<choose>
+		<when test="orderBy==1">
 			PRICE ASC
-		</if>
-		<if test="orderBy == 2">
+		</when>
+		<when test="orderBy==2">
 			FAV_CNT DESC
-		</if>
-	
+		</when>
+		</choose>
    </select>
+     
+   <select id="selectBySearchString1" resultMap="studyroomMap3">
+   	SELECT S.NAME, S.ADDR, S.IMG_PATH, MAX(R.PERSON) AS PERSON,
+		MIN(R.PRICE) AS PRICE, COUNT(distinct(F.USER_ID)) AS FAV_CNT
+		FROM STUDYROOM S
+		full outer join
+		ROOM_INFO R
+		ON s.sr_seq = r.sr_seq
+		full outer join
+		FAVORITES_STUDYROOM F
+		ON F.SR_SEQ = S.SR_SEQ
+		where ${choose1}
+	
+   GROUP BY S.NAME , S.ADDR , S.IMG_PATH
+	ORDER BY ${choose2}
+
+   </select>
+   
+   
+<resultMap type="ReservationVO" id="reservationMap2">
+<result column="res_seq" property="resSeq" />
+<result column="using_date" property="usingDate" />
+<result column="start_time" property="startTime" />
+<result column="end_time" property="endTime" />
+<association property="studyroomVO" javaType="StudyroomVO"  autoMapping="true">
+<result column="sName" property="name" />
+<collection property="roomInfoVO" ofType="RoomInfoVO"  autoMapping="true">
+					<result column="rifName" property="name" />
+				</collection>
+</association>
+	
+</resultMap>
+<select id="selectMyResHistory" resultMap="reservationMap2">
+SELECT r. res_seq, s.name AS sName, rif.name AS rifName, r.using_date, r.start_time, r.end_time
+FROM studyroom s, room_info rif, reservation r
+WHERE s.sr_seq = rif.sr_seq
+AND rif.room_seq = r.room_seq
+AND r.user_id = #{userId}
+ORDER BY res_seq DESC
+</select>
 <!-- sr: reservationOpen Start -->
 <update id="reservationOpen" parameterType = "String">
 	UPDATE studyroom

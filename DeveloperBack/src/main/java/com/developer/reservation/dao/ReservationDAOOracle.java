@@ -19,58 +19,54 @@ public class ReservationDAOOracle implements ReservationDAO {
 		sqlSessionFactory = Factory.getSqlSessionFactory();
 	}
 
-	//ds
-	@Override // 성공
-	public List<ReservationVO> selectAllByUsingDate(int roomSeq, Date usingDate) throws FindException {
-		SqlSession session = sqlSessionFactory.openSession();
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("roomSeq", roomSeq);
-		map.put("usingDate", usingDate);
-
-		List<ReservationVO> list = session.selectList("com.developer.reservation.selectAllByUsingDate", map);
-		return list;
-	}
-
-	//ds
-	@Override // 성공
-	public void insertRv(String userId, int roomSeq, String startTime, String endTime, Date usingDate)
-			throws FindException {
-		SqlSession session = sqlSessionFactory.openSession();
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("userId", userId);
-		map.put("roomSeq", roomSeq);
-		map.put("startTime", startTime);
-		map.put("endTime", endTime);
-		map.put("usingDate", usingDate);
-
-		session.selectList("com.developer.reservation.insertRv", map);
-		session.commit();
-		session.close();
-		// commit하고 close해줘야됨
-	}
-
-	//ds
-	@Override // 성공
-	public void deleteRv(int resSeq) throws FindException {
-		SqlSession session = sqlSessionFactory.openSession();
-
-		session.selectOne("com.developer.reservation.deleteRv", resSeq);
-		session.commit();
-		session.close();
-		// commit하고 close해줘야됨
-
-	}
-
-	//ds
 	@Override //성공
-    public List<ReservationVO>  selectMyResHistory(String userId) throws FindException{
-       SqlSession session = sqlSessionFactory.openSession();
-       
-       List<ReservationVO> list = session.selectList("com.developer.reservation.selectMyResHistory", userId);
-       session.close();
-       return list;
-    }
-	
+	public List<ReservationVO> selectAllByUsingDate(int roomSeq, Date usingDate) throws FindException{
+		SqlSession session = sqlSessionFactory.openSession();
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("roomSeq", roomSeq);
+		map.put("usingDate", usingDate);
+		
+		
+		List<ReservationVO> list = session.selectList("com.developer.reservation.selectAllByUsingDate",map);
+		session.close();
+		return list;
+		
+	}
+		
+		@Override //성공
+		public List<ReservationVO>  selectMyResHistory(String userId) throws FindException{
+			SqlSession session = sqlSessionFactory.openSession();
+			List<ReservationVO> list = session.selectList("com.developer.reservation.selectMyResHistory", userId);
+			session.close();
+			return list;
+		}
+		@Override //성공
+		public void insertRv(String userId, int roomSeq, String startTime, String endTime, Date usingDate) throws FindException{
+			SqlSession session = sqlSessionFactory.openSession();
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("userId",userId );
+			map.put("roomSeq",roomSeq );
+			map.put("startTime",startTime );
+			map.put("endTime",endTime );
+			map.put("usingDate",usingDate );
+			
+			session.selectList("com.developer.reservation.insertRv",map);
+			session.commit();
+			session.close();
+			//commit하고 close해줘야됨
+		}
+		
+			@Override	//성공	
+			public void deleteRv(int resSeq) throws FindException{
+			SqlSession session = sqlSessionFactory.openSession();
+				
+			session.selectOne("com.developer.reservation.deleteRv", resSeq);
+			session.commit();
+			session.close();
+				//commit하고 close해줘야됨
+
+			
+			}
 
 	//sr
 	@Override
