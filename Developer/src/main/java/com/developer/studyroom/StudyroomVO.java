@@ -2,6 +2,7 @@ package com.developer.studyroom;
 
 import java.util.List;
 
+import com.developer.favoritesstudyroom.FavoritesStudyroomVO;
 import com.developer.hostuser.HostUserVO;
 import com.developer.roominfo.RoomInfoVO;
 
@@ -26,6 +27,11 @@ public class StudyroomVO {
 	private int oc;
 	private String hostId;
 	
+	private String srNameAddrName;
+	private int searchBy;
+	private int orderBy;
+	
+	private FavoritesStudyroomVO favoritesStudyroomVO;
 	private List<RoomInfoVO> roomInfoVO;
 	private HostUserVO hostUserVO;
 	

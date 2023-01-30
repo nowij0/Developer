@@ -18,22 +18,43 @@ public class StudyroomDAOOracle implements StudyroomDAO {
 	}
 	public static void main(String[] args) throws FindException { //
 		StudyroomDAOOracle dao = new StudyroomDAOOracle(); 
-		 List<StudyroomVO> list = dao.selectBySearchString("장학", 2, 2);
+		 List<StudyroomVO> list = dao.selectBySearchString("성남", 1, 2);
 		 System.out.println("-------");
-		 System.out.println(list);
+		 for(StudyroomVO vo : list) {
+			System.out.println(vo); 
+		 }
 		 System.out.println("-------");
 		}
 	
-	@Override
+	@Override//성공
 	public List<StudyroomVO> selectBySearchString(String srNameAddrName, int searchBy, int orderBy) throws FindException{
 		SqlSession session = sqlSessionFactory.openSession();
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("srNameAddrName", srNameAddrName);
-		map.put("searchBy", searchBy);
-		map.put("orderBy", orderBy);
 		
-		List<StudyroomVO> list = session.selectList("com.developer.studyroom.selectBySearchString",map);
+		String choose1 = "";
+		if(searchBy == 1) {
+			//vo.setName(srNameAddrName);
+			choose1 = "S.ADDR LIKE '%" +srNameAddrName+ "%' ";
+		}else if(searchBy == 2) {
+			choose1 =  "S.NAME LIKE '%"+srNameAddrName+ "%' ";
+		}
 		
+		String choose2 = "";
+		if(orderBy==1) {
+			choose2 = "PRICE ASC";
+		}else if(orderBy == 2) {
+			choose2 = "FAV_CNT DESC";
+		}
+		Map<String, String> map = new HashMap<>();
+		map.put("choose1", choose1);
+		map.put("choose2", choose2);
+		List<StudyroomVO> list = session.selectList("com.developer.studyroom.selectBySearchString1", map);
+		
+		//vo.setSearchBy(searchBy);
+		//vo.setOrderBy(orderBy);
+		
+		//List<StudyroomVO> list = session.selectList("com.developer.studyroom.selectBySearchString",vo);//map);
+		
+		session.close();
 		return list;
 	}
 	@Override //성공
@@ -44,6 +65,8 @@ public class StudyroomDAOOracle implements StudyroomDAO {
 		map.put("orderBy", orderBy);
 		
 		List<StudyroomVO> list = session.selectList("com.developer.studyroom.selectByPerson",map);
+		session.commit();
+		session.close();
 		return list;
 	}
 	
@@ -55,7 +78,8 @@ public class StudyroomDAOOracle implements StudyroomDAO {
 		map.put("person", person);
 		map.put("orderBy", orderBy);
 		List<StudyroomVO> list = session.selectList("com.developer.studyroom.selectByAddrAndPerson", map);
-		
+		session.commit();
+		session.close();
 		return list;
 	}
 	
@@ -65,7 +89,7 @@ public class StudyroomDAOOracle implements StudyroomDAO {
 	public StudyroomVO selectAllDetail(int srSeq) throws FindException{
 		SqlSession session = sqlSessionFactory.openSession();
 		StudyroomVO vo=(StudyroomVO)session.selectOne("com.developer.studyroom.selectAllDetail",srSeq);
-		
+		session.close();
 		return vo;
 	}
 	

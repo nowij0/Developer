@@ -5,118 +5,161 @@
 <mapper namespace="com.developer.reservation">
 
 
-<resultMap type="ReservationVO" id="reservationMap">
-	<id column="room_seq" property="roomSeq"/>
-	<result column="start_time" property="startTime"/>
-	<result column="end_time" property="endTime"/>
-	<result column="using_date" property="usingDate"/>
- 	
- 	<association property="studyroomVO" javaType="StudyroomVO" autoMapping="true">
-	 	<association property="roomInfoVO" javaType="RoomInfoVO" autoMapping="true">
-	 		<result column="price" property="price"/>
-	 	</association>
- 	</association>
- </resultMap>
+	<resultMap type="ReservationVO" id="reservationMap" autoMapping="true">
+		<id column="room_seq" property="roomSeq" />
+		<result column="start_time" property="startTime" />
+		<result column="end_time" property="endTime" />
+		<result column="using_date" property="usingDate" />
+
+		<association property="studyroomVO" javaType="StudyroomVO"
+			autoMapping="true">
+			<collection property="roomInfoVO" ofType="RoomInfoVO"  autoMapping="true">
+					<result column="price" property="price" />
+				</collection>
+				
+			
+		</association>
+	</resultMap>
 
 
-<select id="selectAllByUsingDate" resultMap="reservationMap">
- <![CDATA[
+	<select id="selectAllByUsingDate" resultMap="reservationMap">
+
 select r.room_seq, r.start_time, r.end_time, r.using_date, ro.price 
 from reservation r, room_info ro, studyroom sr
 where r.room_seq = ro.room_seq
 AND r.room_seq=#{roomSeq}
 AND r.using_date=#{usingDate}
 AND sr.sr_seq = ro.sr_seq
-AND to_date(r.start_time,'HH24:MI') >= to_date(sr.open_time,'HH24:MI')
-AND to_date(r.end_time,'HH24:MI') <= to_date(sr.end_time,'HH24:MI')
-]]>
+AND to_date(r.start_time,'HH24:MI') <![CDATA[>=]]> to_date(sr.open_time,'HH24:MI')
+AND to_date(r.end_time,'HH24:MI')<![CDATA[ <= ]]>to_date(sr.end_time,'HH24:MI')
+
+	</select>
+
+
+	<insert id="insertRv">
+		INSERT INTO reservation
+		VALUES(res_seq.nextval, #{userId},
+		#{roomSeq}, #{startTime}, #{endTime}, #{usingDate})
+	</insert>
+
+
+	<delete id="deleteRv">
+		DELETE FROM reservation
+		WHERE res_seq = #{resSeq}
+	</delete>
+
+
+<resultMap type="ReservationVO" id="reservationMap2">
+<result column="res_seq" property="resSeq" />
+<result column="using_date" property="usingDate" />
+<result column="start_time" property="startTime" />
+<result column="end_time" property="endTime" />
+<association property="studyroomVO" javaType="StudyroomVO"  autoMapping="true">
+<result column="sName" property="name" />
+<collection property="roomInfoVO" ofType="RoomInfoVO"  autoMapping="true">
+					<result column="rifName" property="name" />
+				</collection>
+</association>
+	
+</resultMap>
+<select id="selectMyResHistory" resultMap="reservationMap2">
+SELECT r. res_seq, s.name AS sName, rif.name AS rifName, r.using_date, r.start_time, r.end_time
+FROM studyroom s, room_info rif, reservation r
+WHERE s.sr_seq = rif.sr_seq
+AND rif.room_seq = r.room_seq
+AND r.user_id = #{userId}
+ORDER BY res_seq DESC
 </select>
 
-
-<insert id="insertRv">
-INSERT INTO reservation 
-VALUES(res_seq.nextval, #{userId},
- #{roomSeq}, #{startTime}, #{endTime}, #{usingDate})
-</insert>
-
-
-<delete id="deleteRv" >
-DELETE FROM reservation
-WHERE res_seq = #{resSeq}
-</delete>
-
-</mapper>
 <!-- sr:reservationDelete start -->
 <delete id="reservationDelete" parameterType="Integer">
-DELETE FROM reservation
-WHERE res_seq = #{resSeq}
+	DELETE FROM reservation
+	WHERE res_seq = #{resSeq}
 </delete>
 <!-- sr:reservationDelete end -->
-
 <!-- sr:selectAllStudycafeReservation start -->
-<resultMap type="ReservationVO" id="ReservationMap" autoMapping = "true">
+<resultMap type="ReservationVO" id="ReservationMap"
+	autoMapping="true">
 	<id column="res_seq" property="resSeq" />
 	<result column="using_date" property="usingDate" />
 	<result column="start_time" property="startTime" />
 	<result column="end_time" property="endTime" />
 	<result column="host_id" property="hostId" />
-	
-	<association property="studyroomVO" javaType="StudyroomVO" autoMapping = "true">
- 		<collection property="roomInfoVO" ofType="RoomInfoVO" autoMapping = "true">
- 			<id column="room_seq" property="roomSeq"/>
- 			<result column="riName" property="name" />
- 		</collection>
+
+	<association property="studyroomVO" javaType="StudyroomVO"
+		autoMapping="true">
+		<collection property="roomInfoVO" ofType="RoomInfoVO"
+			autoMapping="true">
+			<id column="room_seq" property="roomSeq" />
+			<result column="riName" property="name" />
+		</collection>
 	</association>
-	
-	<association property="usersVO" javaType="UsersVO" autoMapping = "true">
+
+	<association property="usersVO" javaType="UsersVO"
+		autoMapping="true">
 		<id column="user_id" property="userId" />
 		<result column="uName" property="name" />
 	</association>
 </resultMap>
 
-<select id="selectAllStudycafeReservation" parameterType="String" resultMap="ReservationMap">
-SELECT r.res_seq, ri.name as riName, r.user_id, u.name As uName, r.using_date, r.start_time, r.end_time, r.host_id
-FROM reservation r  JOIN users u ON r.user_id = u.user_id
-JOIN room_info ri ON   ri.room_seq = r.room_seq 
-JOIN studyroom sr ON   sr.sr_seq = ri.sr_seq
-WHERE sr.host_id = #{hostId}
-UNION
-SELECT r.res_seq, ri.name, '', '', r.using_date, r.start_time, r.end_time, r.host_id
-FROM reservation r 
-JOIN room_info ri ON ri.room_seq = r.room_seq 
-WHERE host_id = #{hostId}
+<select id="selectAllStudycafeReservation" parameterType="String"
+	resultMap="ReservationMap">
+	SELECT r.res_seq, ri.name as riName, r.user_id, u.name As uName,
+	r.using_date, r.start_time, r.end_time, r.host_id
+	FROM reservation r JOIN users u ON r.user_id = u.user_id
+	JOIN room_info ri ON ri.room_seq = r.room_seq
+	JOIN studyroom sr ON sr.sr_seq = ri.sr_seq
+	WHERE sr.host_id = #{hostId}
+	UNION
+	SELECT r.res_seq, ri.name, '', '', r.using_date, r.start_time, r.end_time,
+	r.host_id
+	FROM reservation r
+	JOIN room_info ri ON ri.room_seq = r.room_seq
+	WHERE host_id = #{hostId}
 </select>
 <!-- sr:selectAllStudycafeReservation End -->
 
 
 <!-- sr:selectReservation Start -->
-<resultMap type="ReservationVO" id="ReservationSelectMap" autoMapping = "true">
+<resultMap type="ReservationVO" id="ReservationSelectMap"
+	autoMapping="true">
 	<id column="res_seq" property="resSeq" />
 	<result column="using_date" property="usingDate" />
 	<result column="start_time" property="startTime" />
 	<result column="end_time" property="endTime" />
 	<result column="host_id" property="hostId" />
-	
-	<association property="studyroomVO" javaType="StudyroomVO" autoMapping = "true">
- 		<collection property="roomInfoVO" ofType="RoomInfoVO"  autoMapping = "true">
- 			<id column="room_seq" property="roomSeq"/>
- 			<result column="rifName" property="name" />
- 			</collection>
- 			</association>
-	<association property="usersVO" javaType="UsersVO" autoMapping = "true">
+
+	<association property="studyroomVO" javaType="StudyroomVO"
+		autoMapping="true">
+		<collection property="roomInfoVO" ofType="RoomInfoVO"
+			autoMapping="true">
+			<id column="room_seq" property="roomSeq" />
+			<result column="rifName" property="name" />
+		</collection>
+	</association>
+	<association property="usersVO" javaType="UsersVO"
+		autoMapping="true">
 		<id column="user_id" property="userId" />
 		<result column="uName" property="name" />
 		<result column="tel" property="tel" />
-	
+
 	</association>
-		</resultMap>
-		
-<select id="selectReservation" parameterType="Integer" resultMap="ReservationSelectMap">
-SELECT r.res_seq, u.name AS uName, u.tel, rif.name AS rifName, r.using_date, r.start_time, r.end_time, r.host_id
-FROM room_info rif, reservation r, users u
-WHERE rif.room_seq = r.room_seq
-AND r.user_id = u.user_id
-AND r.res_seq = #{resSeq}
+</resultMap>
+
+<select id="selectReservation" parameterType="Integer"
+	resultMap="ReservationSelectMap">
+	SELECT r.res_seq, u.name AS uName, u.tel, rif.name AS rifName, r.using_date,
+	r.start_time, r.end_time, r.host_id
+	FROM room_info rif, reservation r, users u
+	WHERE rif.room_seq = r.room_seq
+	AND r.user_id = u.user_id
+	AND r.res_seq = #{resSeq}
 </select>
 <!-- sr:selectReservation End -->
 
+
+
+
+
+
+</mapper>

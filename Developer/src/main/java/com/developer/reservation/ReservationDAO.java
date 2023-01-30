@@ -1,6 +1,8 @@
 package com.developer.reservation;
 
+import java.util.Date;
 import java.util.List;
+
 import com.developer.exception.FindException;
 
 public interface ReservationDAO {
@@ -60,14 +62,7 @@ public interface ReservationDAO {
 	 */
 	public List<ReservationVO> studyroomReservationCheck(int roomSeq) throws FindException;
 	
-	
-	/**
-	 * [마이페이지-호스트] 스터디카페 예약 내역을 전체 출력(목록)한다.
-	 * @author sr
-	 * @return List<ReservationVO>
-	 * @throws FindException
-	 */
-	public List<ReservationVO> selectAll() throws FindException;
+
 	
 	
 	/**

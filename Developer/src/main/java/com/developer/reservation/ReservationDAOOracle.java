@@ -3,9 +3,7 @@ package com.developer.reservation;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
-import java.util.Formatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +13,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.developer.exception.FindException;
 import com.developer.resource.Factory;
+import com.developer.studyroom.StudyroomVO;
 
 public class ReservationDAOOracle implements ReservationDAO {
 private SqlSessionFactory sqlSessionFactory;
@@ -25,8 +24,21 @@ private SqlSessionFactory sqlSessionFactory;
 
 	public static void main(String[] args) throws FindException, ParseException { //
 		ReservationDAOOracle dao = new ReservationDAOOracle(); 
-		dao.deleteRv(24);
 		
+//		String str = "23-01-07";
+//        SimpleDateFormat format = new SimpleDateFormat("yy-MM-dd");
+        java.sql.Date usingDate = java.sql.Date.valueOf("2023-01-07");
+        
+//        Date date = format.parse(str);
+		
+		List<ReservationVO> list = dao.selectAllByUsingDate(1, usingDate);
+		System.out.println(list);
+		System.out.println("시작"); 
+			for(ReservationVO vo: list) {
+				System.out.println(vo );
+			}
+			System.out.println("끝");	
+			
 	}
 	@Override //성공
 	public List<ReservationVO> selectAllByUsingDate(int roomSeq, Date usingDate) throws FindException{
@@ -35,8 +47,20 @@ private SqlSessionFactory sqlSessionFactory;
 		map.put("roomSeq", roomSeq);
 		map.put("usingDate", usingDate);
 		
+		
 		List<ReservationVO> list = session.selectList("com.developer.reservation.selectAllByUsingDate",map);
-	
+		session.close();
+		return list;
+		
+	}
+		
+		@Override //성공
+		public List<ReservationVO>  selectMyResHistory(String userId) throws FindException{
+			SqlSession session = sqlSessionFactory.openSession();
+			List<ReservationVO> list = session.selectList("com.developer.reservation.selectMyResHistory", userId);
+			session.close();
+			return list;
+		}
 	//sr
 	@Override
 	public ReservationVO selectReservation(int resSeq) throws FindException {
@@ -95,6 +119,20 @@ private SqlSessionFactory sqlSessionFactory;
 
 		
 		}
+
+		@Override
+		public List<ReservationVO> studycafeReservationCheck(String hostId) throws FindException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public List<ReservationVO> studyroomReservationCheck(int roomSeq) throws FindException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+	
 		
 //		public static void main(String[] args) throws FindException, ParseException { //
 //		ReservationDAOOracle dao = new ReservationDAOOracle(); 

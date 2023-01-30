@@ -1,5 +1,10 @@
 package com.developer.roomreview;
 
+import java.util.List;
+
+import com.developer.exception.FindException;
+import com.developer.reservation.ReservationVO;
+
 public interface RoomReviewDAO {
 	/**
 	 * [스터디카페 상세페이지 하단 후기리스트 페이지] 스터디룸 시퀀스를 받아 특정 스터디룸 후기에 대한 리스트를 출력한다
@@ -35,12 +40,12 @@ public interface RoomReviewDAO {
 	/**
 	 * [마이페이지 스터디카페 후기페이지] 아이디값으로 후기를 작성하지 않은 예약리스트를 출력한다
 	 * @author ds
-	 * @param resSeq 예약 시퀀스
-	 * @return List<RoomReviewVO> 유저의 작성한 이용후기 리스트
+	 * @param userId
+	 * @return List<ReservationVO> 유저의 작성한 이용후기 리스트
 	 * @throws 전체정보 출력시  FindException예외발생한다
 	 */
 	
-	public List<RoomReviewVO> selectMyReqRmRv(String userId) throws FindException;
+	public List<ReservationVO> selectMyReqRmRv(String userId) throws FindException;
 	
 	
 

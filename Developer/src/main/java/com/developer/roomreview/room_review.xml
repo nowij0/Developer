@@ -2,26 +2,31 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.developer.roomreview">
+
+
 <!-- 특정 스터디룸 후기리스트 전체 출력 START -->
-	<resultMap type="RoomReviewVO" id="roomreviewMap">
+	<resultMap type="RoomReviewVO" id="roomreviewMap" autoMapping = "true">
 		<result column="cdate" property="cDate" />
 		<result column="star" property="star" />
 		<result column="content" property="content" />
 
-		<association property="reservationVO"
-			javaType="ReservationVO" autoMapping="true">
-			<association property="usersVO" javaType="UsersVO"
-				autoMapping="true"></association>
-			<association property="studyroomVO"
-				javaType="StudyroomVO" autoMapping="true">
-				<association property="roominfoVO" javaType="RoomInfoVO"
-					autoMapping="true"></association>
+		<association property="reservationVO" javaType="ReservationVO" autoMapping="true">
+		
+			<association property="usersVO" javaType="UsersVO" 	autoMapping="true">
+			<result column="nickname" property="nickname" />
+			</association>
+				
+			<association property="studyroomVO" javaType="StudyroomVO" autoMapping="true">
+				<result column="sName" property="name" />
+				<collection property="roomInfoVO" ofType="RoomInfoVO" autoMapping="true">
+				<result column="rifName" property="name" />
+				
+				</collection>
 			</association>
 		</association>
 	</resultMap>
 	<select id="selectAll" resultMap="roomreviewMap">
-		SELECT u.nickname, s.name,
-		r.name, rev.cdate, rev.star, rev.content
+		SELECT u.nickname, s.name AS sName,	r.name AS rifName, rev.cdate, rev.star, rev.content
 		FROM STUDYROOM s, ROOM_INFO r,
 		RESERVATION res, ROOM_REVIEW rev, USERS u
 		WHERE res.res_seq =
@@ -33,29 +38,29 @@
 		order by rev.cdate DESC
 	</select>
 	<!-- 특정 스터디룸 후기리스트 전체 출력 END -->
+	<!-- 후기 입력 START -->
 	<select id="insertRmRv" resultType="RoomReviewVO">
 		INSERT INTO room_review
-		VALUES(review_seq.nextval, #{content,jdbcType=VARCHAR}, #{star,
-		jdbcType=INTEGER}, SYSDATE,
-		#{resSeq, jdbcType=INTEGER})
+		VALUES(review_seq.nextval, #{content}, #{star}, SYSDATE,
+		#{resSeq})
 	</select>
-
+  	<!-- 후기 입력 END -->
 
 <!-- 유저 아이디로 작성한 이용후기 전체목록 출력 START-->
-	<resultMap type="RoomReviewVO" id="roomreviewMap2" autoMapping="true" >
+	<resultMap type="RoomReviewVO" id="roomreviewMap22" autoMapping="true" >
 		<result column="cdate" property="cDate" />
 		<result column="star" property="star" />
 		<association property="reservationVO"  javaType="ReservationVO" autoMapping="true">
-			<association property="studyroomVO" javaType="StudyroomVO" columnPrefix="s." autoMapping="true">
-				<result column="name" property="name" />
-				<association property="roomInfoVO" javaType="RoomInfoVO" columnPrefix="rif." autoMapping="true">
-					<result column="name" property="name" />
-				</association>
+			<association property="studyroomVO" javaType="StudyroomVO"  autoMapping="true">
+				<result column="srName" property="name" />
+				<collection property="roomInfoVO" ofType="RoomInfoVO"  autoMapping="true">
+					<result column="riName" property="name" />
+				</collection>
 			</association>
 		</association>
 	</resultMap>
-	<select id="selectMyRmRv" resultMap="roomreviewMap2">
-		SELECT s.name "studyroomVO.name", rif.name "roomInfoVO.name", rr.cdate,
+	<select id="selectMyRmRv" resultMap="roomreviewMap22">
+		SELECT s.name AS srName, rif.name AS riName, rr.cdate,
 		rr.star
 		FROM studyroom s, room_info rif, reservation r, room_review rr
 		WHERE s.sr_seq = rif.sr_seq
@@ -70,18 +75,18 @@
 		<result column="cdate" property="cDate" />
 		<result column="star" property="star" />
 		<result column="content" property="content" />
-		<association property="reservationVO"  javaType="ReservationVO" columnPrefix="r." autoMapping="true">
+		<association property="reservationVO"  javaType="ReservationVO" autoMapping="true">
 			<result column="using_date" property="usingDate" />
-			<association property="studyroomVO" javaType="StudyroomVO" columnPrefix="s." autoMapping="true">
-				<result column="name" property="name" />
-				<association property="roomInfoVO" javaType="RoomInfoVO" columnPrefix="rif." autoMapping="true">
-					<result column="name" property="name" />
-				</association>
+			<association property="studyroomVO" javaType="StudyroomVO" autoMapping="true">
+				<result column="sName" property="name" />
+				<collection property="roomInfoVO" ofType="RoomInfoVO"  autoMapping="true">
+					<result column="rifName" property="name" />
+				</collection>
 			</association>
 		</association>
 	</resultMap>
 	<select id="selectMyRmRvDetail" resultMap="roomreviewMap3">
-		SELECT s.name "studyroomVO.name", rif.name "roomInfoVO.name", r.using_date "reservationVO.usingDate", rr.cdate,rr.star, rr.content
+		SELECT s.name AS sName, rif.name AS rifName, r.using_date, rr.cdate,rr.star, rr.content
 		FROM studyroom s, room_info rif, reservation r,room_review rr
 		WHERE rr.res_seq = r.res_seq
 		AND rif.room_seq = r.room_seq
@@ -91,13 +96,14 @@
 
 <!-- 유저가 작성한 스터디룸 이용후기 상세 END -->
 <!-- 유저의 미작성 후기 목록 출력 START -->
-<resultMap type="ReservationVO" id="roomreviewMap4" autoMapping="true" >
+<resultMap type="ReservationVO" id="roomreviewMap5" autoMapping="true" >
 
 <result column="res_seq" property="resSeq" />
 <result column="using_date" property="usingDate" />
 <result column="start_time" property="startTime" />
 <result column="end_time" property="endTime" />
 <association property="studyroomVO" javaType="StudyroomVO"  autoMapping="true">
+<id column="sr_seq" property="srSeq"></id>
 <result column="sName" property="name" />
 <collection property="roomInfoVO" ofType="RoomInfoVO"  autoMapping="true">
 					<result column="rifName" property="name" />
@@ -105,7 +111,7 @@
 </association>
 
 </resultMap>
-<select id="selectMyReqRmRv" resultMap="roomreviewMap4">
+<select id="selectMyReqRmRv" resultMap="roomreviewMap5">
 SELECT r.res_seq , s.name AS sName, rif.name AS rifName, r.using_date, r.start_time, r.end_time
 FROM studyroom s, room_info rif, reservation r
 WHERE s.sr_seq = rif.sr_seq

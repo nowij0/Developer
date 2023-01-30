@@ -5,13 +5,23 @@
 <mapper namespace="com.developer.studyroom">
 
 
-	<select id="selectAllDetail" resultType="StudyroomVO">
+	<resultMap type="StudyroomVO" id="studyroomMap2" autoMapping="true">
+  	<result column="name" property="name" />
+  	<result column="info" property="info" />
+  	<result column="addr" property="addr" />
+  	<result column="open_time" property="openTime" />
+  	<result column="end_time" property="endTime" />
+  	<result column="img_path" property="imgPath" />
+  	
+  	
+    </resultMap>
+	<select id="selectAllDetail" resultMap="studyroomMap2">
 		SELECT *
 		FROM STUDYROOM
 		WHERE sr_seq = #{srSeq}
 	</select>
 
-	<resultMap type="StudyroomVO" id="studyroomMap" autoMapping="true">
+	<resultMap type="StudyroomVO" id="studyroomMap1" autoMapping="true">
 		<result column="name" property="name" />
 		<result column="addr" property="addr" />
 		<result column="img_path" property="imgPath" />
@@ -27,7 +37,7 @@
 		</collection>
 	</resultMap>
 
-	<select id="selectByAddrAndPerson" resultMap="studyroomMap">
+	<select id="selectByAddrAndPerson" resultMap="studyroomMap1">
 		SELECT S.NAME, S.ADDR, S.IMG_PATH, MAX(R.PERSON) AS PERSON,
 		MIN(R.PRICE) AS PRICE, COUNT(distinct(F.USER_ID)) AS FAV_CNT
 		FROM STUDYROOM S
@@ -50,8 +60,23 @@
 			FAV_CNT DESC
 		</if>
 	</select>
+	<resultMap type="StudyroomVO" id="studyroomMap4" autoMapping="true">
+		<result column="name" property="name" />
+		<result column="addr" property="addr" />
+		<result column="img_path" property="imgPath" />
+			
+		<association property="favoritesStudyroomVO" javaType="FavoritesStudyroomVO" autoMapping="true">
+			<result  column="user_id" property="userId" />
+			<result  column="fav_cnt" property="cnt" />
 
-   <select id="selectByPerson" resultMap="studyroomMap">
+		</association>
+		<collection property="roomInfoVO" ofType="RoomInfoVO" autoMapping="true">
+			<result column="person" property="person" />
+			<result column="price" property="price" />
+		</collection>
+	</resultMap>
+
+   <select id="selectByPerson" resultMap="studyroomMap4">
    	SELECT S.NAME, S.ADDR, S.IMG_PATH, MAX(R.PERSON) AS PERSON,
 		MIN(R.PRICE) AS PRICE, COUNT(distinct(F.USER_ID)) AS FAV_CNT
 		FROM STUDYROOM S
@@ -71,8 +96,22 @@
 			FAV_CNT DESC
 		</if>
    </select>
-   
-   <select id="selectBySearchString" resultMap="studyroomMap">
+   	<resultMap type="StudyroomVO" id="studyroomMap3" autoMapping="true">
+		<result column="name" property="name" />
+		<result column="addr" property="addr" />
+		<result column="img_path" property="imgPath" />
+			
+		<association property="favoritesStudyroomVO" javaType="FavoritesStudyroomVO" autoMapping="true">
+			<result  column="user_id" property="userId" />
+			<result  column="fav_cnt" property="cnt" />
+
+		</association>
+		<collection property="roomInfoVO" ofType="RoomInfoVO" autoMapping="true">
+			<result column="person" property="person" />
+			<result column="price" property="price" />
+		</collection>
+	</resultMap>
+   <select id="selectBySearchString" resultMap="studyroomMap3">
    	SELECT S.NAME, S.ADDR, S.IMG_PATH, MAX(R.PERSON) AS PERSON,
 		MIN(R.PRICE) AS PRICE, COUNT(distinct(F.USER_ID)) AS FAV_CNT
 		FROM STUDYROOM S
@@ -82,108 +121,155 @@
 		full outer join
 		FAVORITES_STUDYROOM F
 		ON F.SR_SEQ = S.SR_SEQ
-		
-   <if test="searchBy == 1">
-   where s.addr LIKE '%${ADDR}%' 
-   </if>
-   <if test="searchBy == 2">
-   where S.NAME LIKE '%${name}%'
-   </if>
+		where
+		<choose>
+   <when test="searchBy==1">
+  S.ADDR LIKE '%${addr}%' 
+   </when>
+   <when test="searchBy==2">
+   S.NAME LIKE '%${name}%'
+   </when>
+   <otherwise>
+   
+   </otherwise>
+	
+   </choose>
    GROUP BY S.NAME , S.ADDR , S.IMG_PATH
 	ORDER BY
-		<if test="orderBy == 1">
+	<choose>
+		<when test="orderBy==1">
 			PRICE ASC
-		</if>
-		<if test="orderBy == 2">
+		</when>
+		<when test="orderBy==2">
 			FAV_CNT DESC
-		</if>
-	
+		</when>
+		</choose>
    </select>
+     
+   <select id="selectBySearchString1" resultMap="studyroomMap3">
+   	SELECT S.NAME, S.ADDR, S.IMG_PATH, MAX(R.PERSON) AS PERSON,
+		MIN(R.PRICE) AS PRICE, COUNT(distinct(F.USER_ID)) AS FAV_CNT
+		FROM STUDYROOM S
+		full outer join
+		ROOM_INFO R
+		ON s.sr_seq = r.sr_seq
+		full outer join
+		FAVORITES_STUDYROOM F
+		ON F.SR_SEQ = S.SR_SEQ
+		where ${choose1}
+	
+   GROUP BY S.NAME , S.ADDR , S.IMG_PATH
+	ORDER BY ${choose2}
+
+   </select>
+   
+   
+<resultMap type="ReservationVO" id="reservationMap2">
+<result column="res_seq" property="resSeq" />
+<result column="using_date" property="usingDate" />
+<result column="start_time" property="startTime" />
+<result column="end_time" property="endTime" />
+<association property="studyroomVO" javaType="StudyroomVO"  autoMapping="true">
+<result column="sName" property="name" />
+<collection property="roomInfoVO" ofType="RoomInfoVO"  autoMapping="true">
+					<result column="rifName" property="name" />
+				</collection>
+</association>
+	
+</resultMap>
+<select id="selectMyResHistory" resultMap="reservationMap2">
+SELECT r. res_seq, s.name AS sName, rif.name AS rifName, r.using_date, r.start_time, r.end_time
+FROM studyroom s, room_info rif, reservation r
+WHERE s.sr_seq = rif.sr_seq
+AND rif.room_seq = r.room_seq
+AND r.user_id = #{userId}
+ORDER BY res_seq DESC
+</select>
 <!-- sr: reservationOpen Start -->
-<update id="reservationOpen" parameterType = "String">
-	UPDATE studyroom
-	SET oc = 0
-	WHERE sr_seq = (SELECT sr_seq FROM studyroom
-               		WHERE host_id = #{hostId})
-</update>
+<!-- <update id="reservationOpen" parameterType = "String"> -->
+<!-- 	UPDATE studyroom -->
+<!-- 	SET oc = 0 -->
+<!-- 	WHERE sr_seq = (SELECT sr_seq FROM studyroom -->
+<!--                		WHERE host_id = #{hostId}) -->
+<!-- </update> -->
 <!-- sr: reservationOpen End -->
 
 <!-- sr: reservationClose start-->
-<update id="reservationClose" parameterType = "String">
-	UPDATE studyroom
-	SET oc = 1
-	WHERE sr_seq = (SELECT sr_seq FROM studyroom
-               		WHERE host_id = #{hostId})
+<!-- <update id="reservationClose" parameterType = "String"> -->
+<!-- 	UPDATE studyroom -->
+<!-- 	SET oc = 1 -->
+<!-- 	WHERE sr_seq = (SELECT sr_seq FROM studyroom -->
+<!--                		WHERE host_id = #{hostId}) -->
 
-</update>
+<!-- </update> -->
 <!-- sr: reservationClose End-->
 
 <!-- sr: getStudycafe start-->
-<select id="getStudycafe" parameterType="String" resultType="StudyroomVO">
-select * from studyroom where host_id = #{hostId} 
-</select>
+<!-- <select id="getStudycafe" parameterType="String" resultType="StudyroomVO"> -->
+<!-- select * from studyroom where host_id = #{hostId}  -->
+<!-- </select> -->
 <!-- sr: getStudycafe end-->
 
 
 <!-- sr: updateStudycafe start-->
-<update id="updateStudycafe" parameterType = "StudyroomVO">
-	UPDATE studyroom 
-	set name=#{name}, info=#{info},img_path=#{imgPath}, open_time=#{openTime},end_time=#{endTime}
-	where sr_seq=#{srSeq}
+<!-- <update id="updateStudycafe" parameterType = "StudyroomVO"> -->
+<!-- 	UPDATE studyroom  -->
+<!-- 	set name=#{name}, info=#{info},img_path=#{imgPath}, open_time=#{openTime},end_time=#{endTime} -->
+<!-- 	where sr_seq=#{srSeq} -->
 
-</update>
+<!-- </update> -->
 <!-- sr: updateStudycafe end-->
 
 <!-- sr: insertStudycafe start-->
-<insert id="insertStudycafe" parameterType = "StudyroomVO">
+<!-- <insert id="insertStudycafe" parameterType = "StudyroomVO"> -->
 
-INSERT into studyroom(sr_seq, name, addr, info, open_time, end_time, img_path, oc, host_id) values
-(sr_seq.nextval, #{name}, #{addr}, 
-#{info}, #{openTime}, #{endTime}, #{imgPath}, 
-#{oc}, #{hostId})
-</insert>
+<!-- INSERT into studyroom(sr_seq, name, addr, info, open_time, end_time, img_path, oc, host_id) values -->
+<!-- (sr_seq.nextval, #{name}, #{addr},  -->
+<!-- #{info}, #{openTime}, #{endTime}, #{imgPath},  -->
+<!-- #{oc}, #{hostId}) -->
+<!-- </insert> -->
 <!-- sr: insertStudycafe End-->
 
 <!-- sr: selectAllRoom start-->
-<resultMap type="StudyroomVO" id="selectAllRoomMap" autoMapping = "true">
-		<id column="sr_seq" property="srSeq" />
+<!-- <resultMap type="StudyroomVO" id="selectAllRoomMap" autoMapping = "true"> -->
+<!-- 		<id column="sr_seq" property="srSeq" /> -->
 		
-		<collection property="roomInfoVO" ofType="RoomInfoVO" autoMapping="true">
-		<id column="room_seq" property="roomSeq" />
-		<result column="name" property="name" />
-		<result column="info" property="info" />
-		<result column="img_path" property="imgPath" />
-		<result column="person" property="person" />
-		<result column="price" property="price" />
+<!-- 		<collection property="roomInfoVO" ofType="RoomInfoVO" autoMapping="true"> -->
+<!-- 		<id column="room_seq" property="roomSeq" /> -->
+<!-- 		<result column="name" property="name" /> -->
+<!-- 		<result column="info" property="info" /> -->
+<!-- 		<result column="img_path" property="imgPath" /> -->
+<!-- 		<result column="person" property="person" /> -->
+<!-- 		<result column="price" property="price" /> -->
 		
-		</collection>
-	</resultMap>
+<!-- 		</collection> -->
+<!-- 	</resultMap> -->
 
-	<select id="selectAllRoom" parameterType ="String" resultMap="selectAllRoomMap">
-	SELECT rif.room_seq, rif.name, rif.info, rif.img_path, rif.person, rif.price
-	FROM studyroom s, room_info rif
-	where s.sr_seq = rif.sr_seq
-	And s.host_id  = #{hostId}
-	ORDER BY rif.room_seq ASC
-	</select>
+<!-- 	<select id="selectAllRoom" parameterType ="String" resultMap="selectAllRoomMap"> -->
+<!-- 	SELECT rif.room_seq, rif.name, rif.info, rif.img_path, rif.person, rif.price -->
+<!-- 	FROM studyroom s, room_info rif -->
+<!-- 	where s.sr_seq = rif.sr_seq -->
+<!-- 	And s.host_id  = #{hostId} -->
+<!-- 	ORDER BY rif.room_seq ASC -->
+<!-- 	</select> -->
 <!-- sr: selectAllRoom End-->
 
 <!-- sr: getHostAndStudyroom Start -->
-	<resultMap type="StudyroomVO" id="getHostAndStudyroomMap" autoMapping = "true">
-		<id column="sr_seq" property="srSeq" />
+<!-- 	<resultMap type="StudyroomVO" id="getHostAndStudyroomMap" autoMapping = "true"> -->
+<!-- 		<id column="sr_seq" property="srSeq" /> -->
 		
-		<association property="hostUserVO" javaType = "HostUserVO" autoMapping = "true">
-		<id column = "host_id" property="hostId" />
-		</association>
-	</resultMap>
+<!-- 		<association property="hostUserVO" javaType = "HostUserVO" autoMapping = "true"> -->
+<!-- 		<id column = "host_id" property="hostId" /> -->
+<!-- 		</association> -->
+<!-- 	</resultMap> -->
 
-	<select id="getHostAndStudyroom" resultMap="getHostAndStudyroomMap">
-	SELECT * 
-	FROM host_user h
-	LEFT JOIN studyroom s
-     	 ON h.host_id = s.host_id
-	WHERE h.host_id = #{hostId}
-	</select>
+<!-- 	<select id="getHostAndStudyroom" resultMap="getHostAndStudyroomMap"> -->
+<!-- 	SELECT *  -->
+<!-- 	FROM host_user h -->
+<!-- 	LEFT JOIN studyroom s -->
+<!--      	 ON h.host_id = s.host_id -->
+<!-- 	WHERE h.host_id = #{hostId} -->
+<!-- 	</select> -->
 <!-- sr: getHostAndStudyroom End -->
 
 </mapper>

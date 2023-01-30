@@ -1,5 +1,7 @@
 package com.developer.roominfo;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
@@ -20,6 +22,7 @@ public class RoomInfoDAOOracle implements RoomInfoDAO {
 		 System.out.println(vo );
 		 }
 		 System.out.println("끝");
+		 
 		}
 	
 	

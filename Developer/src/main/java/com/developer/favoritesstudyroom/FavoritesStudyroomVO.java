@@ -19,5 +19,6 @@ public class FavoritesStudyroomVO {
 	private int srSeq;
 	private String userId;
 	
-	private StudyroomVO studyroomVO; 
+	private int cnt;
+
 }
