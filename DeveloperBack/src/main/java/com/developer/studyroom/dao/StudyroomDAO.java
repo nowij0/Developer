@@ -48,7 +48,6 @@ public interface StudyroomDAO {
 	 */
 	
 	public StudyroomVO selectAllDetail(int srSeq) throws FindException;
-
 	/**
 	 * [마이페이지-호스트] 스터디카페 예약을 오픈한다.
 	 * @author sr

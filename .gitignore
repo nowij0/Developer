@@ -2,6 +2,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,windows,macos,java,eclipse
 
 ### Eclipse ###
+config.xml
 .metadata
 bin/
 tmp/
@@ -17,6 +18,7 @@ local.properties
 .project
 Servers/
 Servers2/
+config.xml
 
 # External tool builders
 .externalToolBuilders/
