@@ -17,6 +17,7 @@ local.properties
 .project
 Servers/
 Servers2/
+config.xml
 
 # External tool builders
 .externalToolBuilders/
