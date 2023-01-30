@@ -2,6 +2,7 @@ package com.developer.studyroom.vo;
 
 import java.util.List;
 
+import com.developer.favoritesstudyroom.vo.FavoritesStudyroomVO;
 import com.developer.hostuser.vo.HostUserVO;
 import com.developer.roominfo.vo.RoomInfoVO;
 
@@ -28,6 +29,10 @@ public class StudyroomVO {
 	
 	private List<RoomInfoVO> roomInfoVO;
 	private HostUserVO hostUserVO;
+	private String srNameAddrName;
+	private int searchBy;
+	private int orderBy;
+	private FavoritesStudyroomVO favoritesStudyroomVO;
 	
 	//sr: 카페등록때 필요한 생성자(has-a관계 제외하고)
 	public StudyroomVO(int srSeq, String name, String addr, String info, String openTime, String endTime,
