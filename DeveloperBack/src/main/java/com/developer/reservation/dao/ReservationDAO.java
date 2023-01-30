@@ -43,7 +43,6 @@ public interface ReservationDAO {
 	
 	public void deleteRv(int resSeq) throws FindException;
 
-
 	/**
 	 * [마이페이지-호스트] 스터디카페 예약 상세내용을 출력한다.
 	 * @author sr
