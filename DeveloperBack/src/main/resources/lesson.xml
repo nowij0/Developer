@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.developer.lesson">
+	
+	<sql id="getLessonByUserSql">
+	SELECT l.lesson_name
+	from LESSON l, TUTOR t, USERS u
+	where l.user_id = t.user_id
+	and t.user_id = u.user_id
+	and u.user_id = #{userId}
+	</sql>
+	
+	<!-- getLessonByUser1 -->
+	<resultMap type="LessonVO" id="lessonList1" autoMapping="true">
+		<id column="lesson_seq" property="lessonSeq"/>
+		<association property="tutorVO" javaType="TutorVO" autoMapping="true">
+			<association property="usersVO" javaType="UsersVO" autoMapping="true">
+				<id column="user_id" property="userId"/>
+				<result column="name" property="name"/>
+			</association>
+		</association>
+	</resultMap>
+	<select id="getLessonByUser1" resultMap="lessonList1">
+		<include refid="getLessonByUserSql"></include>
+		and TO_CHAR(SYSDATE,'yyyymmdd')<![CDATA[<]]>l.start_cdate
+		order by l.lesson_seq desc
+	</select>
+	<!-- getLessonByUser1 -->
+	
+	
+	<!-- getLessonByUser2 -->
+	<resultMap type="LessonVO" id="lessonList2" autoMapping="true">
+		<id column="lesson_seq" property="lessonSeq"/>
+		<association property="tutorVO" javaType="TutorVO" autoMapping="true">
+			<association property="usersVO" javaType="UsersVO" autoMapping="true">
+				<id column="user_id" property="userId"/>
+				<result column="name" property="name"/>
+			</association>
+		</association>
+	</resultMap>
+	<select id="getLessonByUser2" resultMap="lessonList2">
+		<include refid="getLessonByUserSql"></include>
+		and l.start_cdate<![CDATA[<]]><![CDATA[=]]>TO_CHAR(SYSDATE,'yyyymmdd')
+		and TO_CHAR(SYSDATE,'yyyymmdd')<![CDATA[<]]><![CDATA[=]]>l.end_cdate
+		order by l.lesson_seq desc
+	</select>
+	<!-- getLessonByUser2 -->
+	
+	
+	<!-- getLessonByUser3 -->
+	<resultMap type="LessonVO" id="lessonList3" autoMapping="true">
+		<id column="lesson_seq" property="lessonSeq"/>
+		<association property="tutorVO" javaType="TutorVO" autoMapping="true">
+			<association property="usersVO" javaType="UsersVO" autoMapping="true">
+				<id column="user_id" property="userId"/>
+				<result column="name" property="name"/>
+			</association>
+		</association>
+	</resultMap>
+	<select id="getLessonByUser3" resultMap="lessonList3">
+		<include refid="getLessonByUserSql"></include>
+	and TO_CHAR(SYSDATE,'yyyymmdd')<![CDATA[>]]>l.end_cdate
+	order by l.lesson_seq desc
+	</select>
+	<!-- getLessonByUser3 -->
+	
+	
+	<!-- selectDetail -->
+	<resultMap type="LessonVO" id="lessonDetail" autoMapping="true">
+		<id column="lesson_seq" property="lessonSeq"/>
+		<association property="tutorVO" javaType="TutorVO" autoMapping="true">
+			<association property="usersVO" javaType="UsersVO" autoMapping="true">
+				<id column="user_id" property="userId"></id>
+				<result column="name" property="name"/>
+			</association>
+		</association>
+	</resultMap>
+	<select id="selectLessonDetail" resultMap="lessonDetail">
+	SELECT l.lesson_name, l.img_path, l.location, l.start_cdate, l.end_cdate,
+	        l.category, l.people, u.name
+	FROM TUTOR t, LESSON l, USERS u
+	WHERE u.user_id = t.user_id
+	and t.user_id = l.user_id
+	and l.lesson_seq = #{lessonSeq}
+	</select>
+	<!-- selectDetail -->
+	
+	
+	<!-- updateLesson -->
+	<update id="updateLesson" parameterType="LessonVO">
+	UPDATE LESSON 
+	set location=#{location}, category=#{category}, people=#{people}, content=#{content}, price=#{price}
+	,start_cdate=#{startCdate}, end_cdate=#{endCdate}
+	where lesson_seq=#{lessonSeq}
+	</update>
+	<!-- updateLesson -->
+	
+	
+	<!-- deleteLesson -->
+	<delete id="deleteLesson">
+	DELETE from lesson where lesson_seq=#{lessonSeq}
+	</delete>
+	<!-- deleteLesson -->
+	
+	
+	<!-- sr: selectAllByDate start -->
+	<select id="selectAllByDate" resultType="LessonVO">
+	SELECT *
+	FROM (SELECT lesson_seq, lesson_name, img_path, price FROM lesson 
+	      WHERE pay_lesson != 2
+	      AND <![CDATA[end_date >= sysdate ]]>
+	      ORDER BY end_date ASC)
+	WHERE rownum BETWEEN 1 AND 4
+		</select>
+	<!-- sr: selectAllByDate end -->
+	
+	
+	<!-- selectLesson -->
+	<resultMap type="LessonVO" id="selectLessonMap" autoMapping="true">
+		<id property="lessonSeq" column="lesson_seq"/>
+		<association property="tutorVO" javaType="TutorVO" autoMapping="true">
+			<association property="usersVO" javaType="UsersVO" autoMapping="true"/>
+		</association>
+	</resultMap>
+	<select id="selectLesson" parameterType="Map" resultMap="selectLessonMap" >
+	SELECT 
+	* FROM lesson l
+	    INNER JOIN tutor t
+	    ON l.user_id = t.user_id
+	    INNER JOIN users u
+	    ON t.user_id = u.user_id
+	    WHERE l.pay_lesson != 2
+	   <!--  AND l.end_cdate <![CDATA[>]]> SYSDATE -->
+		<if test="category != null">
+			AND l.category = #{category}
+			<if test="starFilter == 1 and priceFilter == 0">
+				AND l.pay_lesson = 0
+				ORDER BY t.star_avg DESC
+			</if>
+			<if test="starFilter == 2">
+				AND l.pay_lesson = 1
+				<if test="priceFilter == 1">
+					ORDER BY l.price DESC, l.lesson_seq ASC
+				</if>
+				<if test="priceFilter == 2">
+					ORDER BY l.price ASC, l.lesson_seq ASC
+				</if>
+				<if test="priceFilter == 3">
+					ORDER BY t.star_avg DESC, l.lesson_seq ASC
+				</if>
+			</if>
+		</if>
+	</select>
+	<!-- selectLesson -->
+	
+	
+	<!-- selectSearch -->
+	<resultMap type="LessonVO" id="selectSearchMap" autoMapping="true">
+		<id property="lessonSeq" column="lesson_seq"/>
+		<result property="lessonName" column="lesson_name"/>	
+		<result property="category" column="category"/>	
+		<result property="people" column="people"/>	
+		<result property="imgPath" column="img_path"/>	
+		<result property="startCdate" column="start_cdate"/>	
+		<result property="endCdate" column="end_cdate"/>	
+		<result property="price" column="price"/>	
+		<result property="startDate" column="start_date"/>	
+		<result property="endDate" column="end_date"/>	
+		<result property="payLesson" column="pay_lesson"/>	
+		<result property="location" column="location"/>
+		
+		<association property="tutorVO" javaType="TutorVO" autoMapping="true">
+			<id property="info" column="info"/>
+			<result property="imgPath" column="img_path"/>
+			<result property="starAvg" column="star_avg"/>
+			 
+			<association property="usersVO" javaType="UsersVO" autoMapping="true">
+				<id property="userId" column="user_id"/>
+				<result property="name" column="name"/>
+				<result property="nickname" column="nickname"/>
+			</association>
+		</association>
+	</resultMap>
+	<select id="selectSearch" parameterType="String" resultMap="selectSearchMap">
+	SELECT *
+	FROM lesson l
+	    INNER JOIN tutor t
+	    ON l.user_id = t.user_id
+	    INNER JOIN users u
+	    ON t.user_id = u.user_id
+	WHERE pay_lesson != 2
+	AND end_cdate <![CDATA[>]]> SYSDATE
+	<if test="lessonName != null">
+		AND l.lesson_name LIKE '%' || #{search} || '%'
+		ORDER BY l.lesson_name ASC
+	</if>
+	</select>
+	<!-- selectSearch -->
+	
+	
+	<!-- selectDetail -->
+	<resultMap type="LessonVO" id="selectDetailMap" autoMapping="true">		
+		<id property="lessonSeq" column="lesson_seq"/>
+		<result property="imgPath" column="lessonImg"/>
+		<association property="tutorVO" javaType="TutorVO" autoMapping="true">
+			<result property="imgPath" column="tutorImg"/>
+			<association property="usersVO" javaType="UsersVO" autoMapping="true"/>		
+		</association>
+		<collection property="appliedLessonVO" ofType="AppliedLessonVO" autoMapping="true">
+			<result column="applyTutee" property="userId"/>
+		</collection>
+		<collection property="favoritesLessonVO" ofType="FavoritesLessonVO" autoMapping="true">
+			<id column="fav_les_seq" property="favLesSeq"/>
+			<result property="userId" column="user"/>
+			<result property="lessonSeq" column="flLesson"/>
+		</collection>
+	</resultMap>
+	<select id="selectDetail" resultMap="selectDetailMap">
+	SELECT 
+		l.lesson_seq, l.lesson_name, l.category, l.content, l.people, l.img_path AS "lessonImg", l.start_cdate, l.end_cdate,
+		l.price, l.start_date, l.end_date, l.location,
+		t.info, t.img_path AS "tutorImg", t.star_avg,
+		u.name,
+		al.apply_seq, al.user_id AS "applyTutee", al.apply_ok,
+		fl.fav_les_seq, fl.user_id AS "user", fl.lesson_seq AS "flLesson"  
+	FROM lesson l
+	    INNER JOIN applied_lesson al
+	    ON l.lesson_seq = al.lesson_seq
+	    INNER JOIN tutor t
+	    ON l.user_id = t.user_id
+	    INNER JOIN users u 
+	    ON t.user_id = u.user_id
+	    FULL JOIN favorites_lesson fl
+	    ON fl.lesson_seq = l.lesson_seq
+	    WHERE l.lesson_seq = #{lessonSeq}
+	</select>
+	<!-- selectDetail -->
+	
+	
+	<!-- selectAllReview -->
+	<resultMap type="LessonVO" id="selectAllReviewMap">
+		<id property="lessonSeq" column="lesson_seq"/>
+		
+		<collection property="appliedLessonVO" ofType="AppliedLessonVO" autoMapping="true">
+			<id property="applySeq" column="apply_seq"/>
+			
+			<collection property="usersVO" ofType="UsersVO" autoMapping="true">
+				<id property="userId" column="user_id"/>
+				<result property="nickname" column="nickname"/>
+			</collection>
+			<collection property="userReviewVO" ofType="UserReviewVO" autoMapping="true">
+				<id property="applySeq" column="apply_seq"/>
+				<result property="star" column="star"/>
+				<result property="review" column="review"/>
+			</collection>
+		</collection>
+	</resultMap>
+	<select id="selectAllReview" resultMap="selectAllReviewMap">
+	SELECT * 
+	FROM applied_lesson al
+	    INNER JOIN lesson l
+	    ON al.lesson_seq = l.lesson_seq
+	    INNER JOIN lesson_review lr
+	    ON al.apply_seq = lr.apply_seq
+	    INNER JOIN users u
+	    ON al.user_id = u.user_id
+	    WHERE l.lesson_seq = #{lessonSeq}
+	</select>
+	<!-- selectAllReview -->
+	
+	
+	<!-- addLesson -->
+	<insert id="addLesson">
+	INSERT INTO lesson 
+	VALUES (lesson_seq.nextVal, #{userId}, #{lessonName}, #{category}, 
+	#{content}, #{people}, #{imgPath},
+	#{startCdate},  #{endCdate}, #{price}, #{startDate}, #{endDate},  
+	#{payLesson}, #{location})
+	</insert>
+	<!-- addLesson -->
+	
+	
+	<!-- selectTutor -->
+	<resultMap type="LessonVO" id="selectTutorMap">
+		<id property="lessonSeq" column="lesson_seq"/>
+		<result property="lessonName" column="lesson_name"/>	
+		<result property="category" column="category"/>	
+		<result property="imgPath" column="img_path"/>	
+		<result property="price" column="price"/>	
+		<result property="payLesson" column="pay_lesson"/>	
+		<result property="location" column="location"/>
+		
+		<association property="tutorVO" javaType="TutorVO" autoMapping="true">
+			<id property="userId" column="user_id"/>
+			<result property="info" column="info"/>
+			<result property="imgPath" column="img_path"/>
+			
+			<association property="usersVO" javaType="UsersVO" autoMapping="true">
+				<result property="name" column="name"/>
+			</association>
+		</association>	
+	</resultMap>
+	<select id="selectTutor" resultMap="selectTutorMap">
+	SELECT 
+	* FROM lesson l
+	    INNER JOIN tutor t
+	    ON l.user_id = t.user_id
+	    INNER JOIN users u 
+	    ON t.user_id = u.user_id
+	    WHERE l.user_id = #{userId}
+	    AND pay_lesson != 2
+	</select>
+	<!-- selectTutor -->
+
+</mapper>

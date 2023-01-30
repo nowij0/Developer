@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.developer.users">
+	
+	<!-- userLogin -->
+	<select id="userLogin" resultType="UsersVO">
+		SELECT *
+		FROM users
+		WHERE
+		user_id=#{userId} and pwd=#{pwd}
+	</select>
+	<!-- userLogin -->
+
+
+	<!-- selectUserId -->
+	<select id="selectUserId" resultType="UsersVO">
+		SELECT user_id
+		FROM users
+		WHERE email=#{email}
+	</select>
+	<!-- selectUserId -->
+
+	<!-- selectUserPwd -->
+	<select id="selectUserPwd" resultType="UsersVO">
+		SELECT pwd
+		FROM users
+		WHERE
+		user_id=#{userId} and email=#{email}
+	</select>
+	<!-- selectUserPwd -->
+
+	<!-- selectTutor -->
+	<resultMap type="UsersVO" id="tutorMap" autoMapping="true">
+		<id column="user_id" property="userId" />
+		<association property="tutorVO" javaType="TutorVO" autoMapping="true"></association>
+	</resultMap>
+	<select id="selectTutor" resultMap="tutorMap">
+		SELECT u.user_id, u.name, u.nickname, u.tel
+		FROM users u, tutor t
+		WHERE u.user_id = t.user_id
+		AND role = 0
+	</select>
+	<!-- selectTutor -->
+
+	<!-- selectAll -->
+	<select id="selectAll" resultType="String">
+		SELECT name
+		FROM users
+		ORDER BY name
+	</select>
+	<!-- selectAll -->
+
+	<!-- getUsers -->
+	<select id="getUsers" resultType="UsersVO">
+		SELECT *
+		FROM users
+		WHERE user_id=#{userId, jdbcType=VARCHAR}
+	</select>
+	<!-- getUsers -->
+
+	<!-- joinUser -->
+	<insert id="joinUser">
+		INSERT INTO users
+		VALUES(#{userId}, 2, #{pwd}, #{nickname}, #{name}, #{email}, #{tel}, #{addr})
+	</insert>
+	<!-- joinUser -->
+
+	<!-- updateUsers -->
+	<update id="updateUsers">
+		UPDATE USERS
+		SET pwd=#{pwd}, nickname=#{nickname}, name=#{name},
+		email=#{email}, tel=#{tel},
+		addr=#{addr} WHERE user_id=#{userId}
+	</update>
+	<!-- updateUsers -->
+
+	<!-- deleteUser -->
+	<delete id="deleteUser">
+		Delete from USERS WHERE user_id=#{userId}
+	</delete>
+	<!-- deleteUser -->
+
+</mapper>

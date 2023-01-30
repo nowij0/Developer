@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- mybatis 환경설정, DB를 편하게 쓰려고 -->
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+      	<setting name="mapUnderscoreToCamelCase" value="true"/>
+   		<setting name="jdbcTypeForNull" value="NULL" />
+   </settings>
+   
+   <typeAliases>
+		<typeAlias type="com.developer.board.vo.BoardVO" alias="BoardVO"/>
+		<typeAlias type="com.developer.boardrep.vo.BoardRepVO" alias="BoardRepVO"/>
+		<typeAlias type="com.developer.users.vo.UsersVO" alias="UsersVO"/>
+		<typeAlias type="com.developer.hostuser.vo.HostUserVO" alias="HostUserVO"/>
+		<typeAlias type="com.developer.recommend.vo.RecommendVO" alias="RecommendVO"/>
+		<typeAlias type="com.developer.lessonreview.vo.LessonReviewVO" alias="LessonReviewVO"/>
+		<typeAlias type="com.developer.appliedlesson.vo.AppliedLessonVO" alias="AppliedLessonVO"/>
+		<typeAlias type="com.developer.lesson.vo.LessonVO" alias="LessonVO"/>
+		<typeAlias type="com.developer.favoriteslesson.vo.FavoritesLessonVO" alias="FavoritesLessonVO"/>
+		<typeAlias type="com.developer.favoritesstudyroom.vo.FavoritesStudyroomVO" alias="FavoritesStudyroomVO"/>
+		<typeAlias type="com.developer.reservation.vo.ReservationVO" alias="ReservationVO"/>
+		<typeAlias type="com.developer.roominfo.vo.RoomInfoVO" alias="RoomInfoVO"/>
+		<typeAlias type="com.developer.roomreview.vo.RoomReviewVO" alias="RoomReviewVO"/>
+		<typeAlias type="com.developer.studyroom.vo.StudyroomVO" alias="StudyRoomVO"/>
+		<typeAlias type="com.developer.tutor.vo.TutorVO" alias="TutorVO"/>
+		<typeAlias type="com.developer.userreview.vo.UserReviewVO" alias="UserReviewVO"/>
+	</typeAliases>
+	
+	<environments default="mybatis_test">
+		<environment id="mybatis_test">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED"><!-- connection pool의 일종 -->
+				<property name="driver" value="oracle.jdbc.driver.OracleDriver" />
+				<property name="url" value="jdbc:oracle:thin:@tlaqerkcca7j08fz_high?TNS_ADMIN=/Users/moonone/Wallet_TLAQERKCCA7J08FZ" />
+				<property name="username" value="admin" />
+				<property name="password" value="Koo04071104@" />
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<mappers>
+ 	 	<mapper resource="applied_lesson.xml"></mapper>
+ 		<mapper resource="favorites_lesson.xml"></mapper>
+ 		<mapper resource="favorites_studyroom.xml"></mapper>
+ 		<mapper resource="lesson.xml"></mapper>
+ 		<mapper resource="reservation.xml"></mapper>
+ 		<mapper resource="room_info.xml"></mapper>
+ 		<mapper resource="studyroom.xml"></mapper>
+ 		<mapper resource="tutor.xml"></mapper>
+ 		<mapper resource="user_review.xml"></mapper> 
+ 		<mapper resource="room_review.xml"></mapper> 
+ 		<mapper resource="lesson_review.xml"></mapper>
+ 		<mapper resource="recommend.xml"></mapper>
+ 		<mapper resource="board_rep.xml"></mapper>
+ 		<mapper resource="board.xml"></mapper>
+ 		<mapper resource="host_user.xml"></mapper>
+ 		<mapper resource="users.xml"></mapper>
+ 	</mappers>
+
+</configuration>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.developer.hostuser">
+	<!-- hostLogin -->
+	<select id="hostLogin" resultType="HostUserVO">
+		select * from host_user where host_id=#{hostId}
+	</select>
+	<!-- hostLogin -->
+	
+	
+	<!-- selectHostId -->
+	<select id="selectHostId" resultType="HostUserVO">
+		select host_Id from host_user where num=#{num}
+	</select>
+	<!-- selectHostId -->
+	
+	
+	<!-- selectHostPwd -->
+	<select id="selectHostPwd" resultType="HostUserVO">
+		select pwd from host_user where host_id=#{hostId} and num=#{num} and email=#{email}
+	</select>
+	<!-- selectHostPwd -->
+
+	<!-- sr: deleteHostUser Start -->
+	<delete id="deleteHostUser">
+		DELETE FROM host_user
+		WHERE host_id = #{hostId}
+	</delete>
+	<!-- sr: deleteHostUser End -->
+	
+	<!-- sr: getHostUser Start -->
+	<select id= "getHostUser" resultType="HostUserVO">
+	SELECT * FROM host_user
+	WHERE host_id = #{hostId}
+	</select>
+	<!-- sr: getHostUser End -->
+	
+<!-- sr: updateHostUser Start -->
+<update id="updateHostUser" parameterType="HostUserVO">
+UPDATE host_user
+SET pwd = #{pwd}, tel = #{tel}, email = #{email}
+WHERE host_id = #{hostId}
+</update>
+<!-- sr: updateHostUser End -->
+	
+	<!-- joinHostUser -->
+	<insert id="joinHostUser">
+	INSERT INTO host_user
+	VALUES(#{hostId}, #{pwd}, #{num}, 0, #{name}, #{tel}, #{email})
+	</insert>
+	<!-- joinHostUser -->
+</mapper>

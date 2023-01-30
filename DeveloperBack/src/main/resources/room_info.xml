@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.developer.roominfo">
+
+
+
+
+
+<!-- 스터디룸 정보 출력 성공 -->
+<select id="selectAll" resultType="RoomInfoVO">
+select * 
+from room_info 
+where sr_seq = #{srSeq}
+<<<<<<< HEAD:Developer/src/main/java/com/developer/roominfo/room_info.xml
+
+</select>
+=======
+</select>
+
+>>>>>>> de7ce6ca8146f5095cebcff606caca0cf6c4fe46:DeveloperBack/src/main/resources/room_info.xml
+<!-- sr: insertRoom Start-->
+<insert id="insertRoom" parameterType = "RoomInfoVO">
+INSERT into room_info values
+(room_seq.nextval,#{srSeq},#{name},#{info},
+#{imgPath},#{person},#{price})
+</insert>
+<!-- sr: insertRoom End-->
+
+
+<!-- sr: getRoom Start-->
+<select id="getRoom" parameterType="Integer" resultType="RoomInfoVO">
+SELECT *
+FROM room_info
+WHERE room_seq = #{roomSeq}
+</select>
+<!-- sr: getRoom End-->
+
+<!-- sr: updateRoom Start-->
+<update id="updateRoom" parameterType = "RoomInfoVO">
+update room_info 
+set name=#{name}, info=#{info},img_path=#{imgPath},person=#{person},price=#{price}
+where room_seq=#{roomSeq}
+</update>
+<!-- sr: updateRoom End-->
+
+
+<!-- sr: deleteRoom Start-->
+<delete id="deleteRoom" parameterType="Integer">
+delete room_info where room_seq=#{roomSeq}
+</delete>
+<!-- sr: deleteRoom End-->
+
+</mapper>

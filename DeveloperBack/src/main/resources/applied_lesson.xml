@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.developer.appliedlesson">
+
+	<!-- getAppliedLesson START-->
+	<select id="getAppliedLesson" resultType="AppliedLessonVO">
+		select *
+		from applied_lesson
+		where apply_seq=#{applySeq}
+	</select>
+	<!-- getAppliedLesson END-->
+	
+	
+	<!-- getLessonApplyUsers0 START-->
+	<resultMap type="AppliedLessonVO" id="lessonApplyUsers0" autoMapping="true">
+		<id column="apply_seq" property="applySeq"/>
+			<association property="lessonVO" javaType="LessonVO" autoMapping="true">
+			<id column="lesson_seq" property="lessonSeq"></id>
+			</association>
+			<collection property="usersVO" ofType="UsersVO" autoMapping="true">
+			<id column="user_id" property="userId"/>
+			<result column="name" property="name"/>
+			</collection>
+	</resultMap>
+	<select id="getLessonApplyUsers0" resultMap="lessonApplyUsers0">
+	SELECT u.name
+	FROM USERS u, APPLIED_LESSON a, LESSON l
+	WHERE a.user_id = u.user_id
+	and a.apply_ok = 0
+	and l.lesson_seq = a.lesson_seq
+	and l.lesson_seq = #{lessonSeq}
+	order by u.name desc
+	</select>
+	<!-- getLessonApplyUsers0 END-->
+	
+	
+	<!-- getLessonApplyUsers1 START-->
+	<resultMap type="AppliedLessonVO" id="lessonApplyUsers1" autoMapping="true">
+		<id column="apply_seq" property="applySeq"/>
+			<association property="lessonVO" javaType="LessonVO" autoMapping="true">
+			<id column="lesson_seq" property="lessonSeq"></id>
+			</association>
+			<collection property="usersVO" ofType="UsersVO" autoMapping="true">
+			<id column="user_id" property="userId"/>
+			</collection>
+	</resultMap>
+	<select id="getLessonApplyUsers1" resultMap="lessonApplyUsers1">
+	SELECT u.name
+	FROM USERS u, APPLIED_LESSON a, LESSON l
+	WHERE a.user_id = u.user_id
+	and a.apply_ok = 1
+	and l.lesson_seq = a.lesson_seq
+	and l.lesson_seq = #{lessonSeq}
+	order by u.name desc
+	</select>
+	<!-- getLessonApplyUsers1 END -->
+	
+	
+	<!-- updateApplyLesson START-->
+	<update id="updateApplyLesson" parameterType="AppliedLessonVO">
+	update applied_lesson set apply_ok=1
+	where apply_seq = #{applySeq}
+	</update>
+	<!-- updateApplyLesson END-->
+	
+	
+	<!-- updateNotApplyLesson START-->
+	<update id="updateNotApplyLesson" parameterType="AppliedLessonVO">
+	update applied_lesson set apply_ok=2
+	where apply_seq = #{applySeq}
+	</update>
+	<!-- updateNotApplyLesson END-->
+	
+	
+	<!-- ===== tuteeDashboard ===== START -->
+	<resultMap type="AppliedLessonVO" id="tuteeDashboardMap">
+		<id column="apply_seq" property="applySeq"/>
+		<association property="lessonVO" javaType="LessonVO">
+			<result column="lesson_name" property="lessonName"/>
+		</association>
+	</resultMap>
+	<select id="tuteeDashboard" resultMap="tuteeDashboardMap">
+	SELECT l.lesson_name
+	FROM LESSON l
+	 INNER JOIN USERS u
+	 ON l.user_id = u.user_id
+	 INNER JOIN APPLIED_LESSON al
+	 ON l.lesson_seq = al.lesson_seq
+	 INNER JOIN LESSON_REVIEW lr
+	 ON al.apply_seq = lr.apply_seq
+	WHERE al.user_id = #{userId}
+	</select>
+	<!-- ===== tuteeDashboard ===== END -->
+</mapper>
