@@ -9,6 +9,36 @@ import com.developer.studyroom.vo.StudyroomVO;
 
 
 public class StudyroomService {
+	
+	//ds
+	public List<StudyroomVO> searchByAddrAndName(String srNameAddrName, int searchBy, int orderBy) throws FindException{
+		StudyroomDAO dao;
+		dao = new StudyroomDAOOracle();
+		List<StudyroomVO> list = dao.selectBySearchString(srNameAddrName, searchBy, orderBy);
+		return list;
+		
+	}
+	//ds
+	public List<StudyroomVO> searchByPerson(int person, int orderBy) throws FindException{
+		StudyroomDAO dao;
+		dao = new StudyroomDAOOracle();
+		List<StudyroomVO> list = dao.selectByPerson(person, orderBy);
+		return list;
+	}
+	//ds
+	public List<StudyroomVO> searchByAddrAndPerson(String addr, int person, int orderBy) throws FindException{
+		StudyroomDAO dao;
+		dao = new StudyroomDAOOracle();
+		List<StudyroomVO> list = dao.selectByAddrAndPerson(addr, person, orderBy);
+		return list;
+	}
+	//ds
+	public StudyroomVO printAllDetail(int srSeq) throws FindException{
+		StudyroomDAO dao;
+		dao = new StudyroomDAOOracle();
+		StudyroomVO vo = dao.selectAllDetail(srSeq);
+		return vo;
+	}
 
 	// sr: 호스트 마이페이지(호스트회원정보+카페정보 한번에)
 	public StudyroomVO infoHostAndCafe(String hostId) throws FindException {

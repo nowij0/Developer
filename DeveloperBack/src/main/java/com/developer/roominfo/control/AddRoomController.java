@@ -36,7 +36,7 @@ public class AddRoomController implements Controller {
 		RoomInfoService service = new RoomInfoService();
 		ObjectMapper mapper = new ObjectMapper();
 		try { 
-			service.addRoom(new RoomInfoVO(0, srSeq, name, info, imgPath, person, price));
+			service.addRoom(new RoomInfoVO(0, srSeq, name, info, imgPath, person, price, null));
 		} catch (FindException e) {
 			e.printStackTrace();
 			Map<String, String> map = new HashMap<>();
