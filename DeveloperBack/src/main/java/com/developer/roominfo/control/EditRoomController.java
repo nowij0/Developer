@@ -40,7 +40,7 @@ public class EditRoomController implements Controller {
 		int price = Integer.parseInt(request.getParameter("price"));
 
 		try {
-			service.editRoom(new RoomInfoVO(roomSeq, 0, name, info, imgPath, person, price));
+			service.editRoom(new RoomInfoVO(roomSeq, 0, name, info, imgPath, person, price, null));
 
 		} catch (FindException e) {
 			e.printStackTrace();
