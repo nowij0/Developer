@@ -21,7 +21,7 @@ import com.developer.roominfo.vo.RoomInfoVO;
 import com.developer.studyroom.vo.StudyroomVO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class CheckReservePossibbleController implements Controller {
+public class CheckReservePossibleController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
