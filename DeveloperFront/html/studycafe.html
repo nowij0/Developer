@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/basic.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/studycafe.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="../js/basic.js"></script>
+    <script src="../js/index.js"></script>
+    <script src="../js/studycafelist.js"></script>
+
+    <title>Title</title>
+</head>
+<body>
+<div class="searchgroup">
+    <form class="search">
+
+        <select id="searchBy">
+            <option value="1">주소</option>
+            <option value="2">카페이름</option>
+        </select>
+        <input type="text" name="srNameAddrName">
+
+        <select id="person" >
+            <option value="" disabled selected>인원 수</option>
+            <option value="3">3인 이상</option>
+            <option value="4">4인 이상</option>
+            <option value="5">5인 이상</option>
+            <option value="6">6인 이상</option>
+            <option value="7">7인 이상</option>
+            <option value="8">8인 이상</option>
+            <option value="9">9인 이상</option>
+            <option value="10">10인 이상</option>
+
+
+        </select>
+        <select id="orderBy">
+            <option value="1">가격 낮은순</option>
+            <option value="2">즐겨찾기 순</option>
+        </select>
+        <input type="button" value="검색" class="btn"><br/>
+
+
+    </form>
+</div>
+
+   <div class="studycafeList">
+        <table>
+            <thead>
+                <tr >
+
+                    <td colspan="3" class = "img">대표사진</td>
+
+                </tr>
+                <tr class="name">카페이름</tr>
+                <tr>
+                    <td>주소</td>
+                </tr>
+                <tr><td class="price">가격</td><td class="person">최대인원</td><td class="favCnt">즐겨찾기수</td></tr>
+            </thead>
+        </table>
+   </div>
+</body>
+</html>

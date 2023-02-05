@@ -14,6 +14,7 @@ import org.json.simple.JSONObject;
 
 import com.developer.control.Controller;
 import com.developer.exception.FindException;
+import com.developer.favoritesstudyroom.vo.FavoritesStudyroomVO;
 import com.developer.reservation.vo.ReservationVO;
 import com.developer.roominfo.vo.RoomInfoVO;
 import com.developer.roomreview.vo.RoomReviewVO;
@@ -24,7 +25,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class SearchByAddrAndNameController implements Controller {
 
-	@Override //DAOOracle 해결안됨
+	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		  request.setCharacterEncoding("UTF-8");
@@ -34,27 +35,27 @@ public class SearchByAddrAndNameController implements Controller {
 	      
 	      ObjectMapper mapper = new ObjectMapper();
 	      StudyroomService service = new StudyroomService();
-	      String name= request.getParameter("name");
+	      String srNameAddrName= request.getParameter("srNameAddrName");
 	      int searchBy=Integer.parseInt(request.getParameter("searchBy"));
+	      int person=Integer.parseInt(request.getParameter("person"));
 	      int orderBy=Integer.parseInt(request.getParameter("orderBy"));
 	      
 	      JSONArray arr = new JSONArray();
 	      try {
-			List<StudyroomVO> list = service.searchByAddrAndName(name, searchBy, orderBy);
+			List<StudyroomVO> list = service.searchByAddrAndName(srNameAddrName, searchBy, person, orderBy);
 			JSONObject obj = new JSONObject();
 			for(StudyroomVO vo: list) {
 				obj.put("name", vo.getName());
 				obj.put("addr", vo.getAddr());
 				obj.put("imgPath", vo.getImgPath());
+				FavoritesStudyroomVO fvsVO=vo.getFavoritesStudyroomVO();
+				obj.put("userId", fvsVO.getUserId());
+				obj.put("cnt",fvsVO.getCnt());
 				List<RoomInfoVO> rifList= vo.getRoomInfoVO();
 				
 				for(RoomInfoVO rifvo:rifList) {
 					obj.put("person", rifvo.getPerson());
 					obj.put("price", rifvo.getPrice());
-					RoomReviewVO rrv=rifvo.getRoomReviewVO();
-					ReservationVO rvo=rrv.getReservationVO();
-					UsersVO uvo = rvo.getUsersVO();
-					obj.put("userId", uvo.getUserId());
 				}
 				arr.add(obj);
 			

@@ -112,41 +112,7 @@
 			<result column="price" property="price" />
 		</collection>
 	</resultMap>
-   <select id="selectBySearchString" resultMap="studyroomMap3">
-   	SELECT S.NAME, S.ADDR, S.IMG_PATH, MAX(R.PERSON) AS PERSON,
-		MIN(R.PRICE) AS PRICE, COUNT(distinct(F.USER_ID)) AS FAV_CNT
-		FROM STUDYROOM S
-		full outer join
-		ROOM_INFO R
-		ON s.sr_seq = r.sr_seq
-		full outer join
-		FAVORITES_STUDYROOM F
-		ON F.SR_SEQ = S.SR_SEQ
-		where
-		<choose>
-   <when test="searchBy==1">
-  S.ADDR LIKE '%${addr}%' 
-   </when>
-   <when test="searchBy==2">
-   S.NAME LIKE '%${name}%'
-   </when>
-   <otherwise>
    
-   </otherwise>
-	
-   </choose>
-   GROUP BY S.NAME , S.ADDR , S.IMG_PATH
-	ORDER BY
-	<choose>
-		<when test="orderBy==1">
-			PRICE ASC
-		</when>
-		<when test="orderBy==2">
-			FAV_CNT DESC
-		</when>
-		</choose>
-   </select>
-     
    <select id="selectBySearchString1" resultMap="studyroomMap3">
    	SELECT S.NAME, S.ADDR, S.IMG_PATH, MAX(R.PERSON) AS PERSON,
 		MIN(R.PRICE) AS PRICE, COUNT(distinct(F.USER_ID)) AS FAV_CNT
@@ -158,6 +124,8 @@
 		FAVORITES_STUDYROOM F
 		ON F.SR_SEQ = S.SR_SEQ
 		where ${choose1}
+		And
+		R.person <![CDATA[>=]]>#{person}
 	
    GROUP BY S.NAME , S.ADDR , S.IMG_PATH
 	ORDER BY ${choose2}

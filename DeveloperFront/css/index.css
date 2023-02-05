@@ -1,0 +1,38 @@
+*{margin: 0; padding: 0;}
+#wrap {width: 100%; height: 1500px; color: #fff; font-size: 15px; text-align: center; text-transform: uppercase;}
+#header-wrap{width: 100%; background-color: #67615f;}
+#nav-wrap{width: 100%; background-color: #a09998;}
+#banner-wrap{width: 100%; background-color: #aaa5a2;}
+#content-wrap{width: 100%; background-color: #d4cac7;}
+#footer-wrap{width: 100%; background-color: #e6dcd3;}
+
+/*자식이 height값을 가지고 있으면 부모의 height 값은 없어도 된다.
+ width: 100%는 기본값이기 때문에 없어도 된다 */
+
+.header-container {width:1300px; height: 100px; line-height: 100px; margin: 0 auto; background-color: #8d6e63; }
+.nav-container {width:1300px; height: 60px; line-height: 60px;margin: 0 auto; background-color: #a1887f; }
+.banner-container {width: 1300px; height: 300px; line-height: 300px; margin: 0 auto; background-color: #bcaaa4;}
+.content-container {width: 1300px; height: 800px; line-height: 800px; margin: 0 auto; background-color: #d7ccc8;}
+.footer-container{width: 1300px; height: 100px; line-height: 100px; margin: 0 auto; background-color: #c39d91;}
+
+.nav-container>nav{
+    width: 600px;
+    /* display: inline-block; */
+    float: right;
+}
+
+.nav-container>nav>ul{
+    /* 리스트기능에서 동그라미(왼쪽패딩영역을 가지고있음) */
+    list-style-type: none;
+    padding-left: 0px;
+}
+
+.nav-container>nav>ul>li{
+    /* width: 100px; */
+    display: inline-block;
+}
+
+.nav-container>nav>ul>li:hover{
+    background-color: #2C2A29;
+    color: #fff
+}

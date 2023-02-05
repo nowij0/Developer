@@ -1,0 +1,18 @@
+*{
+    box-sizing: border-box;
+}
+div.studycafeList{
+    width: 80%;
+    height: 500px;
+    margin: auto;
+}
+
+div.searchgroup{
+    text-align: center;
+    margin: auto;
+}
+
+div.studycafe>table tr>td.img{
+    max-width:70%;
+    /* max-height: 100%; */
+}

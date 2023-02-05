@@ -19,14 +19,17 @@ public class StudyroomDAOOracle implements StudyroomDAO {
 	}
 	public static void main(String[] args) throws FindException { //
 		StudyroomDAOOracle dao = new StudyroomDAOOracle(); 
-		 List<StudyroomVO> list = dao.selectBySearchString("장학", 2, 2);
+		 List<StudyroomVO> list = dao.selectBySearchString("서울", 1, 5,1);
 		 System.out.println("-------");
-		 System.out.println(list);
+		 
+		 for(StudyroomVO vo: list) {
+			 System.out.println(vo);
+		 }
 		 System.out.println("-------");
 		}
 	
 	@Override//성공
-	public List<StudyroomVO> selectBySearchString(String srNameAddrName, int searchBy, int orderBy) throws FindException{
+	public List<StudyroomVO> selectBySearchString(String srNameAddrName, int searchBy, int person, int orderBy) throws FindException{
 		SqlSession session = sqlSessionFactory.openSession();
 		
 		String choose1 = "";
@@ -43,8 +46,9 @@ public class StudyroomDAOOracle implements StudyroomDAO {
 		}else if(orderBy == 2) {
 			choose2 = "FAV_CNT DESC";
 		}
-		Map<String, String> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
 		map.put("choose1", choose1);
+		map.put("person", person);
 		map.put("choose2", choose2);
 		List<StudyroomVO> list = session.selectList("com.developer.studyroom.selectBySearchString1", map);
 		

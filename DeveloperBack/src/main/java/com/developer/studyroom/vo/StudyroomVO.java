@@ -31,6 +31,7 @@ public class StudyroomVO {
 	private HostUserVO hostUserVO;
 	private String srNameAddrName;
 	private int searchBy;
+	private int person;
 	private int orderBy;
 	private FavoritesStudyroomVO favoritesStudyroomVO;
 	
