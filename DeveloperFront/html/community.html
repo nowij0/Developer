@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="../css/basic.css">
+        <link rel="stylesheet" href="../css/community.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        <script src="https://kit.fontawesome.com/f2754c19ed.js" crossorigin="anonymous"></script>
+        <script src="../js/basic.js"></script>
+        <script src="../js/boardlist.js"></script>
+    </head>
+    <body>
+        <div id="wrap">
+            <div id="header-wrap" style="display:flex">
+                <div class="header-container"><img src="../image/logo.png" style="height: 100px;"></div>
+                <div class="nav-container">
+                    <nav>
+                        <ul>
+                           <li class='lesson'>수업</li>
+                           <li class='studycafe'>스터디카페</li>
+                           <li class='community'>커뮤니티</li>
+                         <!-- 회원상태에 따라 다르게 보여질 메뉴 -->
+                           <li class='signup'>회원가입</li>
+                           <li class='login'>로그인</li>
+                           <li class='logout'>로그아웃</li>
+                           <li class='tutorAdd'>튜터등록</li>
+                           <li class='myPage'>마이페이지</li>
+                        </ul> 
+                     </nav>
+                </div>
+            </div>
+            <div class="banner">
+                Developer Community<br/><br/>
+                <span>함께 토론해봐요!!</span>
+            </div>
+            <div class="board-container">
+            <div class="cate">
+                <h3>카테고리</h3>
+                <button class="cate0" id="cate0">Q/A</button>
+                <button class="cate1" id="cate1">자유게시판</button>
+                <button class="cate2" id="cate2">스터디모집</button>
+            </div>
+            <div id="content-wrap">
+                <div class="search">
+                    <form method="post" action="http://192.168.0.13:5500/html/community.html" id="searchtitle">
+                    <input type="text" placeholder="제목으로 검색하세요" style="width: 400px; height:48px; font: size 10px;" name="title">
+                    <input type="button" value="검색" id="searchbtn" style="width:90px; height:48px;">
+                </form>
+                </div>
+                <div class="filter">
+                    <button class="descbtn fitbtn" id="descbtn">최신순</button>
+                    <button class="cntbtn fitbtn" id="cntbtn">조회순</button>
+                    <button class="recbtn fitbtn" id="recbtn">추천순</button>
+                    <div class="addboard">
+                        <button class="addbtn" id="addbtn"><i class="fa-solid fa-pen"></i>글쓰기</button>
+                    </div>
+                </div>
+                <div class="content-container">
+                    <div class="list" id="list">
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div id="footer-wrap">
+                <div class="footer-container">ⓒ 2023 이거맞조. All Rights Reserved.</div>
+            </div>
+        </div>
+    </body>
+
+</html>

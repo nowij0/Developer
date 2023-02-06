@@ -1,0 +1,9 @@
+div.show{
+    height:200px;
+    border:1px dotted;
+    margin-bottom: 10px;
+}
+div.show>img{
+    max-height: 100%;
+    width:auto;
+}

@@ -23,7 +23,7 @@ import lombok.ToString;
 public class BoardVO {
 	private int postSeq;
 	private String userId;
-	private int category;
+	private int category; //0:Q/A,  1:스터디모집,  2:자유 게시판
 	private String title;
 	private String content;
 	private String imgPath;

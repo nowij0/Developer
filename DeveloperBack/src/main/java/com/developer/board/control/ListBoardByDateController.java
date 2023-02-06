@@ -31,6 +31,7 @@ public class ListBoardByDateController implements Controller {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json;charset=UTF-8");
 		response.addHeader("Access-Control-Allow-Origin", "*");
+		
 
 		ObjectMapper mapper = new ObjectMapper();
 		BoardService service = new BoardService();

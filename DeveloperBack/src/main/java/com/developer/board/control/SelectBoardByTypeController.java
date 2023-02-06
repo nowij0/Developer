@@ -29,6 +29,7 @@ public class SelectBoardByTypeController implements Controller {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json;charset=UTF-8");
 		response.addHeader("Access-Control-Allow-Origin", "*");
+		//response.addHeader("Access-Control-Allow-Credentials", "true");
 		
 		BoardService service = new BoardService();
 		int boardType = Integer.parseInt(request.getParameter("boardType"));
