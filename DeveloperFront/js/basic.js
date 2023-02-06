@@ -1,7 +1,5 @@
-let backURL = "http://localhost:8888/developer/";
-let frontURL = "http://localhost:5500/html/";
-
-//바꿔야함 맞춰서 다시
+let backURL = "http://192.168.0.28:8888/developer/";
+let frontURL = "http://192.168.0.28:5500/html/";
 
 //--[회원] 로그인상태의 메뉴들 보여주기 함수 START--
     function showMenuAtMemberLogined() {
@@ -77,7 +75,7 @@ function checkLogined() {
         let menu = $(e.target).attr('class')
         switch (menu) {
             case 'lesson':
-                $('section').load('./lesson.html')
+                location.href = './lesson.html'
                 break;
             case 'studycafe':
                 location.href= backURL + 'studycafe.html';
