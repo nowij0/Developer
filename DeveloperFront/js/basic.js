@@ -78,7 +78,7 @@ function checkLogined() {
                 $('section').load('./lesson.html')
                 break;
             case 'studycafe':
-                $('section').load('./studycafe.html')
+                location.href= backURL + 'studycafe.html';
                 break;
             case 'community':
                 $('section').load('./community.html')

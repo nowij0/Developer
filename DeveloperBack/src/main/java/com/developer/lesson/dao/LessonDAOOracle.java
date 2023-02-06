@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import com.developer.dto.PageBean;
 import com.developer.exception.FindException;
 import com.developer.lesson.vo.LessonVO;
 import com.developer.resource.Factory;
@@ -77,13 +78,14 @@ public class LessonDAOOracle implements LessonDAO {
 	
 	//지원
 	@Override
-	public List<LessonVO> selectLesson(int category, int priceFilter, int starFilter) throws FindException {
+	public PageBean<LessonVO> selectLesson(int category, int priceFilter, int starFilter, int currentPage) throws FindException {
 		SqlSession session = sqlSessionFactory.openSession();
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("category", category);
 		map.put("priceFilter", priceFilter);
 		map.put("starFilter", starFilter);
-		List<LessonVO> selectLesson = session.selectList("com.developer.lesson.selectLesson", map);
+		map.put("currentPage", currentPage);
+		PageBean<LessonVO> selectLesson = (PageBean<LessonVO>) session.selectList("com.developer.lesson.selectLesson", map);
 		session.commit();
 		session.close();
 		return selectLesson;

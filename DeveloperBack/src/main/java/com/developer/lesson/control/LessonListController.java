@@ -2,7 +2,6 @@ package com.developer.lesson.control;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -10,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.developer.control.Controller;
+import com.developer.dto.PageBean;
 import com.developer.exception.FindException;
 import com.developer.lesson.service.LessonService;
 import com.developer.lesson.vo.LessonVO;
@@ -32,11 +32,17 @@ public class LessonListController implements Controller {
 		int category = Integer.parseInt(request.getParameter("category"));
 		int priceFilter = Integer.parseInt(request.getParameter("priceFilter"));
 		int starFilter = Integer.parseInt(request.getParameter("starFilter"));
+		String cp = request.getParameter("currentPage"); 
+		
+		int currentPage = 1;
+		if(cp != null && !"".equals(cp)) {
+			currentPage = Integer.parseInt(cp);
+		}
 		
 		String result;
 		ObjectMapper mapper = new ObjectMapper();
 		try {
-			List<LessonVO> list = service.selectLesson(category, priceFilter, starFilter);
+			PageBean<LessonVO> list = service.selectLesson(category, priceFilter, starFilter, currentPage);
 			result = mapper.writeValueAsString(list);
 		} catch (FindException e) {
 			e.printStackTrace();
