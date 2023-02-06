@@ -24,6 +24,7 @@ public class BoardSearchController implements Controller {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json;charset=UTF-8");
 		response.addHeader("Access-Control-Allow-Origin", "*");
+		response.addHeader("Access-Control-Allow-Credentials", "true");
 		
 		BoardService service = new BoardService();
 		String title = request.getParameter("title");
