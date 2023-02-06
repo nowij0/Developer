@@ -188,6 +188,7 @@
     	  FROM users u INNER JOIN board b ON u.user_id = b.user_id
      	  ORDER BY c_date DESC)
 	WHERE rownum BETWEEN 1 AND 5
+	WHERE rownum BETWEEN 1 AND 6
 	</select>
 <!-- sr: boardSelectAllByDate End -->
 

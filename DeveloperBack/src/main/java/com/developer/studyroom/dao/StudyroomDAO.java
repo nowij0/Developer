@@ -7,24 +7,24 @@ import com.developer.studyroom.vo.StudyroomVO;
 
 public interface StudyroomDAO {
 	/**
-	 * [스터디카페 검색페이지] 주소(1), 스터디카페명(2)로 스터디카페리스트를 검색한다
+	 * [스터디카페 검색페이지] 주소(1) 또는 스터디카페명(2) 및 인원 수 로 스터디카페리스트를 검색한다
 	 * @author ds 
-	 * @param searchSrNameAddr (주소명 or 스터디카페명 ) 
+	 * @param searchSrNameAddr (주소명 or 스터디카페명 ) , person(인원수),orderBy(정렬)
 	 * order by 두개있음
 	 * @return List<StudyroomVO> 검색에 맞은 스터디카페목록
 	 * @throws 스터디카페목록 검색시 FindException예외발생한다
 	 */
-	public List<StudyroomVO> selectBySearchString(String srNameAddrName, int searchBy, int orderBy) throws FindException;
+	public List<StudyroomVO> selectBySearchString(String srNameAddrName, int searchBy, int person, int orderBy) throws FindException;
 	
 	/**
-	 * [스터디카페 검색페이지] 인원수로 스터디카페리스트를 검색한다 order by 두개있음
+	 * [스터디카페 검색페이지] 전체출력 order by 두개있음
 	 * @author ds
-	 * @param perosn 인원수 
-	 * @return List<StudyroomVO> 검색에 맞은 스터디카페목록
+	 * @param orderBy 정렬
+	 * @return List<StudyroomVO> 스터디카페목록 전체출력
 	 * @throws 스터디카페목록 검색시 FindException예외발생한다
 	 */
 	
-	public List<StudyroomVO> selectByPerson(int person, int orderBy) throws FindException;
+	public List<StudyroomVO> selectAll(int orderBy) throws FindException;
 	
 	/**
 	* [스터디카페 검색페이지] 주소와 인원수로 스터디카페리스트를 검색한다

@@ -20,7 +20,7 @@ import com.developer.studyroom.service.StudyroomService;
 import com.developer.studyroom.vo.StudyroomVO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class SearchByPersonController implements Controller {
+public class SearchAllController implements Controller {
 
 	@Override //성공
 	public String execute(HttpServletRequest request, HttpServletResponse response)
@@ -32,12 +32,12 @@ public class SearchByPersonController implements Controller {
 	      
 	      ObjectMapper mapper = new ObjectMapper();
 	      StudyroomService service = new StudyroomService();
-	      int person=Integer.parseInt(request.getParameter("person"));
+	     
 	      int orderBy=Integer.parseInt(request.getParameter("orderBy"));
 	      JSONArray arr = new JSONArray();
 	      
 	      try {
-			List<StudyroomVO>list = service.searchByPerson(person, orderBy);
+			List<StudyroomVO>list = service.searchAll(orderBy);
 			for(StudyroomVO vo: list) {
 				JSONObject obj = new JSONObject();
 				obj.put("name", vo.getName());

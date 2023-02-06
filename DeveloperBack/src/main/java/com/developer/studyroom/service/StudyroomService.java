@@ -11,18 +11,18 @@ import com.developer.studyroom.vo.StudyroomVO;
 public class StudyroomService {
 	
 	//ds
-	public List<StudyroomVO> searchByAddrAndName(String srNameAddrName, int searchBy, int orderBy) throws FindException{
+	public List<StudyroomVO> searchByAddrAndName(String srNameAddrName, int searchBy, int person, int orderBy) throws FindException{
 		StudyroomDAO dao;
 		dao = new StudyroomDAOOracle();
-		List<StudyroomVO> list = dao.selectBySearchString(srNameAddrName, searchBy, orderBy);
+		List<StudyroomVO> list = dao.selectBySearchString(srNameAddrName, searchBy, person, orderBy);
 		return list;
 		
 	}
 	//ds
-	public List<StudyroomVO> searchByPerson(int person, int orderBy) throws FindException{
+	public List<StudyroomVO> searchAll(int orderBy) throws FindException{
 		StudyroomDAO dao;
 		dao = new StudyroomDAOOracle();
-		List<StudyroomVO> list = dao.selectByPerson(person, orderBy);
+		List<StudyroomVO> list = dao.selectAll(orderBy);
 		return list;
 	}
 	//ds

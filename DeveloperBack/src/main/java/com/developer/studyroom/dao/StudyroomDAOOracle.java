@@ -19,14 +19,17 @@ public class StudyroomDAOOracle implements StudyroomDAO {
 	}
 	public static void main(String[] args) throws FindException { //
 		StudyroomDAOOracle dao = new StudyroomDAOOracle(); 
-		 List<StudyroomVO> list = dao.selectBySearchString("장학", 2, 2);
+		 List<StudyroomVO> list = dao.selectAll(1);
 		 System.out.println("-------");
-		 System.out.println(list);
+		 
+		 for(StudyroomVO vo: list) {
+			 System.out.println(vo);
+		 }
 		 System.out.println("-------");
 		}
 	
 	@Override//성공
-	public List<StudyroomVO> selectBySearchString(String srNameAddrName, int searchBy, int orderBy) throws FindException{
+	public List<StudyroomVO> selectBySearchString(String srNameAddrName, int searchBy, int person, int orderBy) throws FindException{
 		SqlSession session = sqlSessionFactory.openSession();
 		
 		String choose1 = "";
@@ -43,8 +46,9 @@ public class StudyroomDAOOracle implements StudyroomDAO {
 		}else if(orderBy == 2) {
 			choose2 = "FAV_CNT DESC";
 		}
-		Map<String, String> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
 		map.put("choose1", choose1);
+		map.put("person", person);
 		map.put("choose2", choose2);
 		List<StudyroomVO> list = session.selectList("com.developer.studyroom.selectBySearchString1", map);
 		
@@ -57,14 +61,11 @@ public class StudyroomDAOOracle implements StudyroomDAO {
 		return list;
 	}
 	@Override //성공
-	public List<StudyroomVO> selectByPerson(int person, int orderBy) throws FindException{
+	public List<StudyroomVO> selectAll(int orderBy) throws FindException{
 		SqlSession session = sqlSessionFactory.openSession();
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("person", person);
 		map.put("orderBy", orderBy);
-		
-		List<StudyroomVO> list = session.selectList("com.developer.studyroom.selectByPerson",map);
-		session.commit();
+		List<StudyroomVO> list = session.selectList("com.developer.studyroom.selectAll",map);
 		session.close();
 		return list;
 	}
