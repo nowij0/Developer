@@ -27,7 +27,7 @@ public class UsersServlet extends HttpServlet {
 	      String []arr = uri.split("/");
 	      String subPath = arr[arr.length-1];
 	      
-	      String envFileName = "developer.properties";
+	      String envFileName = "users.properties";
 	      envFileName = getServletContext().getRealPath(envFileName);
 	      Properties env = new Properties();
 	      env.load(new FileInputStream(envFileName));
