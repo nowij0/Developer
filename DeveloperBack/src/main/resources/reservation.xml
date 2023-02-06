@@ -144,4 +144,5 @@ AND r.user_id = #{userId}
 ORDER BY res_seq DESC
 </select>
 
+
 </mapper>
