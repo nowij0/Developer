@@ -187,7 +187,7 @@
 	FROM (SELECT b.post_seq, u.nickname "usersVO.nickname", b.category, b.title, b.content, b.img_path, b.c_date, b.recommend, b.cnt
     	  FROM users u INNER JOIN board b ON u.user_id = b.user_id
      	  ORDER BY c_date DESC)
-	WHERE rownum BETWEEN 1 AND 5
+	WHERE rownum BETWEEN 1 AND 6
 	</select>
 <!-- sr: boardSelectAllByDate End -->
 

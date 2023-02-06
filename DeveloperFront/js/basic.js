@@ -1,6 +1,8 @@
 let backURL = "http://localhost:8888/developer/";
 let frontURL = "http://localhost:5500/html/";
 
+//바꿔야함 맞춰서 다시
+
 //--[회원] 로그인상태의 메뉴들 보여주기 함수 START--
     function showMenuAtMemberLogined() {
         $('header>nav>ul>li.lesson').show()
