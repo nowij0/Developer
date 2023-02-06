@@ -12,7 +12,7 @@
 .header-container {width:1300px; height: 100px; line-height: 100px; margin: 0 auto; background-color: #8d6e63; }
 .nav-container {width:1300px; height: 60px; line-height: 60px;margin: 0 auto; background-color: #a1887f; }
 .banner-container {width: 1300px; height: 300px; line-height: 300px; margin: 0 auto; background-color: #bcaaa4;}
-.content-container {width: 1300px; height: 800px; line-height: 800px; margin: 0 auto; background-color: #d7ccc8;}
+.content-container {width: 1300px; height: 800px; line-height: 10px; margin: 0 auto; background-color: #d7ccc8;}
 .footer-container{width: 1300px; height: 100px; line-height: 100px; margin: 0 auto; background-color: #c39d91;}
 
 .nav-container>nav{

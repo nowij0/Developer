@@ -1,18 +1,94 @@
 *{
     box-sizing: border-box;
 }
-div.studycafeList{
-    width: 80%;
-    height: 500px;
+
+div.searchgroup{
+    width: 40%;
+    height: 10%;
+    text-align: center;
+    position: relative;
+    top:60px;
+    left:5%;
     margin: auto;
 }
-
+#searchBy{
+    height: 30px;
+}
+#srNameAddrName{
+    width: 100px;
+    height: 500px;
+}
+#person{
+    height: 30px;
+}
+#orderBy{
+    height: 30px;
+}
+.btn{
+    width: 50px;
+    height: 30px;
+}
+div.studycafeList{
+    text-align: center;
+    margin: auto;
+ 
+    
+}
+div.studycafeList>table{
+    width: 300px;
+    height: 250px;
+    position: relative;
+    top: 100px;
+    margin-left: 10%;
+   
+}
 div.searchgroup{
     text-align: center;
     margin: auto;
 }
 
 div.studycafe>table tr>td.img{
-    max-width:70%;
-    /* max-height: 100%; */
+  
+    
 }
+.img{
+    height: 100px;
+}
+.price{
+    width: 50px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

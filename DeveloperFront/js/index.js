@@ -10,6 +10,7 @@ $(()=>{
              break;
          case 'studycafe':
              $('header>nav>ul>li.studycafe').click()
+             location.href='./studycafeList.html'
              break;
          case 'community':
              $('header>nav>ul>li.community').click()

@@ -17,14 +17,14 @@ public interface StudyroomDAO {
 	public List<StudyroomVO> selectBySearchString(String srNameAddrName, int searchBy, int person, int orderBy) throws FindException;
 	
 	/**
-	 * [스터디카페 검색페이지] 인원수로 스터디카페리스트를 검색한다 order by 두개있음
+	 * [스터디카페 검색페이지] 전체출력 order by 두개있음
 	 * @author ds
-	 * @param perosn 인원수 
-	 * @return List<StudyroomVO> 검색에 맞은 스터디카페목록
+	 * @param orderBy 정렬
+	 * @return List<StudyroomVO> 스터디카페목록 전체출력
 	 * @throws 스터디카페목록 검색시 FindException예외발생한다
 	 */
 	
-	public List<StudyroomVO> selectByPerson(int person, int orderBy) throws FindException;
+	public List<StudyroomVO> selectAll(int orderBy) throws FindException;
 	
 	/**
 	* [스터디카페 검색페이지] 주소와 인원수로 스터디카페리스트를 검색한다

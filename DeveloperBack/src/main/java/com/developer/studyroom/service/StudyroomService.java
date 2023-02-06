@@ -19,10 +19,10 @@ public class StudyroomService {
 		
 	}
 	//ds
-	public List<StudyroomVO> searchByPerson(int person, int orderBy) throws FindException{
+	public List<StudyroomVO> searchAll(int orderBy) throws FindException{
 		StudyroomDAO dao;
 		dao = new StudyroomDAOOracle();
-		List<StudyroomVO> list = dao.selectByPerson(person, orderBy);
+		List<StudyroomVO> list = dao.selectAll(orderBy);
 		return list;
 	}
 	//ds
