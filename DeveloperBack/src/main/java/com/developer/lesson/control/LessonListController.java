@@ -44,6 +44,7 @@ public class LessonListController implements Controller {
 		try {
 			PageBean<LessonVO> list = service.selectLesson(category, priceFilter, starFilter, currentPage);
 			result = mapper.writeValueAsString(list);
+			System.out.println(result);
 		} catch (FindException e) {
 			e.printStackTrace();
 			Map<String, Object> map = new HashMap<>();
