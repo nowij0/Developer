@@ -46,16 +46,16 @@ $(()=>{
     }
 
     //--마우스 오버시 롤링 멈춤 / 마우스 아웃 다시시작 START
-		$banner.mouseover(function(){
-			//중지
-			clearInterval(rollingId);
-			$(this).css("cursor", "pointer");
-		});
-		//마우스 아웃되면 다시 시작
-		$banner.mouseout(function(){
-			rollingId = setInterval(function() { rollingStart(); }, 3000);
-			$(this).css("cursor", "default");
-		});
+      $banner.mouseover(function(){
+         //중지
+         clearInterval(rollingId);
+         $(this).css("cursor", "pointer");
+      });
+      //마우스 아웃되면 다시 시작
+      $banner.mouseout(function(){
+         rollingId = setInterval(function() { rollingStart(); }, 3000);
+         $(this).css("cursor", "default");
+      });
 
     //--마우스 오버시 롤링 멈춤 / 마우스 아웃 다시시작 END
 

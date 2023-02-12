@@ -1,5 +1,5 @@
-let backURL = "http://192.168.0.13:8888/developer/";
-let frontURL = "http://192.168.0.13:5500/html/";
+let backURL = "http://localhost:8888/developer/";
+let frontURL = "http://localhost:5500/html/";
 
 //바꿔야함 맞춰서 다시
 

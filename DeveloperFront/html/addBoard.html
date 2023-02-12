@@ -1,53 +1,47 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
-         <link rel="stylesheet" href="../css/basic.css">
-        <link rel="stylesheet" href="../css/index.css">
-        <link rel="stylesheet" href="../css/addBoard.css">
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="/../css/basic.css">
+        <link rel="stylesheet" href="/../css/addBoard.css">
+        <link rel="stylesheet" href="/../css/community.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        <script src="https://kit.fontawesome.com/f2754c19ed.js" crossorigin="anonymous"></script>
         <script src="../js/basic.js"></script>
-        <script src="../js/index.js"></script>
-        <srcipt src="../js/addBoard.js"></srcipt>
+        <script src="../js/addBoard.js"></script>
     </head>
     <body>
-        <header>
-            <div class='headerImg'></div>
-            <nav>
-               <ul>
-                  <li class='lesson'>수업</li>
-                  <li class='studycafe'>스터디카페</li>
-                  <li class='community'>커뮤니티</li>
-                <!-- 회원상태에 따라 다르게 보여질 메뉴 -->
-                  <li class='signup'>회원가입</li>
-                  <li class='login'>로그인</li>
-                  <li class='logout'>로그아웃</li>
-                  <li class='tutorAdd'>튜터등록</li>
-                  <li class='myPage'>마이페이지</li>
-               </ul> 
-            </nav>
-        </header>
-        <section>
-            <div class="show">
-                <img src="">이미지 보여질부분
+        <div id="input-wrap">
+            <div class="input-container">
+            <div id="input-content-wrap">
+                <div class="form">
+                    <form method="post" enctype="multipart/form-data" action="http://192.168.18:8888/developer/board/addboard">
+                    <div class="inputcate"> 
+                        카테고리를 선택하세요 : <select name="category">
+                            <option value="0">Q/A</option>
+                            <option value="1">스터디카페</option>
+                            <option vlaue="2">자유게시판</option>
+                            </select>
+                        </div>
+                    <div class="inputtitle">
+                        <label><input type="text" name="title" id="addTitle" placeholder="제목을 입력해주세요"></label>
+                        </div>
+                    <label><br/><textarea class="inputcontent" name="content" cols="30" rows="5" placeholder="내용을 입력해주세요"
+                    ></textarea></label>
+                    <div class="show">
+                    </div>
+                    <input type="file" name="imgPath" multiple accept="image/jpeg, image/png, image/gif"><br/>
+                    <div class="inputbutton">
+                        <div class="cancelbtn"><a href="community.html"><input type="button" value="취소" id="cancelbtn"></a></div>
+                        <div class="addbtn>"><input type="submit" value="등록" id="addbtn"><br/></div>
+                    </div>
+                    <input type="hidden" name="userId" value="kosta111"><br/></label>
+                    </form>
+                </div>               
             </div>
-        <div class="form">
-            <form method="post" enctype="multipart/form-data" action="http://192.168.18:8888/developer/board/addboard">
-            제목 : <input type="text" name="title"><br/>
-            카테고리 : <select name="category">
-                <option value="0">Q/A</option>
-                <option value="1">스터디카페</option>
-                <option vlaue="2">자유게시판</option>
-            </select><br/>
-            내용 : <br/><textarea name="content" cols="30" rows="5"></textarea><br/>
-            <input type="file" name="imgPath" multiple accept="image/jpeg, image/png, image/gif"><br/>
-            <input type="submit" value="작성"><br/>
-            <input type="hidden" name="userId" value="kosta111"><br/>
-            </form>
+            </div>
         </div>
-        </section>
-        <footer>
-            ⓒ 2023 이거맞조. All Rights Reserved.
-        </footer>
     </body>
 </html>
+
+

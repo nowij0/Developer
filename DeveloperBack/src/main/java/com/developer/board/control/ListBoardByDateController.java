@@ -30,9 +30,7 @@ public class ListBoardByDateController implements Controller {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json;charset=UTF-8");
-		response.addHeader("Access-Control-Allow-Origin", "*");
-		
-		response.addHeader("Access-Control-Allow-Origin", "http://172.30.1.15:5500");
+		response.addHeader("Access-Control-Allow-Origin", "http://192.168.0.18:5500");
 		response.addHeader("Access-Control-Allow-Credentials", "true");
 
 		ObjectMapper mapper = new ObjectMapper();
