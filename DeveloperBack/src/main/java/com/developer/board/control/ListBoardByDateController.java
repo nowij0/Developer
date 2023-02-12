@@ -25,13 +25,13 @@ public class ListBoardByDateController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// http://localhost:8888/Developer/board/boardlistbydate
+		// http://localhost:8888/developer/board/boardlistbydate
 
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json;charset=UTF-8");
-		response.addHeader("Access-Control-Allow-Origin", "*");
-		
+		response.addHeader("Access-Control-Allow-Origin", "http://192.168.0.18:5500");
+		response.addHeader("Access-Control-Allow-Credentials", "true");
 
 		ObjectMapper mapper = new ObjectMapper();
 		BoardService service = new BoardService();

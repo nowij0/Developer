@@ -12,59 +12,91 @@
     <body>
         <div id="wrap">
             <div id="header-wrap" style="display:flex">
-                <div class="header-container"><img src="../image/logo.png" style="height: 100px;"></div>
+                <div class="header-container">
+                    <a href="index.html"><img src="../images/logo.png" style="height: 100px;"></a>
+                </div>
                 <div class="nav-container">
                     <nav>
                         <ul>
-                           <li class='lesson'>수업</li>
-                           <li class='studycafe'>스터디카페</li>
-                           <li class='community'>커뮤니티</li>
-                         <!-- 회원상태에 따라 다르게 보여질 메뉴 -->
-                           <li class='signup'>회원가입</li>
-                           <li class='login'>로그인</li>
-                           <li class='logout'>로그아웃</li>
-                           <li class='tutorAdd'>튜터등록</li>
-                           <li class='myPage'>마이페이지</li>
-                        </ul> 
-                     </nav>
-                </div>
-            </div>
-            <div class="banner">
-                Developer Community<br/><br/>
-                <span>함께 토론해봐요!!</span>
-            </div>
-            <div class="board-container">
-            <div class="cate">
-                <h3>카테고리</h3>
-                <button class="cate0" id="cate0">Q/A</button>
-                <button class="cate1" id="cate1">자유게시판</button>
-                <button class="cate2" id="cate2">스터디모집</button>
-            </div>
-            <div id="content-wrap">
-                <div class="search">
-                    <form method="post" action="http://192.168.0.13:5500/html/community.html" id="searchtitle">
-                    <input type="text" placeholder="제목으로 검색하세요" style="width: 400px; height:48px; font: size 10px;" name="title">
-                    <input type="button" value="검색" id="searchbtn" style="width:90px; height:48px;">
-                </form>
-                </div>
-                <div class="filter">
-                    <button class="descbtn fitbtn" id="descbtn">최신순</button>
-                    <button class="cntbtn fitbtn" id="cntbtn">조회순</button>
-                    <button class="recbtn fitbtn" id="recbtn">추천순</button>
-                    <div class="addboard">
-                        <button class="addbtn" id="addbtn"><i class="fa-solid fa-pen"></i>글쓰기</button>
+                            <li class='lesson'>수업</li>
+                            <li class='studycafe'>스터디카페</li>
+                            <li class='community'>커뮤니티</li>
+                            <!-- 회원상태에 따라 다르게 보여질 메뉴 -->
+                            <li class='signup'>회원가입</li>
+                            <li class='tutorAdd'>튜터등록</li>
+                            <li class='myPage'>마이페이지</li>
+                            <li class='login'>로그인</li>
+                            <li class='logout'>로그아웃</li>
+                            <button type='button' id="modal_btn">로그인</button>
+                            <div class="black_bg"></div>
+                            <div class="modal_wrap">
+                                <div class="modal_close">
+                                    <a href="#">X</a>
+                                </div>
+                                <div>
+                                    <form id="login" method="POST" action="">
+                                    <fieldset style="width:450px; margin: 0 auto;">
+                                    <legend>Developer 로그인</legend>
+                                    <input type="text" name="userId" placeholder="ID를 입력하세요" id="userId" style=" width: 400px; height: 70px; font-weight: 700; margin-bottom: 12px!important;"><br/>
+                                    <input type="password" name="userPwd" placeholder="비밀번호를 입력하세요" id="userPwd" style=" width: 400px; height: 70px; font-weight: 700; margin-bottom: 12px;"><br/>
+                                    <input type="submit" value="로그인" id="userloginbtn" style="background-color: #00c471; width: 400px; height: 70px; font-weight: 700; margin-bottom: 12px; color:white;">
+                                    <p class="sign_in-more-action">
+                                        <a href="#" class="more-action">아이디 찾기</a>
+                                        <a href="#" class="more-action">비밀번호 찾기</a>
+                                        <a href="" class="more-action">회원가입</a>
+                                    </p>
+                                    </fieldset>
+                                    <!-- <input type="hidden" id="hid_url" name ="hid_url" value="window.location.href"> -->
+                                    </form>
+                                </div>
+                                <div></ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="banner">
+                        Developer Community<br/><br/>
+                        <span>함께 토론해봐요!!<i class="fa-regular fa-thumbs-up"></i>
+                        </span>
+                    </div>
+                    <div class="board-container">
+                        <div class="cate">
+                            <h3>카테고리</h3>
+                            <button class="cate0" id="cate0">Q/A</button>
+                            <button class="cate1" id="cate1">자유게시판</button>
+                            <button class="cate2" id="cate2">스터디모집</button>
+                        </div>
+                        <div id="content-wrap">
+                            <div class="search">
+                                <form
+                                    method="post"
+                                    action="http://192.168.0.18:5500/html/community.html"
+                                    id="searchtitle">
+                                    <input
+                                        type="text"
+                                        placeholder="제목으로 검색하세요"
+                                        style="width: 400px; height:48px; font: size 10px;"
+                                        name="title">
+                                    <input type="button" value="검색" id="searchbtn" style="width:90px; height:48px;">
+                                </form>
+                            </div>
+                            <div class="filter">
+                                <button class="descbtn fitbtn" id="descbtn">최신순</button>
+                                <button class="cntbtn fitbtn" id="cntbtn">조회순</button>
+                                <button class="recbtn fitbtn" id="recbtn">추천순</button>
+                                <div class="addboard">
+                                    <button class="addbtn" id="addbtn">
+                                        <i class="fa-solid fa-pen"></i>글쓰기</button>
+                                </div>
+                            </div>
+                            <div class="content-container">
+                                <div class="list" id="list"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="footer-wrap">
+                        <div class="footer-container">ⓒ 2023 이거맞조. All Rights Reserved.</div>
                     </div>
                 </div>
-                <div class="content-container">
-                    <div class="list" id="list">
-                    </div>
-                </div>
-            </div>
-            </div>
-            <div id="footer-wrap">
-                <div class="footer-container">ⓒ 2023 이거맞조. All Rights Reserved.</div>
-            </div>
-        </div>
-    </body>
+            </body>
 
-</html>
+        </html>

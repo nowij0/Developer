@@ -11,7 +11,7 @@ header{
 header>div.img{
     width: 80px;
     height : 100%;
-    background-image: url('../image/logo.png'); /*div태그의 배경에 이미지넣는것*/
+    background-image: url('../images/logo.png'); /*div태그의 배경에 이미지넣는것*/
     background-repeat : no-repeat;
     overflow:auto;
     /* display: inline-block; */

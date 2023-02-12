@@ -2,6 +2,7 @@ let url = backURL + 'board/boardtype';
 let url2 = backURL + 'board/boardsearch';
 
 $(()=>{
+    // 페이지 로드되었을시 목록 출력 START
     $.ajax({
         url:url,
         method:'get',
@@ -45,8 +46,9 @@ $(()=>{
             alert(xhr.status);
         }
     })
+// 페이지 로드되었을시 목록 출력 END
 
-
+// 최신순 버튼 클릭되었을시 START
 $('#descbtn').click(()=>{
     
     $.ajax({
@@ -95,7 +97,9 @@ $('#descbtn').click(()=>{
         }
     })
 })
+// 최신순 버튼 클릭되었을시 END
 
+// 조회순 버튼 클릭되었을시 START
 $('#cntbtn').click(()=>{
     $.ajax({
         url:url,
@@ -143,8 +147,9 @@ $('#cntbtn').click(()=>{
         }
     })
 })
+// 조회순 버튼 클릭되었을시 END
 
-
+// 추천순 버튼 클릭되었을시 START
 $('#recbtn').click(()=>{
     
     $.ajax({
@@ -193,10 +198,15 @@ $('#recbtn').click(()=>{
         }
     })
 })
-$('#addbtn').on("click",function(){
-    location.href= frontURL + "/addBoard.html";
-});
+// 추천순 버튼 클릭되었을시 END
 
+// 글쓰기 버튼 클릭되었을시 START
+$('#addbtn').on("click",function(){
+    location.href= frontURL + "addBoard.html";
+});
+// 글쓰기 버튼 클릭되었을시 END
+
+// 제목으로 검색 했을 때 START
     $('#searchbtn').click(()=>{
     alert('검색')
     // let para = document.location.href.split("?")[1];
@@ -246,5 +256,23 @@ $('#addbtn').on("click",function(){
             }
         })
     })
-    
+    // 제목으로 검색 했을 때 END
+
+    //모달창 START
+    function onClick() {
+        document.querySelector('.modal_wrap').style.display ='block';
+        document.querySelector('.black_bg').style.display ='block';
+    }
+    function offClick() {
+        document.querySelector('.modal_wrap').style.display ='none';
+        document.querySelector('.black_bg').style.display ='none';
+    }
+ 
+    document.getElementById('modal_btn').addEventListener('click', onClick);
+    document.querySelector('.modal_close').addEventListener('click', offClick);
+
+    $('#login').submit(()=>{
+        alert('로그인');
+    })
+    //모달창 END
 })
