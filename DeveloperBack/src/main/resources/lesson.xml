@@ -295,7 +295,7 @@
 		<association property="tutorVO" javaType="TutorVO" autoMapping="true">
 			<id property="userId" column="user_id"/>
 			<result property="info" column="info"/>
-			<result property="imgPath" column="img_path"/>
+			<result property="imgPath" column="tutorImg"/>
 			
 			<association property="usersVO" javaType="UsersVO" autoMapping="true">
 				<result property="name" column="name"/>
@@ -304,7 +304,11 @@
 	</resultMap>
 	<select id="selectTutor" resultMap="selectTutorMap">
 	SELECT 
-	* FROM lesson l
+	l.lesson_seq, l.lesson_name, l.category, l.content, l.people, l.img_path, l.start_cdate, l.end_cdate,
+		l.price, l.start_date, l.end_date, l.location,
+		t.info, t.img_path AS "tutorImg", t.star_avg,
+		u.name
+	 FROM lesson l
 	    INNER JOIN tutor t
 	    ON l.user_id = t.user_id
 	    INNER JOIN users u 

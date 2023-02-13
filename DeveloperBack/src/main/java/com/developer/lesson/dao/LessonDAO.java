@@ -2,7 +2,6 @@ package com.developer.lesson.dao;
 
 import java.util.List;
 
-import com.developer.dto.PageBean;
 import com.developer.exception.FindException;
 import com.developer.lesson.vo.LessonVO;
 
@@ -16,7 +15,7 @@ public interface LessonDAO {
 	 * @return List<LessonVO>
 	 * @throws FindException
 	 */
-	public PageBean<LessonVO> selectLesson(int category, int priceFilter, int starFilter, int currentPage) throws FindException;
+	public List<LessonVO> selectLesson(int category, int priceFilter, int starFilter, int currentPage) throws FindException;
 
 	/**
 	 * [클래스: 메인화면] 수업 이름, 카테고리명, 강사명 검색

@@ -34,7 +34,7 @@ public class DetailController implements Controller {
 		String result;
 		ObjectMapper mapper = new ObjectMapper();
 		try {
-			List<LessonVO> list = service.selectDetail(lessonSeq);
+			List<LessonVO> list = service.selectDetail(lessonSeq);			
 			result = mapper.writeValueAsString(list);
 		} catch (FindException e) {
 			e.printStackTrace();

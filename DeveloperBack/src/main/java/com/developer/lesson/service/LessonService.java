@@ -2,7 +2,6 @@ package com.developer.lesson.service;
 
 import java.util.List;
 
-import com.developer.dto.PageBean;
 import com.developer.exception.FindException;
 import com.developer.lesson.dao.LessonDAO;
 import com.developer.lesson.dao.LessonDAOOracle;
@@ -31,8 +30,8 @@ public class LessonService {
 	}
 
 	// [JW] 현재 진행 중인 수업 목록 > 카테고리 검색까지는 가능, 필터는 아직 
-	public PageBean<LessonVO> selectLesson(int category, int priceFilter, int starFilter, int currentPage) throws FindException {
-		PageBean<LessonVO> selectLesson = dao.selectLesson(category, priceFilter , starFilter, currentPage);
+	public List<LessonVO> selectLesson(int category, int priceFilter, int starFilter, int currentPage) throws FindException {
+		List<LessonVO> selectLesson = dao.selectLesson(category, priceFilter , starFilter, currentPage);
 		return selectLesson;
 	}
 
